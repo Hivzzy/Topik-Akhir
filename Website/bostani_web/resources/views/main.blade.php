@@ -8,6 +8,7 @@
     <title>{{ $title }} | Bostani Web</title>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
     <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
 </head>
 
