@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PenjualanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::redirect('/', 'dashboard', 301);
+
+Route::get('/dashboard', function () {
     return view('pages.DashboardView', [
         'title' => 'Dashboard',
         'active' => 'dashboard'
     ]);
 });
+
+Route::get('/penjualan', [PenjualanController::class, 'displayPenjualan']);

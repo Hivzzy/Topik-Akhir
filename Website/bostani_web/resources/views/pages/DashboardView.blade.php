@@ -1,9 +1,9 @@
 @extends('main')
 
 @section('container')
-    <div class="space-y-6">
-        <h1 class="text-2xl font-semibold">Dashboard</h1>
-        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+    <div class="space-y-4 sm:space-y-6">
+        <h1 class="text-lg sm:text-2xl font-semibold">Dashboard</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="flex justify-between bg-white p-4 rounded shadow-md">
                 <div>
                     <div class="font-semibold text-[32px]">0</div>

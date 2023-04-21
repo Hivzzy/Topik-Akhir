@@ -12,7 +12,7 @@
     <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
 </head>
 
-<body class="flex bg-gray-200 w-full sm:w-screen" x-data="layout">
+<body class="flex bg-[#EBF4E2] w-full sm:w-screen" x-data="layout">
     @include('layout.sidebar')
     <div class="w-full sm:w-screen">
         @include('layout.header')
@@ -29,6 +29,8 @@
             }));
         });
     </script>
+
+    @yield('script')
 </body>
 
 </html>

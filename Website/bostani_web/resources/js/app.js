@@ -1,3 +1,3 @@
-import './bootstrap';
-import { Datepicker, Input, initTE } from "tw-elements";
-initTE({ Datepicker, Input });
+import "./bootstrap";
+import { Datepicker, Input, Modal, Ripple, Select, initTE } from "tw-elements";
+initTE({ Datepicker, Input, Modal, Ripple, Select });
