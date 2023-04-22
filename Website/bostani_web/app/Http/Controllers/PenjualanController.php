@@ -13,4 +13,11 @@ class PenjualanController extends Controller
             'active' => 'sell-item'
         ]);
     }
+
+    public function displayGrafikPenjualan() {
+        return view('pages.penjualan.GrafikView', [
+            'title' => 'Grafik Penjualan',
+            'active' => 'sell-item'
+        ]);
+    }
 }

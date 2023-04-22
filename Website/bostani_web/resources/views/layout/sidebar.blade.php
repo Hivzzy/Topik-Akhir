@@ -17,11 +17,11 @@
             </a>
             <a class="{{ $active === 'product' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
                 href="/produk">
-                <span class="ml-2 text-sm font-medium">Data Produk</span>    
+                <span class="ml-2 text-sm font-medium">Data Produk</span>
             </a>
             <a class="{{ $active === 'category' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
                 href="/kategori">
-                <span class="ml-2 text-sm font-medium">Data Kategori</span>    
+                <span class="ml-2 text-sm font-medium">Data Kategori</span>
             </a>
             <a class="{{ $active === 'order' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
                 href="/pesanan">

@@ -23,4 +23,6 @@ Route::get('/dashboard', function () {
     ]);
 });
 
+// Penjualan
 Route::get('/penjualan', [PenjualanController::class, 'displayPenjualan']);
+Route::get('/grafik-penjualan', [PenjualanController::class, 'displayGrafikPenjualan']);
