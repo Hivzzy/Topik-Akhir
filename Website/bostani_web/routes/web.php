@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenjualanController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,7 @@ Route::get('/dashboard', function () {
 // Penjualan
 Route::get('/penjualan', [PenjualanController::class, 'displayPenjualan']);
 Route::get('/grafik-penjualan', [PenjualanController::class, 'displayGrafikPenjualan']);
+
+// Pelanggan
+Route::get('/pelanggan', [PelangganController::class, 'displayPelanggan']);
+Route::get('/tambah-pelanggan', [PelangganController::class, 'displayTambahPelanggan']);
