@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\UserConstroller;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +32,7 @@ Route::get('/grafik-penjualan', [PenjualanController::class, 'displayGrafikPenju
 // Pelanggan
 Route::get('/pelanggan', [PelangganController::class, 'displayPelanggan']);
 Route::get('/tambah-pelanggan', [PelangganController::class, 'displayTambahPelanggan']);
+
+// User
+Route::get('/kelola-akun', [UserConstroller::class, 'displayUser']);
+Route::get('/tambah-akun', [UserConstroller::class, 'displayTambahUser']);
