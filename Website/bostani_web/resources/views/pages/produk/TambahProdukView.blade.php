@@ -2,32 +2,58 @@
 
 @section('container')
     <div class="space-y-4 sm:space-y-6">
-        <h1 class="text-lg sm:text-2xl font-semibold">Tambah Data User</h1>
+        <h1 class="text-lg sm:text-2xl font-semibold">Tambah Produk</h1>
         <div class="bg-white p-4 space-y-6 rounded shadown-md">
             <form action="#">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="grid grid-rows-1">
-                        <label class="font-medium" for="">Nama</label>
+                        <label class="font-medium" for="">Nama Produk</label>
                         <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text">
                     </div>
                     <div class="grid grid-rows-1">
-                        <label class="font-medium" for="">Role</label>
-                        <select name="role" id="" class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
+                        <label class="font-medium" for="">Satuan Produk</label>
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text">
+                    </div>
+                    <div class="grid grid-rows-1">
+                        <label class="font-medium" for="">Kategori</label>
+                        <select name="kategori" id="" class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
                             <option value="">-</option>
-                            <option value="">CEO</option>
-                            <option value="">Head of Administration</option>
-                            <option value="">Head of Operation</option>
-                            <option value="">Head of Finance</option>
-                            <option value="">Head of Marketing</option>
+                            <option value="">Ayam</option>
+                            <option value="">Daging</option>
+                            <option value="">Sayuran</option>
+                            <option value="">Buah-buahan</option>
+                            <option value="">Sembako</option>
                         </select>
                     </div>
                     <div class="grid grid-rows-1">
-                        <label class="font-medium" for="">Username</label>
+                        <label class="font-medium" for="">Sub Kategori</label>
+                        <select name="sub_kategori" id="" class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
+                            <option value="">-</option>
+                            <option value="">Daging Ayam</option>
+                            <option value="">Jeroan Ayam</option>
+                            <option value="">Olahan Ayam</option>
+                            <option value="">Fillet & Giling</option>
+                            <option value="">Telur</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-rows-1">
+                        <label class="font-medium" for="">Harga Beli</label>
                         <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text">
                     </div>
                     <div class="grid grid-rows-1">
-                        <label class="font-medium" for="">Password</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="password">
+                        <label class="font-medium" for="">Harga Jual</label>
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text">
+                    </div>
+                    <div class="grid grid-rows-1">
+                        <label class="font-medium" for="">Ukuran</label>
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text">
+                    </div>
+                    <div class="grid grid-rows-1">
+                        <label class="font-medium" for="">Vendor</label>
+                        <select name="vendor" id="" class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
+                            <option value="">-</option>
+                            <option value="">Pasar</option>
+                        </select>
                     </div>
                 </div>
             </form>

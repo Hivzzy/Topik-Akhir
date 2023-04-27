@@ -7,7 +7,7 @@
         <a class="flex items-center" href="/dashboard">
             <img src="/assets/img/logo_bostani.png" width="75px">
         </a>
-        <span class="text-sm text-white font-bold hidden sm:block">Selamat Datang, Administrator</span>
+        <span class="text-sm text-white font-bold hidden lg:block">Selamat Datang, Administrator</span>
     </div>
     <div class="w-full px-2">
         <div class="flex flex-col items-center w-full">

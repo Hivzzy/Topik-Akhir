@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pelanggan_models', function (Blueprint $table) {
+        Schema::create('pelanggan', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
