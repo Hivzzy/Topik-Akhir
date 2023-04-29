@@ -32,4 +32,12 @@ class PelangganController extends Controller
         Alert::success('Success Title', 'Success Message');
         return redirect()->back();
     }
+
+    public function displayEditPelanggan($id)
+    {
+        return view('pages.pelanggan.EditPelangganView', [
+            'title' => 'Edit Pelanggan',
+            'active' => 'customer'
+        ]);
+    }
 }

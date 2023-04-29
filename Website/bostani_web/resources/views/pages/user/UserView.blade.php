@@ -49,22 +49,24 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach ($users as $user)
                                         <tr class="border-b">
-                                            <td class="whitespace-nowrap px-6 py-4">1</td>
-                                            <td class="whitespace-nowrap px-6 py-4">Mark</td>
-                                            <td class="whitespace-nowrap px-6 py-4">Otto</td>
-                                            <td class="whitespace-nowrap px-6 py-4">@mdo</td>
+                                            <td class="whitespace-nowrap px-6 py-4">{{ $user->nama_user }}</td>
+                                            <td class="whitespace-nowrap px-6 py-4">{{ $user->username }}</td>
+                                            <td class="whitespace-nowrap px-6 py-4">{{ $user->password }}</td>
+                                            <td class="whitespace-nowrap px-6 py-4">{{ $user->role->nama_role }}</td>
                                             <td class="whitespace-nowrap text-center">
-                                                <button
+                                                <a href="/akun/edit/1"
                                                     class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
                                                     <img src="/assets/icons/edit.svg">
-                                                </button>
-                                                <button
+                                                </a>
+                                                <a href="#"
                                                     class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700">
                                                     <img src="/assets/icons/delete.svg">
-                                                </button>
+                                                </a>
                                             </td>
                                         </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>

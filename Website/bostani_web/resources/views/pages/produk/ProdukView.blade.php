@@ -72,7 +72,7 @@
                                             <td class="whitespace-nowrap px-6 py-4">Otto</td>
                                             <td class="whitespace-nowrap px-6 py-4">Otto</td>
                                             <td class="whitespace-nowrap text-center">
-                                                <a href="#"
+                                                <a href="/produk/edit/1"
                                                     class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
                                                     <img src="/assets/icons/edit.svg">
                                                 </a>

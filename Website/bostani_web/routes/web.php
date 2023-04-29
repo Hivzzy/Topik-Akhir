@@ -29,6 +29,7 @@ Route::get('/dashboard', function () {
 //Produk
 Route::get('/produk', [ProdukController::class, 'displayProduk']);
 Route::get('/tambah-produk', [ProdukController::class, 'displayTambahProduk']);
+Route::get('/produk/edit/{id}', [ProdukController::class, 'displayEditProduk']);
 
 // Penjualan
 Route::get('/penjualan', [PenjualanController::class, 'displayPenjualan']);
@@ -38,7 +39,9 @@ Route::get('/grafik-penjualan', [PenjualanController::class, 'displayGrafikPenju
 Route::get('/pelanggan', [PelangganController::class, 'index']);
 Route::get('/tambah-pelanggan', [PelangganController::class, 'displayTambahPelanggan']);
 Route::get('/pelanggan/delete/{id}', [PelangganController::class, 'deletePelanggan']);
+Route::get('/pelanggan/edit/{id}', [PelangganController::class, 'displayEditPelanggan']);
 
 // User
 Route::get('/kelola-akun', [UserConstroller::class, 'displayUser']);
 Route::get('/tambah-akun', [UserConstroller::class, 'displayTambahUser']);
+Route::get('/akun/edit/{id}', [UserConstroller::class, 'displayEditUser']);

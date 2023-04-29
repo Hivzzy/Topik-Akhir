@@ -21,4 +21,12 @@ class ProdukController extends Controller
             'active' => 'product'
         ]);
     }
+
+    public function displayEditProduk($id)
+    {
+        return view('pages.produk.EditProdukView', [
+            'title' => 'Edit Prdouk',
+            'active' => 'product'
+        ]);
+    }
 }
