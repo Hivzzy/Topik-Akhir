@@ -40,63 +40,66 @@
                     </div>
                 </div>
             </div>
-
-            <div>
-                <div class="flex flex-col">
-                    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                            <div class="overflow-hidden">
-                                <table class="min-w-full text-sm font-light">
-                                    <thead
-                                        class="border-b bg-neutral-800 font-medium text-left text-white dark:border-neutral-500 dark:bg-neutral-900">
-                                        <tr>
-                                            <th scope="col" class="px-6 py-4">Nama Item</th>
-                                            <th scope="col" class="px-6 py-4">Kategori</th>
-                                            <th scope="col" class="px-6 py-4">Sub Kategori</th>
-                                            <th scope="col" class="px-6 py-4">Satuan</th>
-                                            <th scope="col" class="px-6 py-4">Ukuran</th>
-                                            <th scope="col" class="px-6 py-4">Harga Beli</th>
-                                            <th scope="col" class="px-6 py-4">Harga Jual</th>
-                                            <th scope="col" class="px-6 py-4">Vendor</th>
-                                            <th scope="col" class="px-6 py-4 text-center">Aksi</th>
+            <div class="flex flex-col">
+                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                        <div class="overflow-hidden">
+                            <table class="min-w-full text-sm font-light">
+                                <thead
+                                    class="border-b bg-neutral-800 font-medium text-left text-white dark:border-neutral-500 dark:bg-neutral-900">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-4">Nama Item</th>
+                                        <th scope="col" class="px-6 py-4">Kategori</th>
+                                        <th scope="col" class="px-6 py-4">Sub Kategori</th>
+                                        <th scope="col" class="px-6 py-4">Satuan</th>
+                                        <th scope="col" class="px-6 py-4">Ukuran</th>
+                                        <th scope="col" class="px-6 py-4">Harga Beli</th>
+                                        <th scope="col" class="px-6 py-4">Harga Jual</th>
+                                        <th scope="col" class="px-6 py-4">Vendor</th>
+                                        <th scope="col" class="px-6 py-4 text-center">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($produks as $produk)
+                                        <tr class="border-b">
+                                            <td class="whitespace-nowrap px-6 py-4">{{ $produk->nama_produk }}</td>
+                                            <td class="whitespace-nowrap px-6 py-4">
+                                                {{ $produk->kategori->nama_kategori }}
+                                            </td>
+                                            <td class="whitespace-nowrap px-6 py-4">
+                                                {{ $produk->sub_kategori != null ? $produk->sub_kategori->nama_sub_kategori : '-' }}
+                                            </td>
+                                            <td class="whitespace-nowrap px-6 py-4">{{ $produk->satuan_produk }}</td>
+                                            <td class="whitespace-nowrap px-6 py-4">{{ $produk->ukuran_produk }}</td>
+                                            <td class="whitespace-nowrap px-6 py-4">Rp
+                                                {{ number_format($produk->harga_beli_produk, 0, ',', '.') }}
+                                            </td>
+                                            <td class="whitespace-nowrap px-6 py-4">Rp
+                                                {{ number_format($produk->harga_jual_produk, 0, ',', '.') }}
+                                            </td>
+                                            <td class="whitespace-nowrap px-6 py-4">{{ $produk->vendor->nama_vendor }}
+                                            </td>
+                                            <td class="whitespace-nowrap text-center">
+                                                <a href="/produk/edit/{{ $produk->id }}"
+                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
+                                                    <img src="/assets/icons/edit.svg">
+                                                </a>
+                                                <a href="/produk/hapus/{{ $produk->id }}"
+                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700"
+                                                    data-confirm-delete="true">
+                                                    <img src="/assets/icons/delete.svg">
+                                                </a>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($produks as $produk)
-                                            <tr class="border-b">
-                                                <td class="whitespace-nowrap px-6 py-4">{{ $produk->nama_produk }}</td>
-                                                <td class="whitespace-nowrap px-6 py-4">
-                                                    {{ $produk->kategori->nama_kategori }}
-                                                </td>
-                                                <td class="whitespace-nowrap px-6 py-4">
-                                                    {{ $produk->sub_kategori != null ? $produk->sub_kategori->nama_sub_kategori : '-'}}</td>
-                                                <td class="whitespace-nowrap px-6 py-4">{{ $produk->satuan_produk }}</td>
-                                                <td class="whitespace-nowrap px-6 py-4">{{ $produk->ukuran_produk }}</td>
-                                                <td class="whitespace-nowrap px-6 py-4">Rp {{ number_format($produk->harga_beli_produk, 0, ',', '.') }}
-                                                </td>
-                                                <td class="whitespace-nowrap px-6 py-4">Rp {{ number_format($produk->harga_jual_produk, 0, ',', '.') }}
-                                                </td>
-                                                <td class="whitespace-nowrap px-6 py-4">{{ $produk->vendor->nama_vendor }}
-                                                </td>
-                                                <td class="whitespace-nowrap text-center">
-                                                    <a href="/produk/edit/{{ $produk->id }}"
-                                                        class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
-                                                        <img src="/assets/icons/edit.svg">
-                                                    </a>
-                                                    <a href="/produk/hapus/{{ $produk->id }}"
-                                                        class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700"
-                                                        data-confirm-delete="true">
-                                                        <img src="/assets/icons/delete.svg">
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="flex justify-end">
+                {{ $produks->links('pagination::tailwind') }}
             </div>
         </div>
     </div>

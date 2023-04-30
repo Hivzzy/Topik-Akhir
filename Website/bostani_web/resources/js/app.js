@@ -6,9 +6,10 @@ import {
     Modal,
     Ripple,
     Select,
+    Sidenav,
     initTE,
 } from "tw-elements";
-initTE({ Chart, Datepicker, Input, Modal, Ripple, Select });
+initTE({ Chart, Datepicker, Input, Modal, Ripple, Select, Sidenav });
 
 const dataPendapatanBulanan = {
     type: "line",

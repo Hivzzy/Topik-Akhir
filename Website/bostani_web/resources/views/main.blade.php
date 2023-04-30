@@ -7,29 +7,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $title }} | Bostani Web</title>
     <link href="/assets/img/logo_bostani.png" rel="icon">
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" />
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
-    <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
 </head>
 
-<body class="flex bg-[#EBF4E2] w-full sm:w-screen" x-data="layout">
+<body class="flex bg-[#EBF4E2] w-full sm:w-screen">
     @include('layout.sidebar')
-    <div class="w-full sm:w-screen overflow-x-auto">
+    <div class="w-full sm:w-screen overflow-x-auto" id="content">
         @include('layout.header')
         <div class="p-4 sm:p-6">
             @yield('container')
         </div>
     </div>
-
-    <script>
-        document.addEventListener("alpine:init", () => {
-            Alpine.data("layout", () => ({
-                profileOpen: false,
-                asideOpen: true,
-            }));
-        });
-    </script>
 
     @yield('script')
     @include('sweetalert::alert')
