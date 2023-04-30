@@ -3,7 +3,8 @@
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProdukController;
-use App\Http\Controllers\UserConstroller;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,10 @@ Route::get('/pelanggan/delete/{id}', [PelangganController::class, 'deletePelangg
 Route::get('/pelanggan/edit/{id}', [PelangganController::class, 'displayEditPelanggan']);
 
 // User
-Route::get('/kelola-akun', [UserConstroller::class, 'displayUser']);
-Route::get('/tambah-akun', [UserConstroller::class, 'displayTambahUser']);
-Route::get('/akun/edit/{id}', [UserConstroller::class, 'displayEditUser']);
+Route::get('/kelola-akun', [UserController::class, 'index']);
+Route::get('/tambah-akun', [UserController::class, 'displayTambahUser']);
+Route::post('/akun/tambah', [UserController::class, 'createUser']);
+Route::get('/akun/edit/{id}', [UserController::class, 'displayEditUser']);
+Route::post('/akun/edit/{id}', [UserController::class, 'updateUser']);
+Route::delete('/akun/hapus/{id}', [UserController::class, 'deleteUser']);
+Route::get('/role', [RoleController::class, 'displayRole']);

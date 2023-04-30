@@ -5,13 +5,22 @@
         <h1 class="text-lg sm:text-2xl font-semibold">Akun User</h1>
         <div class="bg-white p-4 space-y-4 rounded shadow-md">
             <div class="flex justify-between items-center">
-                <a href="/tambah-akun"
-                    class="inline-block rounded bg-primary p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-                    <div class="flex space-x-1 items-center">
-                        <img src="/assets/icons/add.svg">
-                        <span class="hidden sm:block">Tambah Data</span>
-                    </div>
-                </a>
+                <div>
+                    <a href="/tambah-akun"
+                        class="inline-block rounded bg-primary p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                        <div class="flex space-x-1 items-center">
+                            <img src="/assets/icons/add.svg">
+                            <span class="hidden sm:block">Tambah Data</span>
+                        </div>
+                    </a>
+                    <a href="/role"
+                        class="inline-block rounded bg-warning p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-warning-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-warning-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-warning-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                        <div class="flex space-x-1 items-center">
+                            <img src="/assets/icons/role.svg">
+                            <span class="hidden sm:block">Data Role</span>
+                        </div>
+                    </a>
+                </div>
                 <div>
                     <div class="flex w-full flex-wrap items-stretch">
                         <input type="search"
@@ -32,7 +41,7 @@
                 </div>
             </div>
 
-            <div>
+            <div class="overflow-x-hidden">
                 <div class="flex flex-col">
                     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
@@ -49,24 +58,33 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach ($users as $user)
-                                        <tr class="border-b">
-                                            <td class="whitespace-nowrap px-6 py-4">{{ $user->nama_user }}</td>
-                                            <td class="whitespace-nowrap px-6 py-4">{{ $user->username }}</td>
-                                            <td class="whitespace-nowrap px-6 py-4">{{ $user->password }}</td>
-                                            <td class="whitespace-nowrap px-6 py-4">{{ $user->role->nama_role }}</td>
-                                            <td class="whitespace-nowrap text-center">
-                                                <a href="/akun/edit/1"
-                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
-                                                    <img src="/assets/icons/edit.svg">
-                                                </a>
-                                                <a href="#"
-                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700">
-                                                    <img src="/assets/icons/delete.svg">
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                        @foreach ($users as $user)
+                                            <tr class="border-b">
+                                                <td class="whitespace-nowrap px-6 py-4">{{ $user->nama_user }}</td>
+                                                <td class="whitespace-nowrap px-6 py-4">{{ $user->username }}</td>
+                                                <td class="whitespace-nowrap px-6 py-4">{{ $user->password }}</td>
+                                                <td class="whitespace-nowrap px-6 py-4">{{ $user->role->nama_role }}</td>
+                                                <td class="whitespace-nowrap text-center">
+                                                    <a href="/akun/edit/{{ $user->id }}"
+                                                        class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
+                                                        <img src="/assets/icons/edit.svg">
+                                                    </a>
+                                                    {{-- <form action="/akun/hapus/{{ $user->id }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button href="/akun/hapus/{{ $user->id }}"
+                                                            class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700" data-confirm-delete="true">
+                                                            <img src="/assets/icons/delete.svg">
+                                                        </button>
+                                                    </form> --}}
+                                                    <a href="/akun/hapus/{{ $user->id }}"
+                                                        class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700" 
+                                                        data-confirm-delete='true'>
+                                                        <img src="/assets/icons/delete.svg">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

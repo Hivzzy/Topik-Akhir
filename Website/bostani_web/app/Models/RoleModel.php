@@ -12,6 +12,12 @@ class RoleModel extends Model
     protected $table = 't_role';
     protected $guarded = ['id'];
 
+    public function getRole()
+    {
+        $role = RoleModel::all();
+        return $role;
+    }
+
     public function users() 
     {
         return $this->hasMany(UserModel::class);

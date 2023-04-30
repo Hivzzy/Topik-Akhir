@@ -24,12 +24,12 @@
                 <div>
                     <div class="flex w-full flex-wrap items-stretch">
                         <input type="search"
-                            class="relative m-0 -mr-0.5 block w-[1px] w-48 sm:w-fit rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                            class="relative m-0 -mr-0.5 block w-fit rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                             placeholder="Cari produk" aria-label="Search" aria-describedby="button-addon1" />
 
                         <!--Search button-->
                         <button
-                            class="relative z-[2] flex items-center rounded-r bg-primary px-4 sm:px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+                            class="relative z-[2] flex items-center rounded-r bg-primary px-2 sm:px-4 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
                             type="button" id="button-addon1" data-te-ripple-init data-te-ripple-color="light">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
                                 <path fill-rule="evenodd"
@@ -62,27 +62,35 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="border-b">
-                                            <td class="whitespace-nowrap px-6 py-4">1</td>
-                                            <td class="whitespace-nowrap px-6 py-4">Mark</td>
-                                            <td class="whitespace-nowrap px-6 py-4">Otto</td>
-                                            <td class="whitespace-nowrap px-6 py-4">@mdo</td>
-                                            <td class="whitespace-nowrap px-6 py-4">Mark</td>
-                                            <td class="whitespace-nowrap px-6 py-4">Otto</td>
-                                            <td class="whitespace-nowrap px-6 py-4">Otto</td>
-                                            <td class="whitespace-nowrap px-6 py-4">Otto</td>
-                                            <td class="whitespace-nowrap text-center">
-                                                <a href="/produk/edit/1"
-                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
-                                                    <img src="/assets/icons/edit.svg">
-                                                </a>
-                                                <a href="#"
-                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700"
-                                                    data-confirm-delete="true">
-                                                    <img src="/assets/icons/delete.svg">
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        @foreach ($produks as $produk)
+                                            <tr class="border-b">
+                                                <td class="whitespace-nowrap px-6 py-4">{{ $produk->nama_produk }}</td>
+                                                <td class="whitespace-nowrap px-6 py-4">
+                                                    {{ $produk->kategori->nama_kategori }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-4">
+                                                    {{ $produk->sub_kategori != null ? $produk->sub_kategori->nama_sub_kategori : '-'}}</td>
+                                                <td class="whitespace-nowrap px-6 py-4">{{ $produk->satuan_produk }}</td>
+                                                <td class="whitespace-nowrap px-6 py-4">{{ $produk->ukuran_produk }}</td>
+                                                <td class="whitespace-nowrap px-6 py-4">Rp {{ number_format($produk->harga_beli_produk, 0, ',', '.') }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-4">Rp {{ number_format($produk->harga_jual_produk, 0, ',', '.') }}
+                                                </td>
+                                                <td class="whitespace-nowrap px-6 py-4">{{ $produk->vendor->nama_vendor }}
+                                                </td>
+                                                <td class="whitespace-nowrap text-center">
+                                                    <a href="/produk/edit/{{ $produk->id }}"
+                                                        class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
+                                                        <img src="/assets/icons/edit.svg">
+                                                    </a>
+                                                    <a href="/produk/hapus/{{ $produk->id }}"
+                                                        class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700"
+                                                        data-confirm-delete="true">
+                                                        <img src="/assets/icons/delete.svg">
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

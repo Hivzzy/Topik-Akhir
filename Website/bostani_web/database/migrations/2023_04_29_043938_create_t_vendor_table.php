@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('t_vendor', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('nama_vendor');
+            // $table->timestamps();
         });
     }
 

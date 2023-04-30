@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::create('t_sub_kategori', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('id_kategori');
+            $table->string('nama_sub_kategori');
+            // $table->timestamps();
         });
     }
 
