@@ -14,7 +14,7 @@ class ProdukModel extends Model
 
     public function getProduk()
     {
-        $produk = ProdukModel::paginate(7);
+        $produk = ProdukModel::all();
         return $produk;
     }
 

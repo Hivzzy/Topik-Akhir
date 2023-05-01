@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $title }} | Bostani Web</title>
     <link href="/assets/img/logo_bostani.png" rel="icon">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.jqueryui.min.css">
     @vite('resources/css/app.css')
     @vite('resources/js/app.js')
 </head>
