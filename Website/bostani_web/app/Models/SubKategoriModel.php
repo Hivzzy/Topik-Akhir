@@ -12,6 +12,12 @@ class SubKategoriModel extends Model
     protected $table = 't_sub_kategori';
     protected $guarded = ['id'];
 
+    public function getSubKategori($id_kategori)
+    {
+        $sub_kategori = SubKategoriModel::where('id_kategori', $id_kategori)->get();
+        return $sub_kategori;
+    }
+
     public function kategori() 
     {
         return $this->belongsTo(KategoriModel::class, 'id_kategori');

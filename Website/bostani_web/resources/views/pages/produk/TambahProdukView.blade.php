@@ -4,69 +4,96 @@
     <div class="space-y-4 sm:space-y-6">
         <h1 class="text-lg sm:text-2xl font-semibold">Tambah Produk</h1>
         <div class="bg-white p-4 space-y-6 rounded shadown-md">
-            <form action="#">
+            <form method="POST" action="/produk/tambah">
+                @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="grid grid-rows-1">
-                        <label class="font-medium" for="">Nama Produk</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text">
+                        <label class="font-medium">Nama Produk</label>
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="nama_produk">
                     </div>
                     <div class="grid grid-rows-1">
-                        <label class="font-medium" for="">Satuan Produk</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text">
+                        <label class="font-medium">Satuan Produk</label>
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="satuan">
                     </div>
                     <div class="grid grid-rows-1">
-                        <label class="font-medium" for="">Kategori</label>
-                        <select name="kategori" id="" class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
-                            <option value="">-</option>
-                            <option value="">Ayam</option>
-                            <option value="">Daging</option>
-                            <option value="">Sayuran</option>
-                            <option value="">Buah-buahan</option>
-                            <option value="">Sembako</option>
+                        <label class="font-medium">Kategori</label>
+                        <select name="kategori" id="kategori"
+                            class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
+                            <option value=""></option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->nama_kategori }}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="grid grid-rows-1">
-                        <label class="font-medium" for="">Sub Kategori</label>
-                        <select name="sub_kategori" id="" class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
-                            <option value="">-</option>
-                            <option value="">Daging Ayam</option>
-                            <option value="">Jeroan Ayam</option>
-                            <option value="">Olahan Ayam</option>
-                            <option value="">Fillet & Giling</option>
-                            <option value="">Telur</option>
+                        <label class="font-medium">Sub Kategori</label>
+                        <select name="sub_kategori" id="sub_kategori"
+                            class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
+                            <option value=""></option>
                         </select>
                     </div>
                     <div class="grid grid-rows-1">
-                        <label class="font-medium" for="">Harga Beli</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text">
+                        <label class="font-medium">Harga Beli</label>
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="harga_beli">
                     </div>
                     <div class="grid grid-rows-1">
-                        <label class="font-medium" for="">Harga Jual</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text">
+                        <label class="font-medium">Harga Jual</label>
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="harga_jual">
                     </div>
                     <div class="grid grid-rows-1">
-                        <label class="font-medium" for="">Ukuran</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text">
+                        <label class="font-medium">Ukuran</label>
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="ukuran">
                     </div>
                     <div class="grid grid-rows-1">
-                        <label class="font-medium" for="">Vendor</label>
-                        <select name="vendor" id="" class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
-                            <option value="">-</option>
-                            <option value="">Pasar</option>
+                        <label class="font-medium">Vendor</label>
+                        <select name="vendor" id=""
+                            class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none" name="vendor">
+                            <option value=""></option>
+                            @foreach ($vendors as $vendor)
+                                <option value="{{ $vendor->id }}">{{ $vendor->nama_vendor }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
+                <div class="flex justify-end space-x-2 mt-6">
+                    <input type="submit"
+                        class="inline-block rounded bg-success px-4 pb-2 pt-2.5 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#14a44d] transition duration-150 ease-in-out hover:bg-success-600 hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] focus:bg-success-600 focus:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] focus:outline-none focus:ring-0 active:bg-success-700 active:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(20,164,77,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)]"
+                        value="Simpan Data">
+                    <button type="button" onclick="history.go(-1);"
+                        class="inline-block rounded bg-danger px-4 pb-2 pt-2.5 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#dc4c64] transition duration-150 ease-in-out hover:bg-danger-600 hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:bg-danger-600 focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:outline-none focus:ring-0 active:bg-danger-700 active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(220,76,100,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)]">
+                        Batal
+                    </button>
+                </div>
             </form>
-            <div class="flex justify-end space-x-2">
-                <a href="#"
-                    class="inline-block rounded bg-success px-4 pb-2 pt-2.5 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#14a44d] transition duration-150 ease-in-out hover:bg-success-600 hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] focus:bg-success-600 focus:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] focus:outline-none focus:ring-0 active:bg-success-700 active:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(20,164,77,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)]">
-                    Simpan Data
-                </a>
-                <button type="button" onclick="history.go(-1);"
-                    class="inline-block rounded bg-danger px-4 pb-2 pt-2.5 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#dc4c64] transition duration-150 ease-in-out hover:bg-danger-600 hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:bg-danger-600 focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:outline-none focus:ring-0 active:bg-danger-700 active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(220,76,100,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)]">
-                    Batal
-                </button>
-            </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('select[name="kategori"]').on('change', function() {
+                var kategoriID = $(this).val();
+                if (kategoriID) {
+                    $.ajax({
+                        url: 'subkategori/get/' + kategoriID,
+                        type: 'GET',
+                        dataType: 'json',
+                        success: function(data) {
+                            $('select[name="sub_kategori"]').empty();
+                            $.each(data, function(key, value) {
+                                $('select[name="sub_kategori"]').append(
+                                    '<option value="' + value['id'] + '">' + value[
+                                        'nama_sub_kategori'] +
+                                    '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    $('select[name="sub_kategori"]').empty();
+                }
+            });
+        });
+    </script>
 @endsection

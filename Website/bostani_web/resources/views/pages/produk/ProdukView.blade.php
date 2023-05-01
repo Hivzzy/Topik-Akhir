@@ -24,7 +24,7 @@
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                         <div class="overflow-hidden">
-                            <table id="tabel_produk" class="stripe hover"
+                            <table id="tabel_produk" class="stripe hover text-sm"
                                 style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                                 <thead class="bg-[#272727] text-white">
                                     <tr>
@@ -55,15 +55,17 @@
                                             <td>Rp
                                                 {{ number_format($produk->harga_jual_produk, 0, ',', '.') }}</td>
                                             <td>{{ $produk->vendor->nama_vendor }}</td>
-                                            <td>
+                                            <td class="flex space-x-1">
                                                 <a href="/produk/edit/{{ $produk->id }}"
                                                     class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
-                                                    <img src="/assets/icons/edit.svg">
+                                                    Edit
+                                                    {{-- <img src="/assets/icons/edit.svg"> --}}
                                                 </a>
                                                 <a href="/produk/hapus/{{ $produk->id }}"
                                                     class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700"
                                                     data-confirm-delete="true">
-                                                    <img src="/assets/icons/delete.svg">
+                                                    Hapus
+                                                    {{-- <img src="/assets/icons/delete.svg"> --}}
                                                 </a>
                                             </td>
                                         </tr>

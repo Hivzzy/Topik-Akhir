@@ -67,20 +67,14 @@
                                                 <td class="whitespace-nowrap text-center">
                                                     <a href="/akun/edit/{{ $user->id }}"
                                                         class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
-                                                        <img src="/assets/icons/edit.svg">
+                                                        Edit
+                                                        {{-- <img src="/assets/icons/edit.svg"> --}}
                                                     </a>
-                                                    {{-- <form action="/akun/hapus/{{ $user->id }}" method="post">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button href="/akun/hapus/{{ $user->id }}"
-                                                            class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700" data-confirm-delete="true">
-                                                            <img src="/assets/icons/delete.svg">
-                                                        </button>
-                                                    </form> --}}
                                                     <a href="/akun/hapus/{{ $user->id }}"
                                                         class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700" 
                                                         data-confirm-delete='true'>
-                                                        <img src="/assets/icons/delete.svg">
+                                                        Hapus
+                                                        {{-- <img src="/assets/icons/delete.svg"> --}}
                                                     </a>
                                                 </td>
                                             </tr>

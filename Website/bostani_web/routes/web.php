@@ -5,6 +5,7 @@ use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Models\SubKategoriModel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', 'dashboard', 301);
+// Route::redirect('/', 'login', 301);
+
+Route::get('/', function() {
+    return view('welcome');
+});
 
 Route::get('/dashboard', function () {
     return view('pages.DashboardView', [
@@ -28,9 +33,17 @@ Route::get('/dashboard', function () {
 });
 
 //Produk
-Route::get('/produk', [ProdukController::class, 'displayProduk']);
+Route::get('/produk', [ProdukController::class, 'index']);
 Route::get('/tambah-produk', [ProdukController::class, 'displayTambahProduk']);
+Route::post('produk/tambah', [ProdukController::class, 'createProduk']);
 Route::get('/produk/edit/{id}', [ProdukController::class, 'displayEditProduk']);
+Route::post('/produk/edit/{id}', [ProdukController::class, 'updateProduk']);
+Route::delete('/produk/hapus/{id}', [ProdukController::class, 'deleteProduk']);
+
+//Kategori
+
+//Sub Kategori
+Route::get('/subkategori/get/{id}', [SubKategoriModel::class, 'getSubKategori']);
 
 // Penjualan
 Route::get('/penjualan', [PenjualanController::class, 'displayPenjualan']);
