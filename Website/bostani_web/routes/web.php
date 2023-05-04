@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SubKategoriController;
 use App\Http\Controllers\UserController;
 use App\Models\SubKategoriModel;
 use Illuminate\Support\Facades\Route;
@@ -19,10 +21,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::redirect('/', 'login', 301);
+// Route::redirect('/', 'login');
 
 Route::get('/', function() {
     return view('welcome');
+});
+
+Route::get('/login', function () {
+    return view('login');
 });
 
 Route::get('/dashboard', function () {
@@ -41,9 +47,11 @@ Route::post('/produk/edit/{id}', [ProdukController::class, 'updateProduk']);
 Route::delete('/produk/hapus/{id}', [ProdukController::class, 'deleteProduk']);
 
 //Kategori
+Route::get('/kategori', [KategoriController::class, 'index']);
 
 //Sub Kategori
 Route::get('/subkategori/get/{id}', [SubKategoriModel::class, 'getSubKategori']);
+Route::get('/subkategori/{id}', [SubKategoriController::class, 'index']);
 
 // Penjualan
 Route::get('/penjualan', [PenjualanController::class, 'displayPenjualan']);

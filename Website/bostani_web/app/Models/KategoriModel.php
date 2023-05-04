@@ -12,6 +12,12 @@ class KategoriModel extends Model
     protected $table = 't_kategori';
     protected $guarded = ['id'];
 
+    public function getKategori()
+    {
+        $kategori = KategoriModel::all();
+        return $kategori;
+    }
+
     public function produks()
     {
         return $this->hasMany(ProdukModel::class);
