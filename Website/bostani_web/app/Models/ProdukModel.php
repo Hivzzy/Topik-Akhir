@@ -28,34 +28,29 @@ class ProdukModel extends Model
 
     public function createProduk($produk)
     {
-        $add_produk = DB::table('t_produk')->insert(
-            array(
-                'id_kategori' => $produk['kategori'],
-                'id_sub_kategori' => $produk['sub_kategori'],
-                'id_vendor' => $produk['vendor'],
-                'nama_produk' => $produk['nama_produk'],
-                'satuan_produk' => $produk['satuan'],
-                'ukuran_produk' => $produk['ukuran'],
-                'harga_beli_produk' => $produk['harga_beli'],
-                'harga_jual_produk' => $produk['harga_jual'],
-            )
-        );
+        $add_produk = ProdukModel::create([
+            'category_id' => $produk['kategori'],
+            'sub_category_id' => $produk['sub_kategori'],
+            'unit_id' => $produk['satuan'],
+            'product_name' => $produk['nama_produk'],
+            'product_purchase_price' => $produk['harga_beli'],
+            'product_selling_price' => $produk['harga_jual'],
+        ]);
 
         return $add_produk;
     }
 
     public function updateProduk($produk, $id)
     {
-        $edit_produk = DB::table('t_produk')->where('id', $id)->update(
+        $edit_produk = ProdukModel::where('id', $id)->update(
             array(
-                'id_kategori' => $produk['kategori'],
-                'id_sub_kategori' => $produk['sub_kategori'],
-                'id_vendor' => $produk['vendor'],
-                'nama_produk' => $produk['nama_produk'],
-                'satuan_produk' => $produk['satuan'],
-                'ukuran_produk' => $produk['ukuran'],
-                'harga_beli_produk' => $produk['harga_beli'],
-                'harga_jual_produk' => $produk['harga_jual'],
+                'category_id' => $produk['kategori'],
+                'sub_category_id' => $produk['sub_kategori'],
+                'unit_id' => $produk['satuan'],
+                'product_name' => $produk['nama_produk'],
+                // 'ukuran_produk' => $produk['ukuran'],
+                'product_purchase_price' => $produk['harga_beli'],
+                'product_selling_price' => $produk['harga_jual'],
             )
         );
 
@@ -64,7 +59,7 @@ class ProdukModel extends Model
 
     public function deleteProduk($id_produk)
     {
-        $delete_produk = DB::table('t_produk')->where('id', $id_produk)->delete();
+        $delete_produk = ProdukModel::where('id', $id_produk)->delete();
         return $delete_produk;
     }
 

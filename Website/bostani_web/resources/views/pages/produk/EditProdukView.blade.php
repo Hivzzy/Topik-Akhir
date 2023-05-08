@@ -9,19 +9,25 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Nama Produk</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="nama_produk" value="{{ $produk->nama_produk }}">
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="nama_produk"
+                            value="{{ $produk->product_name }}">
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Satuan Produk</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="satuan" value="{{ $produk->satuan_produk }}">
+                        <select name="satuan" class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none ">
+                            <option value="{{ $produk->unit_id }}">{{ $produk->satuan->unit_product_name }}</option>
+                            @foreach ($units as $unit)
+                                <option value="{{ $unit->id }}">{{ $unit->unit_product_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Kategori</label>
                         <select name="kategori" id="kategori"
                             class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
-                            <option value="{{ $produk->id_kategori }}">{{ $produk->kategori->nama_kategori }}</option>
+                            <option value="{{ $produk->category_id }}">{{ $produk->kategori->category_name }}</option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->nama_kategori }}</option>
+                                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -29,31 +35,25 @@
                         <label class="font-medium">Sub Kategori</label>
                         <select name="sub_kategori" id="sub_kategori"
                             class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
-                            <option value="{{ $produk->id_sub_kategori }}">{{ $produk->id_sub_kategori != null ? $produk->sub_kategori->nama_sub_kategori : '' }}</option>
+                            <option value="{{ $produk->sub_category_id }}">
+                                {{ $produk->sub_kategori != null ? $produk->sub_kategori->sub_category_name : '-' }}
+                            </option>
                         </select>
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Harga Beli</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="harga_beli" value="{{ $produk->harga_beli_produk }}">
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="harga_beli"
+                            value="{{ $produk->product_purchase_price }}">
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Harga Jual</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="harga_jual" value="{{ $produk->harga_jual_produk }}">
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="harga_jual"
+                            value="{{ $produk->product_selling_price }}">
                     </div>
-                    <div class="grid grid-rows-1">
+                    {{-- <div class="grid grid-rows-1">
                         <label class="font-medium">Ukuran</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="ukuran" value="{{ $produk->ukuran_produk }}">
-                    </div>
-                    <div class="grid grid-rows-1">
-                        <label class="font-medium">Vendor</label>
-                        <select name="vendor" id=""
-                            class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none" name="vendor">
-                            <option value="{{ $produk->id_vendor }}">{{ $produk->vendor->nama_vendor }}</option>
-                            @foreach ($vendors as $vendor)
-                                <option value="{{ $vendor->id }}">{{ $vendor->nama_vendor }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="number" name="ukuran">
+                    </div> --}}
                 </div>
                 <div class="flex justify-end space-x-2 mt-6">
                     <input type="submit"
@@ -77,7 +77,7 @@
                 var kategoriID = $(this).val();
                 if (kategoriID) {
                     $.ajax({
-                        url: 'subkategori/get/' + kategoriID,
+                        url: '/subkategori/get/' + kategoriID,
                         type: 'GET',
                         dataType: 'json',
                         success: function(data) {
@@ -85,7 +85,7 @@
                             $.each(data, function(key, value) {
                                 $('select[name="sub_kategori"]').append(
                                     '<option value="' + value['id'] + '">' + value[
-                                        'nama_sub_kategori'] +
+                                        'sub_category_name'] +
                                     '</option>');
                             });
                         }

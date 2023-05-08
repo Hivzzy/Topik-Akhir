@@ -45,8 +45,6 @@ class ProdukController extends Controller
             'sub_kategori' => '',
             'harga_beli' => 'required',
             'harga_jual' => 'required',
-            'ukuran' => 'required',
-            'vendor' => 'required',
         ]);
 
         $produk = new ProdukModel();
@@ -71,6 +69,7 @@ class ProdukController extends Controller
             'active' => 'product',
             'produk' => $data,
             'categories' => KategoriModel::all(),
+            'units' => UnitModel::all(),
         ]);
     }
 
@@ -83,8 +82,6 @@ class ProdukController extends Controller
             'sub_kategori' => '',
             'harga_beli' => 'required',
             'harga_jual' => 'required',
-            'ukuran' => 'required',
-            'vendor' => 'required',
         ]);
 
         $produk = new ProdukModel();
