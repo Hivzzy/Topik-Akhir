@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('t_user', function (Blueprint $table) {
+        Schema::create('city', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_role');
-            $table->string('nama_user');
-            $table->string('username')->unique();
-            $table->string('password');
-            // $table->timestamps();
+            $table->string('city_name');
         });
     }
 
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('t_user');
+        Schema::dropIfExists('city');
     }
 };

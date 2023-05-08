@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sub_category', function (Blueprint $table) {
+        Schema::create('urban_village', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id');
-            $table->string('sub_category_name');
+            $table->foreignId('district_id');
+            $table->string('urban_village_name');
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_category');
+        Schema::dropIfExists('urban_village');
     }
 };

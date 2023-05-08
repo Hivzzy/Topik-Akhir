@@ -10,8 +10,9 @@ class ProdukModel extends Model
 {
     use HasFactory;
 
-    protected $table = 't_produk';
+    protected $table = 'product';
     protected $guarded = ['id'];
+    public $timestamps = false;
 
     public function getProduk()
     {
@@ -69,16 +70,16 @@ class ProdukModel extends Model
 
     public function kategori()
     {
-        return $this->belongsTo(KategoriModel::class, 'id_kategori');
+        return $this->belongsTo(KategoriModel::class, 'category_id');
     }
 
     public function sub_kategori()
     {
-        return $this->belongsTo(SubKategoriModel::class, 'id_sub_kategori');
+        return $this->belongsTo(SubKategoriModel::class, 'sub_category_id');
     }
 
-    public function vendor()
+    public function satuan()
     {
-        return $this->belongsTo(VendorModel::class, 'id_vendor');
+        return $this->belongsTo(UnitModel::class, 'unit_id');
     }
 }

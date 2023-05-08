@@ -13,9 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('t_pesanan', function (Blueprint $table) {
+        Schema::create('order', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('user_id');
+            $table->foreignId('customer_id');
+            $table->foreignId('order_status_id');
+            $table->dateTime('order_date');
+            $table->dateTime('delivery_date');
+            $table->string('payment_method');
         });
     }
 
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('t_pesanan');
+        Schema::dropIfExists('order');
     }
 };

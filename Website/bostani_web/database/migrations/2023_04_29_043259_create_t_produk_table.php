@@ -13,17 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('t_produk', function (Blueprint $table) {
+        Schema::create('product', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_kategori');
-            $table->foreignId('id_sub_kategori')->nullable();
-            $table->foreignId('id_vendor')->nullable();
-            $table->string('nama_produk');
-            $table->decimal('harga_jual_produk');
-            $table->decimal('harga_beli_produk');
-            $table->integer('ukuran_produk');
-            $table->string('satuan_produk');
-            // $table->timestamps();
+            $table->foreignId('category_id')->nullable();
+            $table->foreignId('sub_category_id')->nullable();
+            $table->foreignId('unit_id');
+            $table->string('product_name');
+            $table->integer('product_size');
+            $table->decimal('product_purchase_price');
+            $table->decimal('product_selling_price');
         });
     }
 
@@ -34,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('t_produk');
+        Schema::dropIfExists('product');
     }
 };

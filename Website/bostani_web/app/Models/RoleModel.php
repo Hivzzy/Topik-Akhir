@@ -9,8 +9,9 @@ class RoleModel extends Model
 {
     use HasFactory;
 
-    protected $table = 't_role';
+    protected $table = 'role';
     protected $guarded = ['id'];
+    public $timestamps = false;
 
     public function getRole()
     {

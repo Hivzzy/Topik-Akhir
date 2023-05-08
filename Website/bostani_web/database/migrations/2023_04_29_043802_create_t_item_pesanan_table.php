@@ -13,9 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('t_item_pesanan', function (Blueprint $table) {
+        Schema::create('order_items', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('order_id');
+            $table->foreignId('product_id');
+            $table->integer('number_of_item');
+            $table->decimal('item_purchase_price');
+            $table->decimal('item_selling_price');
         });
     }
 
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('t_item_pesanan');
+        Schema::dropIfExists('order_items');
     }
 };

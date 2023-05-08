@@ -9,18 +9,19 @@ class SubKategoriModel extends Model
 {
     use HasFactory;
 
-    protected $table = 't_sub_kategori';
+    protected $table = 'sub_category';
     protected $guarded = ['id'];
+    public $timestamps = false;
 
     public function getSubKategori($id_kategori)
     {
-        $sub_kategori = SubKategoriModel::where('id_kategori', $id_kategori)->get();
+        $sub_kategori = SubKategoriModel::where('category_id', $id_kategori)->get();
         return $sub_kategori;
     }
 
     public function kategori() 
     {
-        return $this->belongsTo(KategoriModel::class, 'id_kategori');
+        return $this->belongsTo(KategoriModel::class, 'category_id');
     }
 
     public function produks()

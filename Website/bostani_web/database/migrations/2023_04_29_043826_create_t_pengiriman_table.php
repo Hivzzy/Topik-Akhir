@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('t_pengiriman', function (Blueprint $table) {
+        Schema::create('delivery', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('delivery_status_id');
+            $table->foreignId('driver_id');
+            $table->foreignId('order_id');
+            $table->dateTime('delivery_date');
         });
     }
 
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('t_pengiriman');
+        Schema::dropIfExists('delivery');
     }
 };

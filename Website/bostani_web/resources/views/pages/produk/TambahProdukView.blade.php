@@ -13,7 +13,13 @@
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Satuan Produk</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="satuan">
+                        <select name="satuan"
+                            class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none ">
+                            <option value=""></option>
+                            @foreach ($units as $unit)
+                                <option value="{{ $unit->id }}">{{ $unit->unit_product_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Kategori</label>
@@ -21,7 +27,7 @@
                             class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
                             <option value=""></option>
                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->nama_kategori }}</option>
+                                <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -40,20 +46,10 @@
                         <label class="font-medium">Harga Jual</label>
                         <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="harga_jual">
                     </div>
-                    <div class="grid grid-rows-1">
+                    {{-- <div class="grid grid-rows-1">
                         <label class="font-medium">Ukuran</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="ukuran">
-                    </div>
-                    <div class="grid grid-rows-1">
-                        <label class="font-medium">Vendor</label>
-                        <select name="vendor" id=""
-                            class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none" name="vendor">
-                            <option value=""></option>
-                            @foreach ($vendors as $vendor)
-                                <option value="{{ $vendor->id }}">{{ $vendor->nama_vendor }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="number" name="ukuran">
+                    </div> --}}
                 </div>
                 <div class="flex justify-end space-x-2 mt-6">
                     <input type="submit"
@@ -85,7 +81,7 @@
                             $.each(data, function(key, value) {
                                 $('select[name="sub_kategori"]').append(
                                     '<option value="' + value['id'] + '">' + value[
-                                        'nama_sub_kategori'] +
+                                        'sub_category_name'] +
                                     '</option>');
                             });
                         }

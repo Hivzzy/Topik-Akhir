@@ -12,7 +12,7 @@
         <li class="relative">
             <a class="{{ $active === 'dashboard' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
                 href="/dashboard">
-                <span class="ml-2 text-sm font-me dium">Dashboard</span>
+                <span class="ml-2 text-sm font-medium">Dashboard</span>
             </a>
         </li>
         <li class="relative">

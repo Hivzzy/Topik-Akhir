@@ -2,7 +2,7 @@
 
 @section('container')
     <div class="space-y-4 sm:space-y-6">
-        <h1 class="text-lg sm:text-2xl font-semibold">Sub Kategori - {{ $category->nama_kategori }}</h1>
+        <h1 class="text-lg sm:text-2xl font-semibold">Sub Kategori - {{ $category->category_name }}</h1>
         <div class="bg-white p-4 rounded shadow-md flex space-x-[10px]">
             <a href="/tambah-produk"
                 class="inline-block rounded bg-primary p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
@@ -28,7 +28,7 @@
                                 <tbody>
                                     @foreach ($sub_categories as $sub_category)
                                         <tr>
-                                            <td>{{ $sub_category->nama_sub_kategori }}</td>
+                                            <td>{{ $sub_category->sub_category_name }}</td>
                                             <td class="flex space-x-1">
                                                 <a href="/kategori/edit/{{ $sub_category->id }}"
                                                     class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">

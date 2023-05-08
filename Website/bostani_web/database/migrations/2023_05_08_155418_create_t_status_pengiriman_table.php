@@ -13,10 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('t_vendor', function (Blueprint $table) {
+        Schema::create('delivery_status', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_vendor');
-            // $table->timestamps();
+            $table->string('delivery_status_name');
         });
     }
 
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('t_vendor');
+        Schema::dropIfExists('delivery_status');
     }
 };

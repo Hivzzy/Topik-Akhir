@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('t_pelanggan', function (Blueprint $table) {
+        Schema::create('customer', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('urban_village_id');
+            $table->string('customer_name');
+            $table->string('customer_phone');
+            $table->string('customer_address');
         });
     }
 
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('t_pelanggan');
+        Schema::dropIfExists('customer');
     }
 };

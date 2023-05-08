@@ -10,8 +10,9 @@ class UserModel extends Model
 {
     use HasFactory;
 
-    protected $table = 't_user';
+    protected $table = 'user';
     protected $guarded = ['id'];
+    public $timestamps = false;
 
     public function getUser()
     {
@@ -61,6 +62,6 @@ class UserModel extends Model
 
     public function role()
     {
-        return $this->belongsTo(RoleModel::class, 'id_role');
+        return $this->belongsTo(RoleModel::class, 'role_id');
     }
 }

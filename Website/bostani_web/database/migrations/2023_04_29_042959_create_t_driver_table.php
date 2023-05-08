@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('t_driver', function (Blueprint $table) {
+        Schema::create('driver', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('driver_name');
+            $table->string('driver_phone')->nullable();
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('t_driver');
+        Schema::dropIfExists('driver');
     }
 };

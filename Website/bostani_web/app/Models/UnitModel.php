@@ -5,14 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class VendorModel extends Model
+class UnitModel extends Model
 {
     use HasFactory;
 
-    protected $table = 't_vendor';
+    protected $table = 'unit';
     protected $guarded = ['id'];
+    public $timestamps = false;
 
-    public function produks()
+    public function produk()
     {
         return $this->hasMany(ProdukModel::class);
     }

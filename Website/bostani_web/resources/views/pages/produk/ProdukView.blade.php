@@ -24,7 +24,7 @@
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                         <div class="overflow-hidden">
-                            <table id="tabel_produk" class="stripe hover text-sm"
+                            <table id="tabel_produk" class="stripe hover"
                                 style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                                 <thead class="bg-[#272727] text-white">
                                     <tr>
@@ -32,29 +32,27 @@
                                         <th>Satuan</th>
                                         <th>Kategori</th>
                                         <th>Sub Kategori</th>
-                                        <th>Ukuran/Harga</th>
+                                        {{-- <th>Ukuran</th> --}}
                                         <th>Harga Beli</th>
                                         <th>Harga Jual</th>
-                                        <th>Vendor</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($produks as $produk)
                                         <tr>
-                                            <td>{{ $produk->nama_produk }}</td>
-                                            <td>{{ $produk->satuan_produk }}</td>
+                                            <td>{{ $produk->product_name }}</td>
+                                            <td>{{ $produk->satuan->unit_product_name }}</td>
                                             <td>
-                                                {{ $produk->kategori->nama_kategori }}</td>
+                                                {{ $produk->kategori->category_name }}</td>
                                             <td>
-                                                {{ $produk->sub_kategori != null ? $produk->sub_kategori->nama_sub_kategori : '-' }}
+                                                {{ $produk->sub_kategori != null ? $produk->sub_kategori->sub_category_name : '-' }}
                                             </td>
-                                            <td>{{ $produk->ukuran_produk }}</td>
+                                            {{-- <td>{{ $produk->product_size }}</td> --}}
                                             <td>Rp
-                                                {{ number_format($produk->harga_beli_produk, 0, ',', '.') }}</td>
+                                                {{ number_format($produk->product_purchase_price, 0, ',', '.') }}</td>
                                             <td>Rp
-                                                {{ number_format($produk->harga_jual_produk, 0, ',', '.') }}</td>
-                                            <td>{{ $produk->vendor->nama_vendor }}</td>
+                                                {{ number_format($produk->product_selling_price, 0, ',', '.') }}</td>
                                             <td class="flex space-x-1">
                                                 <a href="/produk/edit/{{ $produk->id }}"
                                                     class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">

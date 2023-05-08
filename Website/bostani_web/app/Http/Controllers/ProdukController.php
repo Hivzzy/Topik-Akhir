@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\KategoriModel;
 use App\Models\ProdukModel;
-use App\Models\VendorModel;
+use App\Models\UnitModel;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -32,7 +32,7 @@ class ProdukController extends Controller
             'title' => 'Tambah Prdouk',
             'active' => 'product',
             'categories' => KategoriModel::all(),
-            'vendors' => VendorModel::all(),
+            'units' => UnitModel::all(),
         ]);
     }
 
@@ -71,7 +71,6 @@ class ProdukController extends Controller
             'active' => 'product',
             'produk' => $data,
             'categories' => KategoriModel::all(),
-            'vendors' => VendorModel::all(),
         ]);
     }
 

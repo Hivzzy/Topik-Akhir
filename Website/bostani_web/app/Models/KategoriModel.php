@@ -9,8 +9,9 @@ class KategoriModel extends Model
 {
     use HasFactory;
 
-    protected $table = 't_kategori';
+    protected $table = 'category';
     protected $guarded = ['id'];
+    public $timestamps = false;
 
     public function getKategori()
     {

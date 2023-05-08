@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('t_penjualan', function (Blueprint $table) {
+        Schema::create('invoice', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->foreignId('order_id');
+            $table->decimal('shipping_cost');
+            $table->dateTime('invoice_date');
         });
     }
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('t_penjualan');
+        Schema::dropIfExists('invoice');
     }
 };
