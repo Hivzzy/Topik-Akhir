@@ -19,6 +19,29 @@ class KategoriModel extends Model
         return $kategori;
     }
 
+    public function createKategori($kategori)
+    {
+        $add_kategori = KategoriModel::create([
+            'category_name' => $kategori['nama_kategori'],
+        ]);
+
+        return $add_kategori;
+    }
+
+    public function editKategori($kategori, $id)
+    {
+        $edit_kategori = KategoriModel::where('id', $id)->update([
+            'category_name' => $kategori['nama_kategori'],
+        ]);
+        return $edit_kategori;
+    }
+
+    public function deleteKategori($id)
+    {
+        $delete_kategori = KategoriModel::where('id', $id)->delete();
+        return $delete_kategori;
+    }
+
     public function produks()
     {
         return $this->hasMany(ProdukModel::class);

@@ -48,6 +48,9 @@ Route::delete('/produk/hapus/{id}', [ProdukController::class, 'deleteProduk']);
 
 //Kategori
 Route::get('/kategori', [KategoriController::class, 'index']);
+Route::post('/kategori/tambah', [KategoriController::class, 'createKategori']);
+Route::post('/kategori/edit/{id}', [KategoriController::class, 'updateKategori']);
+Route::delete('kategori/hapus/{id}', [KategoriController::class, 'deleteKategori']);
 
 //Sub Kategori
 Route::get('/subkategori/get/{id}', [SubKategoriModel::class, 'getSubKategori']);

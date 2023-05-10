@@ -9,28 +9,28 @@
                     <div class="font-semibold text-[32px]">0</div>
                     <span class="font-semibold text-lg">Barang</span>
                 </div>
-                <img src="/assets/icons/icon-park-outline_ad-product.svg">
+                <img src="/assets/icons/product.svg" alt="product icon">
             </div>
             <div class="flex justify-between bg-white p-4 rounded shadow-md">
                 <div>
                     <div class="font-semibold text-[32px]">0</div>
                     <span class="font-semibold text-lg">Pelanggan</span>
                 </div>
-                <img src="/assets/icons/mdi_people-group.svg">
+                <img src="/assets/icons/mdi_people-group.svg" alt="people icon">
             </div>
             <div class="flex justify-between bg-white p-4 rounded shadow-md">
                 <div>
                     <div class="font-semibold text-[32px]">0</div>
                     <span class="font-semibold text-lg">Pesanan</span>
                 </div>
-                <img src="/assets/icons/ph_shopping-cart-simple-bold.svg">
+                <img src="/assets/icons/ph_shopping-cart-simple-bold.svg" alt="cart icon">
             </div>
             <div class="flex justify-between bg-white p-4 rounded shadow-md">
                 <div>
                     <div class="font-semibold text-[32px]">0</div>
                     <span class="font-semibold text-lg">Pendapatan</span>
                 </div>
-                <img src="/assets/icons/ph_money.svg">
+                <img src="/assets/icons/ph_money.svg" alt="money icon">
             </div>
         </div>
     </div>
