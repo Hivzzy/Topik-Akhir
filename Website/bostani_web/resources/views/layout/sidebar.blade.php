@@ -6,7 +6,7 @@
         <a class="flex items-center" href="/dashboard">
             <img src="/assets/img/logo_bostani.png" width="75px" alt="bostani logo">
         </a>
-        <span class="text-sm text-white font-bold">Selamat Datang, Administrator</span>
+        <span class="text-sm text-white font-bold">Selamat Datang, {{ auth()->user()->name }}</span>
     </div>
     <ul class="relative m-0 list-none px-[0.2rem]" data-te-sidenav-menu-ref>
         <li class="relative">
