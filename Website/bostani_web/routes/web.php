@@ -8,6 +8,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubKategoriController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WilayahController;
 use App\Models\SubKategoriModel;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::redirect('/', 'login');
+Route::redirect('/', 'login');
 
 // Route::get('/', function() {
 //     return view('welcome');
@@ -60,8 +61,14 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     // Pelanggan
     Route::get('/pelanggan', [PelangganController::class, 'index']);
     Route::get('/tambah-pelanggan', [PelangganController::class, 'displayTambahPelanggan']);
-    Route::get('/pelanggan/delete/{id}', [PelangganController::class, 'deletePelanggan']);
+    Route::post('/pelanggan/tambah', [PelangganController::class, 'createPelanggan']);
+    Route::get('/pelanggan/hapus/{id}', [PelangganController::class, 'deletePelanggan']);
     Route::get('/pelanggan/edit/{id}', [PelangganController::class, 'displayEditPelanggan']);
+    Route::delete('/pelanggan/hapus/{id}',[PelangganController::class, 'deletePelanggan']);
+
+    //Wilayah
+    Route::get('/kecamatan/get/{id}', [WilayahController::class, 'getKecamatan']);
+    Route::get('/kelurahan/get/{id}', [WilayahController::class, 'getKelurahan']);
     
     // User
     Route::get('/kelola-akun', [UserController::class, 'index']);

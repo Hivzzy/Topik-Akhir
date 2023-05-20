@@ -6,14 +6,14 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div class="flex justify-between bg-white p-4 rounded shadow-md">
                 <div>
-                    <div class="font-semibold text-[32px]">0</div>
+                    <div class="font-semibold text-[32px]">{{ $products }}</div>
                     <span class="font-semibold text-lg">Barang</span>
                 </div>
                 <img src="/assets/icons/product.svg" alt="product icon">
             </div>
             <div class="flex justify-between bg-white p-4 rounded shadow-md">
                 <div>
-                    <div class="font-semibold text-[32px]">0</div>
+                    <div class="font-semibold text-[32px]">{{ $customers }}</div>
                     <span class="font-semibold text-lg">Pelanggan</span>
                 </div>
                 <img src="/assets/icons/mdi_people-group.svg" alt="people icon">

@@ -30,18 +30,16 @@
                                             <td><a
                                                     href="/subkategori/{{ $category->id }}">{{ $category->category_name }}</a>
                                             </td>
-                                            <td class="flex space-x-1">
+                                            <td>
                                                 <a href="#" data-te-toggle="modal"
                                                     data-te-target="#editCategoryModal{{ $category->id }}"
                                                     class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
                                                     Edit
-                                                    {{-- <img src="/assets/icons/edit.svg"> --}}
                                                 </a>
                                                 <a href="/kategori/hapus/{{ $category->id }}"
                                                     class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700"
                                                     data-confirm-delete="true">
                                                     Hapus
-                                                    {{-- <img src="/assets/icons/delete.svg"> --}}
                                                 </a>
                                             </td>
                                         </tr>

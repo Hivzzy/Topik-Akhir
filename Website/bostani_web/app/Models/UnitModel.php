@@ -9,7 +9,7 @@ class UnitModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'unit';
+    protected $table = 'units';
     protected $guarded = ['id'];
     public $timestamps = false;
 

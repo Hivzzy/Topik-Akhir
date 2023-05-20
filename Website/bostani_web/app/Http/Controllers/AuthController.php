@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PelangganModel;
+use App\Models\ProdukModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +20,9 @@ class AuthController extends Controller
     {
         return view('pages.DashboardView', [
             'title' => 'Dashboard',
-            'active' => 'dashboard'
+            'active' => 'dashboard',
+            'products' => ProdukModel::count(),
+            'customers' => PelangganModel::count(),
         ]);
     }
 

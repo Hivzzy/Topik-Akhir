@@ -9,14 +9,14 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Nama</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="nama_user" value="{{ $user->nama_user }}">
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="nama_user" value="{{ $user->name }}">
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Role</label>
                         <select name="role" id="" class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
-                            <option value="{{ $user->id_role }}">{{ $user->role->nama_role }}</option>
+                            <option value="{{ $user->role_id }}">{{ $user->role->role_name }}</option>
                             @foreach ($roles as $role)
-                             <option value="{{ $role->id }}">{{ $role->nama_role }}</option>   
+                             <option value="{{ $role->id }}">{{ $role->role_name }}</option>   
                             @endforeach
                         </select>
                     </div>

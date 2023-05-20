@@ -5,22 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RoleModel extends Model
+class KotaModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'roles';
+    protected $table = 'cities';
     protected $guarded = ['id'];
     public $timestamps = false;
 
-    public function getRole()
+    public function getKota()
     {
-        $role = RoleModel::all();
-        return $role;
+        $kota = KelurahanModel::all();
+        return $kota;
     }
 
-    public function users() 
+    public function kecamatan()
     {
-        return $this->hasMany(UserModel::class);
+        return $this->hasMany(KecamatanModel::class);
     }
 }

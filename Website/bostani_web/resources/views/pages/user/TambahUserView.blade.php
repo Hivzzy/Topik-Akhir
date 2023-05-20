@@ -16,7 +16,7 @@
                         <select name="role" id="" class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
                             <option value="">-</option>
                             @foreach ($roles as $role)
-                             <option value="{{ $role->id }}">{{ $role->nama_role }}</option>   
+                             <option value="{{ $role->id }}">{{ $role->role_name }}</option>   
                             @endforeach
                         </select>
                     </div>
