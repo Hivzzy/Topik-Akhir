@@ -9,7 +9,7 @@ class KategoriModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'category';
+    protected $table = 'categories';
     protected $guarded = ['id'];
     public $timestamps = false;
 

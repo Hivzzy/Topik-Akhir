@@ -9,7 +9,7 @@ class SubKategoriModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'sub_category';
+    protected $table = 'sub_categories';
     protected $guarded = ['id'];
     public $timestamps = false;
 

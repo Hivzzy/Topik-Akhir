@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KotaModel;
+use App\Models\PelangganModel;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -15,7 +17,8 @@ class PelangganController extends Controller
 
         return view('pages.pelanggan.PelangganView', [
             'title' => 'Data Pelanggan',
-            'active' => 'customer'
+            'active' => 'customer',
+            'customers' => PelangganModel::all(), 
         ]);
     }
 
@@ -23,14 +26,45 @@ class PelangganController extends Controller
     {
         return view('pages.pelanggan.TambahPelangganView', [
             'title' => 'Tambah Pelanggan',
-            'active' => 'customer'
+            'active' => 'customer',
+            'cities' => KotaModel::all(),
         ]);
     }
 
-    public function deletePelanggan($id)
+    public function createPelanggan(Request $request)
     {
-        Alert::success('Success Title', 'Success Message');
-        return redirect()->back();
+        $validatedData = $request->validate([
+            'nama_pelanggan' => 'required',
+            'no_telepon' => 'required|min:10',
+            'alamat' => 'required',
+            'kelurahan' => 'required',
+        ]);
+
+        $pelanggan = new PelangganModel();
+        $add_pelanggan = $pelanggan->createPelanggan($validatedData);
+
+        if ($add_pelanggan) {
+            Alert::success('Success', 'Data pelanggan berhasil ditambahkan');
+            return redirect('/pelanggan');
+        } else {
+            Alert::error('Error', 'Data pelanggan gagal ditambahkan');
+            return redirect()->back();
+        }
+    }
+
+    public function deletePelanggan($id_pelanggan)
+    {
+
+        $pelanggan = new PelangganModel();
+        $delete_pelanggan = $pelanggan->deletePelanggan($id_pelanggan);
+
+        if ($delete_pelanggan) {
+            Alert::success('Success', 'Data pelanggan berhasil dihapus');
+            return redirect('/pelanggan');
+        } else {
+            Alert::error('Error', 'Data pelanggan gagal dihapus');
+            return redirect()->back();
+        }
     }
 
     public function displayEditPelanggan($id)

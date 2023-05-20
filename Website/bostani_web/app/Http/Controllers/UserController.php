@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\RoleModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Password;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
@@ -39,15 +41,27 @@ class UserController extends Controller
 
     public function createUser(Request $request)
     {
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'nama_user' => 'required',
             'role' => 'required',
-            'username' => 'required',
-            'password' => 'required',
+            'username' => 'required|unique:users|min:8|max:16',
+            'password' => [
+                'required', 'max:16',
+                Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->symbols()
+                // ->uncompromised()   
+            ],
         ]);
 
+        if ($validator->fails()) {
+            toast($validator->messages()->all()[0], 'error');
+            return back();
+        }
+
         $user = new UserModel();
-        $add_user = $user->createUser($validatedData);
+        $add_user = $user->createUser($request->all());
 
         if ($add_user) {
             Alert::success('Success', 'User berhasil ditambahkan');
@@ -76,15 +90,27 @@ class UserController extends Controller
 
     public function updateUser(Request $request, $id)
     {
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'nama_user' => 'required',
             'role' => 'required',
-            'username' => 'required',
-            'password' => 'required',
+            'username' => 'required|min:8|max:16',
+            'password' => [
+                'required', 'max:16',
+                Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->symbols()
+                // ->uncompromised()   
+            ],
         ]);
 
+        if ($validator->fails()) {
+            toast($validator->messages()->all()[0], 'error');
+            return back();
+        }
+
         $user = new UserModel();
-        $edit_user = $user->updateUser($validatedData, $id);
+        $edit_user = $user->updateUser($request->all(), $id);
 
         if ($edit_user) {
             Alert::success('Success', 'Data user berhasil diperbarui');
@@ -97,16 +123,15 @@ class UserController extends Controller
 
     public function deleteUser($id)
     {
-        dd($id);
-        // $user = new UserModel();
-        // $delete_user = $user->deleteUser($id);
+        $user = new UserModel();
+        $delete_user = $user->deleteUser($id);
 
-        // if ($delete_user) {
-        //     Alert::success('Success', 'Data user berhasil dihapus');
-        //     return redirect('/kelola-akun');
-        // } else {
-        //     Alert::error('Error', 'Data user gagal dihapus');
-        //     return redirect()->back();
-        // }
+        if ($delete_user) {
+            Alert::success('Success', 'Data user berhasil dihapus');
+            return redirect('/kelola-akun');
+        } else {
+            Alert::error('Error', 'Data user gagal dihapus');
+            return redirect()->back();
+        }
     }
 }

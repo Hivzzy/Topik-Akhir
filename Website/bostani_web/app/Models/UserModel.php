@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class UserModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'user';
+    protected $table = 'users';
     protected $guarded = ['id'];
     public $timestamps = false;
 
@@ -28,24 +27,22 @@ class UserModel extends Model
 
     public function createUser($user)
     {
-        $add_user = DB::table('t_user')->insert(
-            array(
-                'id_role' => $user['role'],
-                'nama_user' => $user['nama_user'],
-                'username' => $user['username'],
-                'password' => bcrypt($user['password']),
-            )
-        );
+        $add_user = UserModel::create([
+            'role_id' => $user['role'],
+            'name' => $user['nama_user'],
+            'username' => $user['username'],
+            'password' => bcrypt($user['password']),
+        ]);
 
         return $add_user;
     }
 
     public function updateUser($user, $id_user)
     {
-        $edit_user = DB::table('t_user')->where('id', $id_user)->update(
+        $edit_user = UserModel::where('id', $id_user)->update(
             array(
-                'id_role' => $user['role'],
-                'nama_user' => $user['nama_user'],
+                'role_id' => $user['role'],
+                'name' => $user['nama_user'],
                 'username' => $user['username'],
                 'password' => bcrypt($user['password']),
             )
@@ -56,12 +53,17 @@ class UserModel extends Model
 
     public function deleteUser($id_user)
     {
-        $delete_user = DB::table('t_user')->where('id', $id_user)->delete();
+        $delete_user = UserModel::where('id', $id_user)->delete();
         return $delete_user;
     }
 
     public function role()
     {
         return $this->belongsTo(RoleModel::class, 'role_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(PesananModel::class);
     }
 }

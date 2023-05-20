@@ -20,7 +20,7 @@ class ProdukController extends Controller
         $data = $produk->getProduk();
 
         return view('pages.produk.ProdukView', [
-            'title' => 'Data Prdouk',
+            'title' => 'Data Produk',
             'active' => 'product',
             'produks' => $data,
         ]);
@@ -29,7 +29,7 @@ class ProdukController extends Controller
     public function displayTambahProduk()
     {
         return view('pages.produk.TambahProdukView', [
-            'title' => 'Tambah Prdouk',
+            'title' => 'Tambah Produk',
             'active' => 'product',
             'categories' => KategoriModel::all(),
             'units' => UnitModel::all(),
@@ -65,7 +65,7 @@ class ProdukController extends Controller
         $data = $produk->getDetailProduk($id);
 
         return view('pages.produk.EditProdukView', [
-            'title' => 'Edit Prdouk',
+            'title' => 'Edit Produk',
             'active' => 'product',
             'produk' => $data,
             'categories' => KategoriModel::all(),

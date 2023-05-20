@@ -20,55 +20,55 @@
             </a>
         </div>
         <div class="bg-white p-4 space-y-4 rounded shadow-md">
-            <div class="flex flex-col">
-                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                        <div class="overflow-hidden">
-                            <table id="tabel_produk" class="stripe hover py-4" width="100%">
-                                <thead class="bg-[#272727] text-white">
-                                    <tr>
-                                        <th>Nama Item</th>
-                                        <th>Satuan</th>
-                                        <th>Kategori</th>
-                                        <th>Sub Kategori</th>
-                                        {{-- <th>Ukuran</th> --}}
-                                        <th>Harga Beli</th>
-                                        <th>Harga Jual</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($produks as $produk)
+            <div class="overflow-x-hidden">
+                <div class="flex flex-col">
+                    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                            <div class="overflow-hidden">
+                                <table id="tabel_produk" class="stripe hover py-4" width="100%">
+                                    <thead class="bg-[#272727] text-white">
                                         <tr>
-                                            <td>{{ $produk->product_name }}</td>
-                                            <td>{{ $produk->satuan->unit_product_name }}</td>
-                                            <td>
-                                                {{ $produk->kategori->category_name }}</td>
-                                            <td>
-                                                {{ $produk->sub_kategori != null ? $produk->sub_kategori->sub_category_name : '-' }}
-                                            </td>
-                                            {{-- <td>{{ $produk->product_size }}</td> --}}
-                                            <td>Rp
-                                                {{ number_format($produk->product_purchase_price, 0, ',', '.') }}</td>
-                                            <td>Rp
-                                                {{ number_format($produk->product_selling_price, 0, ',', '.') }}</td>
-                                            <td class="flex space-x-1">
-                                                <a href="/produk/edit/{{ $produk->id }}"
-                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
-                                                    Edit
-                                                    {{-- <img src="/assets/icons/edit.svg"> --}}
-                                                </a>
-                                                <a href="/produk/hapus/{{ $produk->id }}"
-                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700"
-                                                    data-confirm-delete="true">
-                                                    Hapus
-                                                    {{-- <img src="/assets/icons/delete.svg"> --}}
-                                                </a>
-                                            </td>
+                                            <th>Nama Item</th>
+                                            <th>Satuan</th>
+                                            <th>Kategori</th>
+                                            <th>Sub Kategori</th>
+                                            {{-- <th>Ukuran</th> --}}
+                                            <th>Harga Beli</th>
+                                            <th>Harga Jual</th>
+                                            <th>Aksi</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($produks as $produk)
+                                            <tr>
+                                                <td>{{ $produk->product_name }}</td>
+                                                <td>{{ $produk->satuan->unit_product_name }}</td>
+                                                <td>
+                                                    {{ $produk->kategori->category_name }}</td>
+                                                <td>
+                                                    {{ $produk->sub_kategori != null ? $produk->sub_kategori->sub_category_name : '-' }}
+                                                </td>
+                                                {{-- <td>{{ $produk->product_size }}</td> --}}
+                                                <td>Rp
+                                                    {{ number_format($produk->product_purchase_price, 0, ',', '.') }}</td>
+                                                <td>Rp
+                                                    {{ number_format($produk->product_selling_price, 0, ',', '.') }}</td>
+                                                <td>
+                                                    <a href="/produk/edit/{{ $produk->id }}"
+                                                        class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
+                                                        Edit
+                                                    </a>
+                                                    <a href="/produk/hapus/{{ $produk->id }}"
+                                                        class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700"
+                                                        data-confirm-delete="true">
+                                                        Hapus
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

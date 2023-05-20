@@ -45,7 +45,7 @@
                                             <td>
                                                 {{ $user->role->role_name }}
                                             </td>
-                                            <td class="flex space-x-1">
+                                            <td>
                                                 <a href="/akun/edit/{{ $user->id }}"
                                                     class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
                                                     Edit
