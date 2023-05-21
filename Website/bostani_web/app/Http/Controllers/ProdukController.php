@@ -45,6 +45,7 @@ class ProdukController extends Controller
             'sub_kategori' => '',
             'harga_beli' => 'required',
             'harga_jual' => 'required',
+            'ukuran' => 'required',
         ]);
 
         $produk = new ProdukModel();

@@ -34,6 +34,7 @@ class ProdukModel extends Model
             'product_name' => $produk['nama_produk'],
             'product_purchase_price' => $produk['harga_beli'],
             'product_selling_price' => $produk['harga_jual'],
+            'product_size' => $produk['ukuran'],
         ]);
 
         return $add_produk;

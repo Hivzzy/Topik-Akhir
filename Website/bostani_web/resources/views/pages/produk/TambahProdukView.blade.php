@@ -46,10 +46,10 @@
                         <label class="font-medium">Harga Jual</label>
                         <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="harga_jual">
                     </div>
-                    {{-- <div class="grid grid-rows-1">
+                    <div class="grid grid-rows-1">
                         <label class="font-medium">Ukuran</label>
                         <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="number" name="ukuran">
-                    </div> --}}
+                    </div>
                 </div>
                 <div class="flex justify-end space-x-2 mt-6">
                     <input type="submit"
