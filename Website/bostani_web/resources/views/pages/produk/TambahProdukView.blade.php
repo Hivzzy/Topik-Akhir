@@ -10,7 +10,7 @@
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Nama Produk</label>
                         <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="product_name"
-                            id="product_name">
+                            id="product_name" required>
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Satuan Produk</label>
