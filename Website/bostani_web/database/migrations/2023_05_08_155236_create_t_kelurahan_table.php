@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('urban_villages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('district_id');
-            $table->string('urban_village_name', 16);
+            $table->string('urban_village_name', 32);
         });
     }
 
