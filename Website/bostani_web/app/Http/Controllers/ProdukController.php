@@ -40,13 +40,13 @@ class ProdukController extends Controller
     public function createProduk(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'nama_produk' => 'required',
-            'satuan' => 'required',
-            'kategori' => 'required',
-            'sub_kategori' => '',
-            'harga_beli' => 'required',
-            'harga_jual' => 'required',
-            'ukuran' => 'required',
+            'product_name' => 'required|unique:products',
+            'unit' => 'required',
+            'category' => 'required',
+            'sub_category' => '',
+            'purchase_price' => 'required',
+            'selling_price' => 'required',
+            'size' => 'required',
         ]);
 
         if ($validator->fails()) {

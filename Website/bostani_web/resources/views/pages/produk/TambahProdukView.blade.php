@@ -9,11 +9,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Nama Produk</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="nama_produk" value="{{ old('nama_produk') }}">
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="product_name">
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Satuan Produk</label>
-                        <select name="satuan"
+                        <select name="unit"
                             class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none ">
                             <option value=""></option>
                             @foreach ($units as $unit)
@@ -23,7 +23,7 @@
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Kategori</label>
-                        <select name="kategori" id="kategori"
+                        <select name="category" id="kategori"
                             class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
                             <option value=""></option>
                             @foreach ($categories as $category)
@@ -33,22 +33,22 @@
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Sub Kategori</label>
-                        <select name="sub_kategori" id="sub_kategori"
+                        <select name="sub_category" id="sub_kategori"
                             class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
                             <option value=""></option>
                         </select>
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Harga Beli</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="harga_beli">
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="purchase_price">
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Harga Jual</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="harga_jual">
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="selling_price">
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Ukuran</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="number" name="ukuran">
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="number" name="size">
                     </div>
                 </div>
                 <div class="flex justify-end space-x-2 mt-6">
@@ -69,7 +69,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('select[name="kategori"]').on('change', function() {
+            $('select[name="category"]').on('change', function() {
                 var kategoriID = $(this).val();
                 if (kategoriID) {
                     $.ajax({
@@ -77,9 +77,9 @@
                         type: 'GET',
                         dataType: 'json',
                         success: function(data) {
-                            $('select[name="sub_kategori"]').empty();
+                            $('select[name="sub_category"]').empty();
                             $.each(data, function(key, value) {
-                                $('select[name="sub_kategori"]').append(
+                                $('select[name="sub_category"]').append(
                                     '<option value="' + value['id'] + '">' + value[
                                         'sub_category_name'] +
                                     '</option>');
@@ -87,7 +87,7 @@
                         }
                     });
                 } else {
-                    $('select[name="sub_kategori"]').empty();
+                    $('select[name="sub_category"]').empty();
                 }
             });
         });
