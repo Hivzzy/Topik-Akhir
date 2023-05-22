@@ -39,6 +39,9 @@ class ProdukController extends Controller
 
     public function createProduk(Request $request)
     {
+        if($request['sub_category'] == '') {
+                $request['sub_category'] = NULL;
+        }
         $validator = Validator::make($request->all(), [
             'product_name' => 'required|unique:products',
             'unit' => 'required',

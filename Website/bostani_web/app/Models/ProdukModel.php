@@ -10,6 +10,8 @@ class ProdukModel extends Model
     use HasFactory;
 
     protected $table = 'products';
+    protected $fillable = ['category_id','sub_category_id','unit_id','product_name','product_purchase_price','product_selling_price','product_size'];
+
     protected $guarded = ['id'];
     public $timestamps = false;
 
@@ -77,4 +79,10 @@ class ProdukModel extends Model
     {
         return $this->belongsTo(UnitModel::class, 'unit_id');
     }
+
+    public function item_pesanan()
+    {
+        return $this->hasMany(UnitModel::class);
+    }
 }
+

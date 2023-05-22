@@ -35,4 +35,9 @@ class PelangganModel extends Model
     {
         return $this->belongsTo(KelurahanModel::class, 'urban_village_id');
     }
+
+    public function pesanan()
+    {
+        return $this->hasMany(PesananModel::class);
+    }
 }

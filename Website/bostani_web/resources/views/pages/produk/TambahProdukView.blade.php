@@ -87,7 +87,7 @@
                         }
                     });
                 } else {
-                    $('select[name="sub_category"]').empty();
+                    $('select[name="sub_category"]').append('<option value="">'+'</option>');
                 }
             });
         });
