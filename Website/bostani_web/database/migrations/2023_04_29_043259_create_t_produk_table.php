@@ -18,10 +18,10 @@ return new class extends Migration
             $table->foreignId('category_id')->nullable();
             $table->foreignId('sub_category_id')->nullable();
             $table->foreignId('unit_id');
-            $table->string('product_name');
+            $table->string('product_name', 64);
             $table->integer('product_size');
-            $table->decimal('product_purchase_price');
-            $table->decimal('product_selling_price');
+            $table->integer('product_purchase_price');
+            $table->integer('product_selling_price');
         });
     }
 

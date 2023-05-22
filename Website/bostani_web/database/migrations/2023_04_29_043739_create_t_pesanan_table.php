@@ -22,7 +22,8 @@ return new class extends Migration
             $table->date('order_date');
             $table->timestamp('order_time');
             $table->dateTime('delivery_date');
-            $table->string('payment_method');
+            $table->integer('shipping_cost');
+            $table->string('payment_method', 8);
         });
     }
 

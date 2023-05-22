@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
         UserModel::create([
             'role_id' => 5,
             'name' => 'Adrianus Simarmata',
-            'username' => 'adrianus_simarmata',
+            'username' => 'adrianus99',
             'password' => bcrypt('password'),
         ]);
     }

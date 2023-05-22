@@ -56,11 +56,12 @@ class ProdukController extends Controller
             toast($validator->messages()->all()[0], 'error');
             return back();
         }
+
         $produk = new ProdukModel();
         $add_produk = $produk->createProduk($request->all());
 
         if ($add_produk) {
-            Alert::success('Success', $request->all()['nama_produk'] . ' berhasil ditambahkan');
+            Alert::success('Success', $request->all()['product_name'] . ' berhasil ditambahkan');
             return redirect('/produk');
         } else {
             Alert::error('Error', 'User gagal ditambahkan');
@@ -84,17 +85,23 @@ class ProdukController extends Controller
 
     public function updateProduk(Request $request, $id)
     {
-        $validatedData = $request->validate([
-            'nama_produk' => 'required',
-            'satuan' => 'required',
-            'kategori' => 'required',
-            'sub_kategori' => '',
-            'harga_beli' => 'required',
-            'harga_jual' => 'required',
+        $validator = Validator::make($request->all(), [
+            'product_name' => 'required',
+            'unit' => 'required',
+            'category' => 'required',
+            'sub_category' => '',
+            'purchase_price' => 'required',
+            'selling_price' => 'required',
+            'size' => 'required',
         ]);
 
+        if ($validator->fails()) {
+            toast($validator->messages()->all()[0], 'error');
+            return back();
+        }
+
         $produk = new ProdukModel();
-        $edit_produk = $produk->updateProduk($validatedData, $id);
+        $edit_produk = $produk->updateProduk($request->all(), $id);
 
         if ($edit_produk) {
             Alert::success('Success', 'Data produk berhasil diperbarui');

@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('order_id');
             $table->foreignId('product_id');
-            $table->integer('number_of_item');
-            $table->decimal('item_purchase_price');
-            $table->decimal('item_selling_price');
+            $table->foreignId('shop_item_id')->nullable();
+            $table->integer('item_purchase_price');
+            $table->integer('item_selling_price');
+            $table->integer('item_size');
         });
     }
 

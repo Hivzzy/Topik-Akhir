@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('districts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('city_id');
-            $table->string('district_name');
+            $table->string('district_name', 32);
         });
     }
 
