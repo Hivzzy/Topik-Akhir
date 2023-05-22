@@ -10,6 +10,8 @@ class ProdukModel extends Model
     use HasFactory;
 
     protected $table = 'products';
+    protected $fillable = ['category_id','sub_category_id','unit_id','product_name','product_purchase_price','product_selling_price','product_size'];
+
     protected $guarded = ['id'];
     public $timestamps = false;
 
@@ -44,13 +46,13 @@ class ProdukModel extends Model
     {
         $edit_produk = ProdukModel::where('id', $id)->update(
             array(
-                'category_id' => $produk['kategori'],
-                'sub_category_id' => $produk['sub_kategori'],
-                'unit_id' => $produk['satuan'],
-                'product_name' => $produk['nama_produk'],
-                // 'ukuran_produk' => $produk['ukuran'],
-                'product_purchase_price' => $produk['harga_beli'],
-                'product_selling_price' => $produk['harga_jual'],
+                'category_id' => $produk['category'],
+                'sub_category_id' => $produk['sub_category'],
+                'unit_id' => $produk['unit'],
+                'product_name' => $produk['product_name'],
+                'product_purchase_price' => $produk['purchase_price'],
+                'product_selling_price' => $produk['selling_price'],
+                'product_size' => $produk['size'],
             )
         );
 
@@ -77,4 +79,10 @@ class ProdukModel extends Model
     {
         return $this->belongsTo(UnitModel::class, 'unit_id');
     }
+
+    public function item_pesanan()
+    {
+        return $this->hasMany(UnitModel::class);
+    }
 }
+

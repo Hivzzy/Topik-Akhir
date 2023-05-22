@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('delivery_status', function (Blueprint $table) {
             $table->id();
-            $table->string('delivery_status_name');
+            $table->string('delivery_status_name', 8);
         });
     }
 
