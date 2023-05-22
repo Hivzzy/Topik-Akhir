@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class ProdukModel extends Model
 {
@@ -17,7 +18,15 @@ class ProdukModel extends Model
 
     public function getProduk()
     {
+        $key_cache = 'produk';
+        $produk = Cache::get($key_cache);
+        
+        if ($produk) {
+            return $produk;
+        }
         $produk = ProdukModel::all();
+
+        Cache::put($key_cache, $produk, 10);
         return $produk;
     }
 
