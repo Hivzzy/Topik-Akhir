@@ -28,13 +28,13 @@ class ProdukModel extends Model
     public function createProduk($produk)
     {
         $add_produk = ProdukModel::create([
-            'category_id' => $produk['kategori'],
-            'sub_category_id' => $produk['sub_kategori'],
-            'unit_id' => $produk['satuan'],
-            'product_name' => $produk['nama_produk'],
-            'product_purchase_price' => $produk['harga_beli'],
-            'product_selling_price' => $produk['harga_jual'],
-            'product_size' => $produk['ukuran'],
+            'category_id' => $produk['category'],
+            'sub_category_id' => $produk['sub_category'],
+            'unit_id' => $produk['unit'],
+            'product_name' => $produk['product_name'],
+            'product_purchase_price' => $produk['purchase_price'],
+            'product_selling_price' => $produk['selling_price'],
+            'product_size' => $produk['size'],
         ]);
 
         return $add_produk;

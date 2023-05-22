@@ -6,6 +6,7 @@ use App\Models\KategoriModel;
 use App\Models\ProdukModel;
 use App\Models\UnitModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProdukController extends Controller
@@ -38,21 +39,25 @@ class ProdukController extends Controller
 
     public function createProduk(Request $request)
     {
-        $validatedData = $request->validate([
-            'nama_produk' => 'required',
-            'satuan' => 'required',
-            'kategori' => 'required',
-            'sub_kategori' => '',
-            'harga_beli' => 'required',
-            'harga_jual' => 'required',
-            'ukuran' => 'required',
+        $validator = Validator::make($request->all(), [
+            'product_name' => 'required|unique:products',
+            'unit' => 'required',
+            'category' => 'required',
+            'sub_category' => '',
+            'purchase_price' => 'required',
+            'selling_price' => 'required',
+            'size' => 'required',
         ]);
 
+        if ($validator->fails()) {
+            toast($validator->messages()->all()[0], 'error');
+            return back();
+        }
         $produk = new ProdukModel();
-        $add_produk = $produk->createProduk($validatedData);
+        $add_produk = $produk->createProduk($request->all());
 
         if ($add_produk) {
-            Alert::success('Success', $validatedData['nama_produk'] . ' berhasil ditambahkan');
+            Alert::success('Success', $request->all()['nama_produk'] . ' berhasil ditambahkan');
             return redirect('/produk');
         } else {
             Alert::error('Error', 'User gagal ditambahkan');
