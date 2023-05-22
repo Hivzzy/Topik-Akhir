@@ -4,17 +4,17 @@
     <div class="space-y-4 sm:space-y-6">
         <h1 class="text-lg sm:text-2xl font-semibold">Tambah Produk</h1>
         <div class="bg-white p-4 space-y-6 rounded shadown-md">
-            <form method="POST" action="/produk/tambah">
+            <form method="POST" action="/produk/tambah" autocapitalize="words">
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Nama Produk</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="product_name">
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="product_name"
+                            id="product_name">
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Satuan Produk</label>
-                        <select name="unit"
-                            class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none ">
+                        <select name="unit" class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none ">
                             <option value=""></option>
                             @foreach ($units as $unit)
                                 <option value="{{ $unit->id }}">{{ $unit->unit_product_name }}</option>
@@ -90,6 +90,16 @@
                     $('select[name="sub_category"]').empty();
                 }
             });
+        });
+
+        // Set product name capitalize
+        $('#product_name').on('change keydown paste', function(e) {
+            if (this.value.length = 1) {}
+            var $this_val = $(this).val();
+            this_val = $this_val.toLowerCase().replace(/\b[a-z]/g, function(char) {
+                return char.toUpperCase();
+            });
+            $(this).val(this_val);
         });
     </script>
 @endsection
