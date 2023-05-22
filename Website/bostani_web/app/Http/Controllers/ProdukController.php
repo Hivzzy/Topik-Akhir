@@ -57,7 +57,7 @@ class ProdukController extends Controller
         $add_produk = $produk->createProduk($request->all());
 
         if ($add_produk) {
-            Alert::success('Success', $request->all()['nama_produk'] . ' berhasil ditambahkan');
+            Alert::success('Success', $request->all()['product_name'] . ' berhasil ditambahkan');
             return redirect('/produk');
         } else {
             Alert::error('Error', 'User gagal ditambahkan');

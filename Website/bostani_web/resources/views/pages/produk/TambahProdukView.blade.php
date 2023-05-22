@@ -9,12 +9,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Nama Produk</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="product_name"
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded required" type="text" name="product_name"
                             id="product_name">
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Satuan Produk</label>
-                        <select name="unit" class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none ">
+                        <select name="unit" class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none required">
                             <option value=""></option>
                             @foreach ($units as $unit)
                                 <option value="{{ $unit->id }}">{{ $unit->unit_product_name }}</option>
@@ -24,7 +24,7 @@
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Kategori</label>
                         <select name="category" id="kategori"
-                            class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none">
+                            class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none required">
                             <option value=""></option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->category_name }}</option>
@@ -40,15 +40,15 @@
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Harga Beli</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="purchase_price">
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded required" type="text" name="purchase_price">
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Harga Jual</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="selling_price">
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded required" type="text" name="selling_price">
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Ukuran</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="number" name="size">
+                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded required" type="number" name="size">
                     </div>
                 </div>
                 <div class="flex justify-end space-x-2 mt-6">
