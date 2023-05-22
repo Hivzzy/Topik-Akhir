@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('urban_village_id');
-            $table->string('customer_name');
-            $table->string('customer_phone');
+            $table->string('customer_name', 32);
+            $table->string('customer_phone', 15);
             $table->string('customer_address');
+            $table->string('customer_postal_code', 5);
         });
     }
 

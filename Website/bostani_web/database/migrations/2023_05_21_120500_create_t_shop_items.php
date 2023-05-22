@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('shop_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_item_id');
-            $table->string('shop_item_information');
+            $table->string('shop_item_information', 128);
         });
     }
 

@@ -18,9 +18,11 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('customer_id');
             $table->foreignId('order_status_id');
+            $table->time('order_time');
             $table->dateTime('order_date');
             $table->dateTime('delivery_date');
-            $table->string('payment_method');
+            $table->integer('shipping_cost');
+            $table->string('payment_method', 8);
         });
     }
 
