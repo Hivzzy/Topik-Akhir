@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubKategoriController;
@@ -54,6 +55,10 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/subkategori/get/{id}', [SubKategoriModel::class, 'getSubKategori']);
     Route::get('/subkategori/{id}', [SubKategoriController::class, 'index']);
     
+    //Pesanan
+    Route::get('/pesanan', [PesananController::class, 'index']);
+    Route::get('/pesanan/detail/{id}', [PesananController::class, 'getDetailPesanan']);
+
     // Penjualan
     Route::get('/penjualan', [PenjualanController::class, 'displayPenjualan']);
     Route::get('/grafik-penjualan', [PenjualanController::class, 'displayGrafikPenjualan']);

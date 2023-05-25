@@ -19,9 +19,9 @@ class PesananModel extends Model
         return $pesanan;
     }
 
-    public function getDetailProduk($id_pesanan)
+    public function getDetailPesanan($id_pesanan)
     {
-        $pesanan = ProdukModel::where('id', $id_pesanan)->first();
+        $pesanan = PesananModel::where('id', $id_pesanan)->first();
         return $pesanan;
     }
 

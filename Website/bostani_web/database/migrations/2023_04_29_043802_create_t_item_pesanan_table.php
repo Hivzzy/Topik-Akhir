@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('shop_item_id')->nullable();
             $table->integer('item_purchase_price');
             $table->integer('item_selling_price');
-            $table->integer('item_size');
+            $table->decimal('item_size');
         });
     }
 

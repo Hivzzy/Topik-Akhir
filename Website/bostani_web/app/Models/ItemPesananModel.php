@@ -12,10 +12,9 @@ class ItemPesananModel extends Model
     protected $guarded = ['id'];
     public $timestamps = false;
 
-
-    public function getItemPesanan()
+    public function getItemPesanan($id_pesanan)
     {
-        $item_pesanan = ItemPesananModel::all();
+        $item_pesanan = ItemPesananModel::where('order_id', $id_pesanan)->get();
         return $item_pesanan;
     }
 
@@ -59,7 +58,7 @@ class ItemPesananModel extends Model
 
     public function produk()
     {
-        return $this->belongsTo(PelangganModel::class,'product_id');
+        return $this->belongsTo(ProdukModel::class,'product_id');
     }
 
 }

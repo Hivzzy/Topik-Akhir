@@ -8,7 +8,7 @@ class StatusPesananModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'orders_status';
+    protected $table = 'order_status';
     protected $guarded = ['id'];
     public $timestamps = false;
 
