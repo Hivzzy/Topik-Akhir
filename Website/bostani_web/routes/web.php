@@ -59,6 +59,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/pesanan', [PesananController::class, 'index']);
     Route::get('/pesanan/detail/{id}', [PesananController::class, 'getDetailPesanan']);
     Route::post('/cart/add/{productId}/{quantity}', [CartController::class, 'addToCart']);
+    Route::get('/tambah-pesanan', [PesananController::class, 'displayTambahPesanan']);
 
     //Belanja
     Route::get('/belanja', [PesananController::class, 'getListBelanja']);
