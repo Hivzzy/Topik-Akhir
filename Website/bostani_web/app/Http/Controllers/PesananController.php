@@ -49,23 +49,24 @@ class PesananController extends Controller
     public function getListBelanja()
     {
         $belanja = new PesananModel();
+        $item_belanja = new ItemPesananModel();
         $id_pesanan = [];
-        $tanggal_kirim = '2023/06/16';
-        $dt_belanja = $belanja->getListBelanja($tanggal_kirim);
+        $tanggal_kirim = now();  
+        // $tanggal_kirim = '2023/06/16';
 
+        $dt_belanja = $belanja->getListBelanja($tanggal_kirim);
         foreach ($dt_belanja as $dt) {
             array_push($id_pesanan, $dt->id);
         }
 
-        $item_belanja = $belanja->getItemBelanja($id_pesanan);
-        $sum_item = $belanja->getTotalItem($id_pesanan);
-        // dump($sum_item);
+        $data = $item_belanja->getItemBelanja($id_pesanan);
+        $sum_item = $item_belanja->getTotalItem($id_pesanan);
 
         return view('pages.belanja.BelanjaView', [
             'title' => 'Daftar Belanja',
             'active' => 'shop-item',
             'belanja' => $dt_belanja,
-            'items' => $item_belanja,
+            'items' => $data,
             'list_item' => $sum_item, 
         ]);
     }

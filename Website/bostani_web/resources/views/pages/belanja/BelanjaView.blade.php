@@ -23,13 +23,13 @@
                                 <tbody>
                                     @foreach ($list_item as $item)
                                         <tr class="">
-                                            <td class="px-6 py-2">{{ $item->produk->product_name }}</td>
-                                            <td class="px-6 py-2">{{ $item->produk->satuan->unit_product_name }}</td>
+                                            <td class="px-6 py-2">{{ $item->product_name }}</td>
+                                            <td class="px-6 py-2">{{ $item->unit_product_name }}</td>
                                             <td class="px-6 py-2">Rp
-                                                {{ number_format($item->item_selling_price, 0, ',', '.') }}</td>
-                                            <td class="px-6 py-2">{{ $item->item_size }}</td>
+                                                {{ number_format($item->item_purchase_price, 0, ',', '.') }}</td>
+                                            <td class="px-6 py-2">{{ $item->jumlah }}</td>
                                             <td class="px-6 py-2">Rp
-                                                {{ number_format($item->item_selling_price * $item->item_size, 0, ',', '.') }}
+                                                {{ number_format($item->item_purchase_price * $item->jumlah, 0, ',', '.') }}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -79,7 +79,10 @@
                                                 <input type="checkbox" name="check" id="check">
                                             </td>
                                             <td>
-                                                <input type="text">
+                                                <form action="#" method="post">
+                                                    <input type="text" class="p-2 bg-gray-100 rounded text-xs">
+                                                    {{-- <input type="submit" value="Tambah" class="bg-info rounded text-xs text-white p-2"> --}}
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

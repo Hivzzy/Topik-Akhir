@@ -68,17 +68,6 @@ class PesananModel extends Model
         return $belanja;
     }
 
-    public function getItemBelanja($id_pesanan)
-    {
-        $item_belanja = ItemPesananModel::whereIn('order_id', $id_pesanan)->get();
-        return $item_belanja;
-    }
-
-    public function getTotalItem($id_pesanan) {
-        $item_belanja = ItemPesananModel::whereIn('order_id', $id_pesanan)->distinct('product_id')->get();
-        return $item_belanja;
-    }
-
     public function users()
     {
         return $this->belongsTo(UserModel::class,'user_id');
@@ -104,5 +93,3 @@ class PesananModel extends Model
     }
 
 }
-
-?>
