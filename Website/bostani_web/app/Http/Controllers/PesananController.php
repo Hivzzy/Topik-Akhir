@@ -45,4 +45,28 @@ class PesananController extends Controller
             'items' => $item_pesanan->getItemPesanan($id_pesanan),
         ]);
     }
+
+    public function getListBelanja()
+    {
+        $belanja = new PesananModel();
+        $id_pesanan = [];
+        $tanggal_kirim = '2023/06/16';
+        $dt_belanja = $belanja->getListBelanja($tanggal_kirim);
+
+        foreach ($dt_belanja as $dt) {
+            array_push($id_pesanan, $dt->id);
+        }
+
+        $item_belanja = $belanja->getItemBelanja($id_pesanan);
+        $sum_item = $belanja->getTotalItem($id_pesanan);
+        // dump($sum_item);
+
+        return view('pages.belanja.BelanjaView', [
+            'title' => 'Daftar Belanja',
+            'active' => 'shop-item',
+            'belanja' => $dt_belanja,
+            'items' => $item_belanja,
+            'list_item' => $sum_item, 
+        ]);
+    }
 }

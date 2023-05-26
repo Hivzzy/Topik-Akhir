@@ -34,6 +34,12 @@
             </a>
         </li>
         <li class="relative">
+            <a class="{{ $active === 'shop-item' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
+                href="/belanja">
+                <span class="ml-2 text-sm font-medium">Data Belanja</span>
+            </a>
+        </li>
+        <li class="relative">
             <a class="{{ $active === 'send-item' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
                 href="/pengiriman">
                 <span class="ml-2 text-sm font-medium">Data Pengiriman</span>

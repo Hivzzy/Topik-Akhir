@@ -62,6 +62,23 @@ class PesananModel extends Model
         return $delete_pesanan;
     }
 
+    public function getListBelanja($tanggal_kirim)
+    {
+        $belanja = PesananModel::where('delivery_date', date($tanggal_kirim))->get(['id', 'customer_id']);
+        return $belanja;
+    }
+
+    public function getItemBelanja($id_pesanan)
+    {
+        $item_belanja = ItemPesananModel::whereIn('order_id', $id_pesanan)->get();
+        return $item_belanja;
+    }
+
+    public function getTotalItem($id_pesanan) {
+        $item_belanja = ItemPesananModel::whereIn('order_id', $id_pesanan)->distinct('product_id')->get();
+        return $item_belanja;
+    }
+
     public function users()
     {
         return $this->belongsTo(UserModel::class,'user_id');
