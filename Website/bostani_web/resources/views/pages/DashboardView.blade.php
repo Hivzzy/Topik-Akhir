@@ -20,7 +20,7 @@
             </div>
             <div class="flex justify-between bg-white p-4 rounded shadow-md">
                 <div>
-                    <div class="font-semibold text-[32px]">0</div>
+                    <div class="font-semibold text-[32px]">{{ $orders }}</div>
                     <span class="font-semibold text-lg">Pesanan</span>
                 </div>
                 <img src="/assets/icons/ph_shopping-cart-simple-bold.svg" alt="cart icon">
