@@ -10,25 +10,33 @@
                     <div class="space-y-4">
                         <div class="grid grid-rows-1">
                             <label class="font-medium" for="">Nama</label>
-                            <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text"
-                                name="nama_pelanggan" placeholder="Nama" required>
+                            {{-- <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text"
+                                name="nama_pelanggan" placeholder="Nama" required> --}}
+                            <input type="text" name="nama_pelanggan"
+                                class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                                required />
                         </div>
                         <div class="grid grid-rows-1">
                             <label class="font-medium" for="">No Telepon</label>
-                            <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="no_telepon" placeholder="Nomor Telepon"
-                                required>
+                            {{-- <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="no_telepon" placeholder="Nomor Telepon"
+                                required> --}}
+                            <input type="text" name="no_telepon"
+                                class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                                required />
                         </div>
                         <div class="grid grid-rows-1">
                             <label class="font-medium" for="">Alamat</label>
-                            <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="alamat" placeholder="Alamat"
-                                required>
+                            {{-- <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="alamat" placeholder="Alamat"
+                                required> --}}
+                            <input type="text" name="alamat"
+                                class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                                required />
                         </div>
                     </div>
                     <div class="space-y-4">
                         <div class="grid grid-rows-1">
                             <label class="font-medium" for="">Kota</label>
-                            <select name="kota" class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none" title="kota"
-                                required>
+                            <select name="kota" data-te-select-init title="kota" required>
                                 <option value=""></option>
                                 @foreach ($cities as $city)
                                     <option value="{{ $city->id }}">{{ $city->city_name }}</option>
@@ -37,15 +45,13 @@
                         </div>
                         <div class="grid grid-rows-1">
                             <label class="font-medium" for="">Kecamatan</label>
-                            <select name="kecamatan" class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none" title="kecamatan"
-                                required>
+                            <select name="kecamatan" data-te-select-init title="kecamatan" required>
                                 <option value=""></option>
                             </select>
                         </div>
                         <div class="grid grid-rows-1">
                             <label class="font-medium" for="">Kelurahan</label>
-                            <select name="kelurahan" class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none" title="kelurahan"
-                                required>
+                            <select name="kelurahan" data-te-select-init title="kelurahan" required>
                                 <option value=""></option>
                             </select>
                         </div>
