@@ -7,36 +7,33 @@
         <div class="bg-white p-4 space-y-4 rounded shadow-md">
             <h2 class="text-lg font-semibold">Data Pelanggan</h2>
             <hr>
-            {{-- <form action="#" method="post"> --}}
             <div class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Nama</label>
-                        <select name="customer" id=""
-                            class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none" required>
+                        <select data-te-select-init data-te-select-filter="true" data-te-select-option-height="52" id="pelanggan" name="pelanggan" required>
                             <option value=""></option>
                             @foreach ($customers as $customer)
-                                <option value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
+                                <option value="{{ $customer->id }}" data-te-select-secondary-text="{{ $customer->customer_address }}">{{ $customer->customer_name }}</option>
                             @endforeach
-                        </select>
+                          </select>
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">No Telepon</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="no_telepon"
+                        <input class="px-2 py-1 border rounded" type="text" name="no_telepon" id="no_telepon"
                             required>
                     </div>
                 </div>
                 <div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Alamat</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="alamat" required>
+                        <input class="px-2 py-1 border border-1 rounded" type="text" name="alamat" id="alamat" required>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Kota</label>
-                        <select name="kota" id="kota"
-                            class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none" required>
+                        <select name="kota" id="kota" data-te-select-init required>
                             <option value=""></option>
                             @foreach ($cities as $city)
                                 <option value="{{ $city->id }}">{{ $city->city_name }}</option>
@@ -45,85 +42,86 @@
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Kecamatan</label>
-                        <select name="kecamatan" id="kecamatan"
-                            class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none" required>
+                        <select name="kecamatan" id="kecamatan" data-te-select-init
+                            class="px-2 py-1 border border-1 rounded appearance-none" required>
+                            <option value=""></option>
                         </select>
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Kelurahan</label>
-                        <select name="kelurahan" id="kelurahan"
-                            class="px-2 py-1 border bg-gray-100 border-1 rounded appearance-none" required>
+                        <select name="kelurahan" id="kelurahan" data-te-select-init
+                            class="px-2 py-1 border border-1 rounded appearance-none" required>
+                            <option value=""></option>
                         </select>
                     </div>
                 </div>
             </div>
-            {{-- </form> --}}
         </div>
 
         <div class="bg-white p-4 space-y-6 rounded shadow-md">
             <h2 class="text-lg font-semibold">Data Pesanan</h2>
             <hr>
-            {{-- <form action="#" method="post"> --}}
             <div class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Tanggal Kirim</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="date" name="tanggal_kirim"
+                        <input class="px-2 py-1 border border-1 rounded" type="date" name="tanggal_kirim"
                             required>
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Metode Pembayaran</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="metode_pembayaran"
+                        <input class="px-2 py-1 border border-1 rounded" type="text" name="metode_pembayaran"
                             required>
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Ongkos Kirim</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="ongkos_kirim"
+                        <input class="px-2 py-1 border border-1 rounded" type="text" name="ongkos_kirim"
                             required>
                     </div>
                 </div>
             </div>
-            {{-- </form> --}}
         </div>
 
         <div class="bg-white p-4 space-y-6 rounded shadow-md">
             <h2 class="text-lg font-semibold">Item Pesanan</h2>
             <hr>
-            {{-- <form action="#" method="post"> --}}
             <div class="space-y-4">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Nama Item</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="nama_item"
-                            required>
+                        <select data-te-select-init data-te-select-filter="true" id="produk" name="nama_item" required>
+                            <option value=""></option>
+                            @foreach ($products as $product)
+                                <option value="{{ $product->id }}">{{ $product->product_name }}</option>
+                            @endforeach
+                          </select>
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Satuan</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="satuan" required>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="grid grid-rows-1">
-                        <label class="font-medium" for="">Jumlah</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="jumlah" required>
+                        <input class="px-2 py-1 border border-1 rounded" type="text" name="satuan" id="satuan" readonly required>
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Harga</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="harga" required>
+                        <input class="px-2 py-1 border border-1 rounded" type="text" name="harga" id="harga" readonly required>
                     </div>
                     <div class="grid grid-rows-1">
+                        <label class="font-medium" for="">Jumlah</label>
+                        <input class="px-2 py-1 border border-1 rounded" type="text" name="jumlah" required>
+                    </div>  
+                </div>
+                {{-- <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Total Harga</label>
-                        <input class="px-2 py-1 border bg-gray-100 border-1 rounded" type="text" name="total_harga"
+                        <input class="px-2 py-1 border border-1 rounded" type="text" name="total_harga"
                             required>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="flex justify-end mt-6">
                 <button
                     class="inline-block rounded bg-primary p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">Tambah
                     Item</button>
             </div>
-            {{-- </form> --}}
         </div>
 
         <div class="bg-white p-4 space-y-6 rounded shadow-md">
@@ -182,6 +180,57 @@
                 })
                 .columns.adjust()
                 .responsive.recalc();
+        });
+
+        $(document).ready(function() {
+            $(document).on('change', '#pelanggan', function() {
+                var p_id = $(this).val();
+                console.log(p_id);
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/pelanggan/get',
+                    data: {
+                        'id': p_id
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        // console.log(data);
+
+                        // Set Nilai
+                        $('#no_telepon').val(data[0].customer_phone);
+                        $('#alamat').val(data[0].customer_address);
+                        // $('#kota_input').val(data[0].city_name);
+                        // $('#kecamatan_input').val(data[0].district_name);
+                        // $('#kelurahan_input').val(data[0].urban_village_name);
+                    },
+                    error: function() {}
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            $(document).on('change', '#produk', function() {
+                var p_id = $(this).val();
+                console.log(p_id);
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/produk/get',
+                    data: {
+                        'id': p_id
+                    },
+                    dataType: 'json',
+                    success: function(data) {
+                        // console.log(data);
+
+                        // Set Nilai
+                        $('#satuan').val(data[0].unit_product_name);
+                        $('#harga').val(data[0].product_selling_price);
+                    },
+                    error: function() {}
+                });
+            });
         });
 
         $(document).ready(function() {

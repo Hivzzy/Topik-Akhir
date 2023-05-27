@@ -44,6 +44,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/produk/edit/{id}', [ProdukController::class, 'displayEditProduk']);
     Route::post('/produk/edit/{id}', [ProdukController::class, 'updateProduk']);
     Route::delete('/produk/hapus/{id}', [ProdukController::class, 'deleteProduk']);
+    Route::get('/produk/get', [ProdukController::class, 'getProdukById']);
     
     //Kategori
     Route::get('/kategori', [KategoriController::class, 'index']);
@@ -75,6 +76,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/pelanggan/hapus/{id}', [PelangganController::class, 'deletePelanggan']);
     Route::get('/pelanggan/edit/{id}', [PelangganController::class, 'displayEditPelanggan']);
     Route::delete('/pelanggan/hapus/{id}',[PelangganController::class, 'deletePelanggan']);
+    Route::get('/pelanggan/get', [PelangganController::class, 'getPelangganById']);
 
     //Wilayah
     Route::get('/kecamatan/get/{id}', [WilayahController::class, 'getKecamatan']);

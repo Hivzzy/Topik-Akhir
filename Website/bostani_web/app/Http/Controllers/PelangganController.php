@@ -22,6 +22,14 @@ class PelangganController extends Controller
         ]);
     }
 
+    public function getPelangganById(Request $request)
+    {
+        $pelanggan = new PelangganModel();
+        $data = $pelanggan->getPelangganById($request->id);
+        // dd($data);
+        return response()->json($data);
+    }
+
     public function displayTambahPelanggan()
     {
         return view('pages.pelanggan.TambahPelangganView', [

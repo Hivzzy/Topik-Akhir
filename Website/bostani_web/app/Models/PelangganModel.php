@@ -13,6 +13,17 @@ class PelangganModel extends Model
     protected $guarded = ['id'];
     public $timestamps = false;
 
+    public function getPelangganById($id)
+    {
+        $data = PelangganModel::join('urban_villages', 'customers.urban_village_id', '=', 'urban_villages.id')
+        ->join('districts', 'urban_villages.district_id', '=', 'districts.id')
+        ->join('cities', 'districts.city_id', '=', 'cities.id')
+        ->select('customers.*', 'urban_villages.urban_village_name', 'districts.district_name', 'cities.city_name')
+        ->where('customers.id', $id)
+        ->get();
+        return $data;
+    }
+
     public function createPelanggan($pelanggan)
     {
         $add_pelanggan = PelangganModel::create([

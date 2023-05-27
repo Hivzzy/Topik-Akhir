@@ -14,7 +14,7 @@
                 </div>
             </a>
 
-            <div class="bg-[#272727] rounded">
+            <div>
                 <select id="jenisLaporan" data-te-select-init>
                     <option value="#">-- Pilih Jenis Laporan --</option>
                     <option value="harian">Laporan Harian</option>

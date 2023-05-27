@@ -6,6 +6,7 @@ use App\Models\ItemPesananModel;
 use App\Models\KotaModel;
 use App\Models\PelangganModel;
 use App\Models\PesananModel;
+use App\Models\ProdukModel;
 use Illuminate\Http\Request;
 
 class PesananController extends Controller
@@ -30,6 +31,7 @@ class PesananController extends Controller
             'active' => 'order',
             'customers' => PelangganModel::all(),
             'cities' => KotaModel::all(),
+            'products' => ProdukModel::all(),
         ]);
     }
 

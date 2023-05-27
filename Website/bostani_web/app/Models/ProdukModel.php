@@ -32,7 +32,11 @@ class ProdukModel extends Model
 
     public function getDetailProduk($id_produk)
     {
-        $produk = ProdukModel::where('id', $id_produk)->first();
+        $produk = ProdukModel::join('units', 'products.unit_id', '=', 'units.id')
+        ->select('products.product_selling_price', 'units.unit_product_name')
+        ->where('products.id', $id_produk)
+        ->get();
+
         return $produk;
     }
 

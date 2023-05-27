@@ -27,6 +27,13 @@ class ProdukController extends Controller
         ]);
     }
 
+    public function getProdukById(Request $request)
+    {
+        $produk = new ProdukModel();
+        $data = $produk->getDetailProduk($request->id);
+        return response()->json($data);
+    }
+
     public function displayTambahProduk()
     {
         return view('pages.produk.TambahProdukView', [
