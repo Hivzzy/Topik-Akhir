@@ -5,6 +5,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\ItemPesananController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubKategoriController;
@@ -59,7 +60,8 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     //Pesanan
     Route::get('/pesanan', [PesananController::class, 'index']);
     Route::get('/pesanan/detail/{id}', [PesananController::class, 'getDetailPesanan']);
-    Route::post('/cart/add/{productId}/{quantity}', [ItemPesananController::class, 'addToCart']);
+    Route::post('/cart/add', [ItemPesananController::class, 'addToCartItemPesanan'])->name('cart.add');
+    Route::get('/cart/show', [ItemPesananController::class, 'showCart'])->name('cart.show');
     Route::get('/tambah-pesanan', [PesananController::class, 'displayTambahPesanan']);
 
     //Belanja
