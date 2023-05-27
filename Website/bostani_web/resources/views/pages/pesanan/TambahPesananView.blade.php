@@ -70,8 +70,14 @@
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Metode Pembayaran</label>
-                        <input class="px-2 py-1 border border-1 rounded" type="text" name="metode_pembayaran"
-                            required>
+                        <select name="metode_pembayaran" data-te-select-init
+                            class="px-2 py-1 border border-1 rounded appearance-none" required>
+                            <option value=""></option>
+                            <option value="COD">COD</option>
+                            <option value="Transfer">Transfer</option>
+                        </select>
+                        {{-- <input class="px-2 py-1 border border-1 rounded" type="text" name="metode_pembayaran"
+                            required> --}}
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Ongkos Kirim</label>
@@ -85,7 +91,7 @@
         <div class="bg-white p-4 space-y-6 rounded shadow-md">
             <h2 class="text-lg font-semibold">Item Pesanan</h2>
             <hr>
-            <div class="space-y-4">
+            <div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Nama Item</label>

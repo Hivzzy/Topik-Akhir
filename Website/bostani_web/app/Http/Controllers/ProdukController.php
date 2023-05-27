@@ -30,7 +30,7 @@ class ProdukController extends Controller
     public function getProdukById(Request $request)
     {
         $produk = new ProdukModel();
-        $data = $produk->getDetailProduk($request->id);
+        $data = $produk->getProdukById($request->id);
         return response()->json($data);
     }
 
