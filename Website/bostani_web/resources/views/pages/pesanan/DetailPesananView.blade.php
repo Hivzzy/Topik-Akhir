@@ -53,7 +53,18 @@
                 <tr>
                     <td>Status Pesanan</td>
                     <td>:</td>
-                    <td>{{ $order->status_pesanan->order_status_name }}</td>
+                    <td>
+                        {{-- {{ $order->status_pesanan->order_status_name }} --}}
+                        <select name="order_status" data-te-select-init>
+                            <option value="{{ $order->order_status_id }}">
+                                {{ $order->status_pesanan->order_status_name }}</option>
+                            @foreach ($order_status as $status)
+                                <option value="{{ $status->id }}">
+                                    {{ $status->order_status_name }}</option>
+                            @endforeach
+                        </select>
+                        <input type="hidden" name="order_id" value="{{ $order->id }}">
+                    </td>
                 </tr>
             </table>
 
@@ -104,10 +115,11 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="flex flex-wrap gap-2 justify-between items-center">
                 <div>
-                    <p class="text-xl font-semibold">Total Pesanan : Rp {{ number_format($total_pesanan, 0, ',', '.') }}</p>
+                    <p class="text-xl font-semibold">Total Pesanan : Rp {{ number_format($total_pesanan, 0, ',', '.') }}
+                    </p>
                 </div>
                 <a href="/pesanan"
                     class="inline-block rounded bg-info px-4 pb-2 pt-2.5 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#dc4c64] transition duration-150 ease-in-out hover:bg-info-600 hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:bg-info-600 focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:outline-none focus:ring-0 active:bg-info-700 active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(220,76,100,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)]">
@@ -116,4 +128,28 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('select[name="order_status"]').on('change', function() {
+                var statusID = $(this).val();
+                var orderID = $('input[name="order_id"]').val();
+                // console.log(statusID,orderID);
+
+                if (statusID) {
+                    $.ajax({
+                        type: 'GET',
+                        url: '/pesanan/status/' + orderID + '/' + statusID,
+                        dataType: 'json',
+                        success: function(data) {
+                            // console.log(data);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 @endsection

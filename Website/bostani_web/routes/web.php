@@ -6,6 +6,7 @@ use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ItemPesananController;
+use App\Http\Controllers\PengirimanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubKategoriController;
@@ -51,7 +52,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/kategori', [KategoriController::class, 'index']);
     Route::post('/kategori/tambah', [KategoriController::class, 'createKategori']);
     Route::post('/kategori/edit/{id}', [KategoriController::class, 'updateKategori']);
-    Route::delete('kategori/hapus/{id}', [KategoriController::class, 'deleteKategori']);
+    Route::delete('/kategori/hapus/{id}', [KategoriController::class, 'deleteKategori']);
     
     //Sub Kategori
     Route::get('/subkategori/get/{id}', [SubKategoriModel::class, 'getSubKategori']);
@@ -65,9 +66,13 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/cart/delete/{id}', [ItemPesananController::class, 'deleteItemCart']);
     Route::get('/cart/delete', [ItemPesananController::class, 'deleteAllCart']);
     Route::get('/tambah-pesanan', [PesananController::class, 'displayTambahPesanan']);
+    Route::get('/pesanan/status/{order_id}/{status_id}', [PesananController::class, 'updateStatusPesanan']);
 
     //Belanja
     Route::get('/belanja', [PesananController::class, 'getListBelanja']);
+
+    //Pengiriman
+    Route::get('/pengiriman', [PengirimanController::class, 'index']);
 
     // Penjualan
     Route::get('/penjualan', [PenjualanController::class, 'displayPenjualan']);

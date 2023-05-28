@@ -7,6 +7,7 @@ use App\Models\KotaModel;
 use App\Models\PelangganModel;
 use App\Models\PesananModel;
 use App\Models\ProdukModel;
+use App\Models\StatusPesananModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -32,7 +33,6 @@ class PesananController extends Controller
     public function displayTambahPesanan()
     {
         $item_pesanan = new ItemPesananController();
-        // dd($item_pesanan->showCart());
 
         return view('pages.pesanan.TambahPesananView', [
             'title' => 'Tambah Pesanan',
@@ -54,7 +54,15 @@ class PesananController extends Controller
             'active' => 'order',
             'order' => $detail_pesanan->getDetailPesanan($id_pesanan),
             'items' => $item_pesanan->getItemPesanan($id_pesanan),
+            'order_status' => StatusPesananModel::all(),
         ]);
+    }
+
+    public function updateStatusPesanan($order_id, $status_id)
+    {
+        $pesanan = new PesananModel();
+        $update_status = $pesanan->updateStatusPesanan($order_id, $status_id);
+        return back();
     }
 
     public function getListBelanja()

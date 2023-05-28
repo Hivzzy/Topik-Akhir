@@ -62,6 +62,12 @@ class PesananModel extends Model
         return $delete_pesanan;
     }
 
+    public function updateStatusPesanan($order_id, $status_id)
+    {
+        $update_status = PesananModel::where('id', $order_id)->update(['order_status_id' => $status_id]);
+        return $update_status;
+    }
+
     public function getListBelanja($tanggal_kirim)
     {
         $belanja = PesananModel::where('delivery_date', date($tanggal_kirim))->get(['id', 'customer_id']);
