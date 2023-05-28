@@ -60,6 +60,18 @@ class ItemPesananController extends Controller
         return back();
     }
 
+    public function deleteAllCart()
+    {
+        if (Session::get('cart') != []) {
+            Session::forget('cart');
+            toast('Item pesanan berhasil dihapus', 'success');
+            return back();
+        } else {
+            toast('Item pesanan sudah kosong', 'error');
+            return back();
+        }
+    }
+
     public function createItemPesanan(Request $request)
     {
         $validator = Validator::make($request->all(), [
