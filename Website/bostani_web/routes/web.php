@@ -80,6 +80,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/pelanggan/edit/{id}', [PelangganController::class, 'displayEditPelanggan']);
     Route::delete('/pelanggan/hapus/{id}',[PelangganController::class, 'deletePelanggan']);
     Route::get('/pelanggan/get', [PelangganController::class, 'getPelangganById']);
+    Route::post('/pelanggan/edit/{id}', [PelangganController::class, 'updatePelanggan']);
 
     //Wilayah
     Route::get('/kecamatan/get/{id}', [WilayahController::class, 'getKecamatan']);
