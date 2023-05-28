@@ -62,6 +62,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/pesanan/detail/{id}', [PesananController::class, 'getDetailPesanan']);
     Route::post('/cart/add', [ItemPesananController::class, 'addToCartItemPesanan'])->name('cart.add');
     Route::get('/cart/show', [ItemPesananController::class, 'showCart'])->name('cart.show');
+    Route::get('/cart/delete/{id}', [ItemPesananController::class, 'deleteItemCart']);
     Route::get('/tambah-pesanan', [PesananController::class, 'displayTambahPesanan']);
 
     //Belanja

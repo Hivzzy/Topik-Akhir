@@ -7,14 +7,16 @@ use App\Models\PesananModel;
 use App\Models\ItemPesananModel;
 use App\Models\UnitModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ItemPesananController extends Controller
 {
 
-   public function addToCartItemPesanan(Request $request){
-
+   public function addToCartItemPesanan(Request $request)
+   {
+    // Session::forget('cart');
         $product = ProdukModel::find($request->product_id);
         if (!$product) {
             return response()->json(['message' => 'Item pesanan tidak ditemukan'], 404);
@@ -28,25 +30,34 @@ class ItemPesananController extends Controller
         } else {
             // Kondisi jika item tidak sama
             $cart[$product->id] = [
-                'product_id' => $produk->id,
-                'item_name' =>$produk->product_name,
+                'product_id' => $product->id,
+                'item_name' =>$product->product_name,
                 'item_size' => $request->quantity,
                 'item_unit' => $product->satuan,
-                'item_purchase_price' => $product->harga,
-                'item_selling_price' => $product->item_selling_price,
-                'sub_total' => $request->quantity * $product->harga,
+                'item_purchase_price' => $product->product_purchase_price,
+                'item_selling_price' => $product->product_selling_price,
+                'sub_total' => $request->quantity * $product->product_seliing_price,    // Ini ga kehitung, jumlah nya tetep 0. Ini juga bisa dihapus aja, jadi di view di hitungnya
             ];
         }
 
         Session::put('cart', $cart);
-        return redirect('/addPesanan');
+        return back();
     }
 
     public function showCart()
     {
         $cart = Session::get('cart', []);
 
-        return response()->json($cart);
+        // return response()->json($cart);
+        return $cart;
+    }
+
+    public function deleteItemCart($id)
+    {
+        $cart = Session::get('cart', []);
+        unset($cart[$id]);
+        Session::put('cart', $cart);
+        return back();
     }
 
     public function createItemPesanan(Request $request)
@@ -60,7 +71,7 @@ class ItemPesananController extends Controller
         ]);
 
         $item_pesanan = new ItemPesananModel();
-        $add_item_pesanan= $pesanan->createItemPesanan($validatedData);
+        $add_item_pesanan= $$item_pesanan->createItemPesanan($request->all());
 
         if ($add_item_pesanan) {
             return redirect('/pesanan');

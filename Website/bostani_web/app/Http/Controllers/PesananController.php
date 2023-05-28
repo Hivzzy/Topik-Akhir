@@ -8,11 +8,16 @@ use App\Models\PelangganModel;
 use App\Models\PesananModel;
 use App\Models\ProdukModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PesananController extends Controller
 {
     public function index()
     {
+        if (Session::get('cart') != []) {
+            Session::forget('cart');
+        }
+
         $title = 'Hapus Pesanan!';
         $text = "Anda yakin ingin menghapus data pesanan?";
         confirmDelete($title, $text);
@@ -26,12 +31,16 @@ class PesananController extends Controller
 
     public function displayTambahPesanan()
     {
+        $item_pesanan = new ItemPesananController();
+        // dd($item_pesanan->showCart());
+
         return view('pages.pesanan.TambahPesananView', [
             'title' => 'Tambah Pesanan',
             'active' => 'order',
             'customers' => PelangganModel::all(),
             'cities' => KotaModel::all(),
             'products' => ProdukModel::all(),
+            'items' => $item_pesanan->showCart(),
         ]);
     }
 
