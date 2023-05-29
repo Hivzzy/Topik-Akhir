@@ -16,11 +16,11 @@ class ItemPesananController extends Controller
 
    public function addToCartItemPesanan(Request $request)
    {
-    // Session::forget('cart');
         $product = ProdukModel::find($request->product_id);
         if (!$product) {
             return response()->json(['message' => 'Item pesanan tidak ditemukan'], 404);
         }
+
         $cart = Session()->get('cart',[]);
 
         // Cek apakah produk sudah ada di dalam cart

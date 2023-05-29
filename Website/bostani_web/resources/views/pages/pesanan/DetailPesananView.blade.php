@@ -80,7 +80,7 @@
                                         <th scope="col" class=" px-6 py-2">Harga Satuan</th>
                                         <th scope="col" class=" px-6 py-2">Jumlah</th>
                                         <th scope="col" class=" px-6 py-2">Sub Total Harga</th>
-                                        <th scope="col" class=" px-6 py-2">Aksi</th>
+                                        {{-- <th scope="col" class=" px-6 py-2">Aksi</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -100,13 +100,13 @@
                                             <td class="px-6 py-2">Rp
                                                 {{ number_format($item->item_selling_price * $item->item_size, 0, ',', '.') }}
                                             </td>
-                                            <td class="px-6 py-2">
+                                            {{-- <td class="px-6 py-2">
                                                 <a href="#"
                                                     class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700"
                                                     data-confirm-delete="true">
                                                     Hapus
                                                 </a>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 </tbody>
