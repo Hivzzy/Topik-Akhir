@@ -22,7 +22,7 @@
                 <tr>
                     <td>Tanggal Terima Pesanan</td>
                     <td>:</td>
-                    <td>{{ date('d M Y', strtotime($order->order_date)) }}</td>
+                    <td>{{ date('d M Y', strtotime($order->order_time)) }}</td>
                 </tr>
                 <tr>
                     <td>Tanggal Kirim Pesanan</td>

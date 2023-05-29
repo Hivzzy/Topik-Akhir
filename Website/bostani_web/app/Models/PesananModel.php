@@ -28,14 +28,11 @@ class PesananModel extends Model
     {
         $user_id = auth()->user()->id;
         $status_id = 1;
-        $order_date = now();
 
         $add_pesanan = PesananModel::create([
             'user_id' => $user_id,
             'customer_id' => $pesanan['pelanggan'],
             'order_status_id' => $status_id,
-            'order_date' => date($order_date),
-            'order_time' => $order_date,
             'delivery_date' => $pesanan['tanggal_kirim'],
             'payment_method' => $pesanan['metode_pembayaran'],
             'shipping_cost' => $pesanan['ongkos_kirim'],
