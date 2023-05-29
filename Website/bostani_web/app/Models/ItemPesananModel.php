@@ -18,17 +18,17 @@ class ItemPesananModel extends Model
         return $item_pesanan;
     }
 
-    public function createItemPesanan($item_pesanan)
+    static function createItemPesanan($item_pesanan)
     {
         $add_item_pesanan = ItemPesananModel::create([
             'order_id' => $item_pesanan['order_id'],
             'product_id' => $item_pesanan['product_id'],
-            'number_of_item' => $item_pesanan['number_of_item'],
+            'item_size' => $item_pesanan['number_of_item'],
             'item_purchase_price' => $item_pesanan['item_purchase_price'],
             'item_selling_price' => $item_pesanan['item_selling_price'],
         ]);
 
-        return $add_item_pesanan;
+        // return $add_item_pesanan;
     }
 
     public function updateItemPesanan($item_pesanan, $id)

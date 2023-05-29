@@ -12,7 +12,6 @@ class PesananModel extends Model
     protected $guarded = ['id'];
     public $timestamps = false;
 
-
     public function getPesanan()
     {
         $pesanan = PesananModel::all();
@@ -27,17 +26,19 @@ class PesananModel extends Model
 
     public function createPesanan($pesanan)
     {
+        $user_id = auth()->user()->id;
+        $status_id = 1;
+
         $add_pesanan = PesananModel::create([
-            'user_id' => $pesanan['user'],
-            'customer_id' => $pesanan['customer'],
-            'order_status_id' => $pesanan['order_status'],
-            'order_date' => $pesanan['tanggal_pemesanan'],
-            'order_time' => $pesanan['waktu_pemesanan'],
-            'delivery_date' => $pesanan['tanggal_pengiriman'],
+            'user_id' => $user_id,
+            'customer_id' => $pesanan['pelanggan'],
+            'order_status_id' => $status_id,
+            'delivery_date' => $pesanan['tanggal_kirim'],
             'payment_method' => $pesanan['metode_pembayaran'],
+            'shipping_cost' => $pesanan['ongkos_kirim'],
         ]);
 
-        return $add_pesanan;
+        return $add_pesanan->id;
     }
 
     public function updatePesanan($pesanan, $id)

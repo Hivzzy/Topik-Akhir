@@ -10,6 +10,8 @@ use App\Models\ProdukModel;
 use App\Models\StatusPesananModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PesananController extends Controller
 {
@@ -58,11 +60,62 @@ class PesananController extends Controller
         ]);
     }
 
+    public function createPesanan(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'pelanggan' => 'required',
+            'no_telepon' => 'required|min:10',
+            'alamat' => 'required',
+            'kelurahan' => 'required',
+            'kecamatan' => 'required',
+            'kota' => 'required',
+            'tanggal_kirim' => 'required',
+            'metode_pembayaran' => 'required',
+            'ongkos_kirim' => 'required',
+        ]);
+
+        // Mengecek inputan tidak sesuai
+        if ($validator->fails()) {
+            toast($validator->messages()->all()[0], 'error');
+            return redirect()->back()->withInput($request->all());
+        }
+
+        // Mengecek item pesanan
+        if (Session::get('cart') == []) {
+            toast('Harap isi item pesanan!', 'error');
+            return redirect()->back()->withInput($request->all());
+        }
+
+        $pesanan = new PesananModel();
+        $id_pesanan = $pesanan->createPesanan($request->all());
+
+        $cart = Session::get('cart');
+        foreach ($cart as $c => $val) {
+            $item_pesanan = [
+                'order_id' => $id_pesanan,
+                'product_id' => $val['product_id'],
+                'number_of_item' => $val['item_size'],
+                'item_purchase_price' => $val['item_purchase_price'],
+                'item_selling_price' => $val['item_selling_price'],
+            ];
+            ItemPesananModel::createItemPesanan($item_pesanan);
+        }
+
+        if ($id_pesanan != null) {
+            Session::forget('cart');
+            Alert::success('Success', 'Data pesanan berhasil ditambahkan');
+            return redirect('/pesanan');
+        } else {
+            Alert::error('Error', 'Data pesanan gagal ditambahkan');
+            return redirect()->back();
+        }
+    }
+
     public function updateStatusPesanan($order_id, $status_id)
     {
         $pesanan = new PesananModel();
         $update_status = $pesanan->updateStatusPesanan($order_id, $status_id);
-        return back();
+        // return back();
     }
 
     public function getListBelanja()
@@ -70,7 +123,7 @@ class PesananController extends Controller
         $belanja = new PesananModel();
         $item_belanja = new ItemPesananModel();
         $id_pesanan = [];
-        $tanggal_kirim = now();  
+        $tanggal_kirim = now();
         // $tanggal_kirim = '2023/06/16';
 
         $dt_belanja = $belanja->getListBelanja($tanggal_kirim);
@@ -86,7 +139,7 @@ class PesananController extends Controller
             'active' => 'shop-item',
             'belanja' => $dt_belanja,
             'items' => $data,
-            'list_item' => $sum_item, 
+            'list_item' => $sum_item,
         ]);
     }
 }

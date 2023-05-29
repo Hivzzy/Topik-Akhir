@@ -37,7 +37,7 @@
                                         <tr>
                                             <td>{{ $order->users->name }}</td>
                                             <td>{{ $order->customers->customer_name }}</td>
-                                            <td>{{ date('d M Y', strtotime($order->order_date)) }}</td>
+                                            <td>{{ date('d M Y', strtotime($order->order_time)) }}</td>
                                             <td>{{ date('H:i', strtotime($order->order_time)) }}</td>
                                             <td>{{ date('d M Y', strtotime($order->delivery_date)) }}</td>
                                             <td>{{ $order->payment_method }}</td>
