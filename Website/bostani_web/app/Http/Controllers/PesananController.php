@@ -123,7 +123,7 @@ class PesananController extends Controller
         $belanja = new PesananModel();
         $item_belanja = new ItemPesananModel();
         $id_pesanan = [];
-        $tanggal_kirim = now();
+        $tanggal_kirim = date('Y/m/d', strtotime(now()));
         // $tanggal_kirim = '2023/06/16';
 
         $dt_belanja = $belanja->getListBelanja($tanggal_kirim);
