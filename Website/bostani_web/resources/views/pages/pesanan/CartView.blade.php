@@ -24,7 +24,7 @@
                             <tr>
                                 <td>{{ $item['item_name'] }}</td>
                                 <td>{{ $item['item_size'] }}</td>
-                                <td>{{ $item['item_unit']['unit_product_name'] }}</td>
+                                <td>{{ $item['item_unit'] }}</td>
                                 <td>Rp {{ number_format($item['item_selling_price'], 0, ',', '.') }}</td>
                                 <td>Rp
                                     {{ number_format($item['item_size'] * $item['item_selling_price'], 0, ',', '.') }}

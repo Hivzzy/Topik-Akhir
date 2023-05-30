@@ -34,16 +34,16 @@ class ItemPesananController extends Controller
                 'product_id' => $product->id,
                 'item_name' =>$product->product_name,
                 'item_size' => $request->quantity,
-                'item_unit' => $product->satuan,
+                'item_unit' => $product->satuan->unit_product_name,
                 'item_purchase_price' => $product->product_purchase_price,
                 'item_selling_price' => $product->product_selling_price,
-                'sub_total' => $request->quantity * $product->product_seliing_price,    // Ini ga kehitung, jumlah nya tetep 0. Ini juga bisa dihapus aja, jadi di view di hitungnya
+                // 'sub_total' => $request->quantity * $product->product_seliing_price,
             ];
         }
 
         Session::put('cart', $cart);
         // return back();
-        return response()->json($cart);
+        // return response()->json($cart);
     }
 
     public function showCart()
@@ -62,7 +62,7 @@ class ItemPesananController extends Controller
         $cart = Session::get('cart', []);
         unset($cart[$id]);
         Session::put('cart', $cart);
-        return back();
+        // return back();
     }
 
     public function deleteAllCart()
@@ -70,10 +70,10 @@ class ItemPesananController extends Controller
         if (Session::get('cart') != []) {
             Session::forget('cart');
             toast('Item pesanan berhasil dihapus', 'success');
-            return back();
+            // return back();
         } else {
             toast('Item pesanan sudah kosong', 'error');
-            return back();
+            // return back();
         }
     }
 

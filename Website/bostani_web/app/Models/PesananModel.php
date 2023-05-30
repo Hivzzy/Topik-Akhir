@@ -44,23 +44,25 @@ class PesananModel extends Model
 
     public function updatePesanan($pesanan, $id)
     {
+        $user_id = auth()->user()->id;
+        $status_id = 1;
         $edit_pesanan = PesananModel::where('id', $id)->update(
             array(
-                'customer_id' => $pesanan['customer'],
-                'order_status_id' => $pesanan['order_status'],
-                'order_date' => $pesanan['tanggal_pemesanan'],
-                'order_time' => $pesanan['waktu_pemesanan'],
-                'delivery_date' => $pesanan['tanggal_pengiriman'],
+                'user_id' => $user_id,
+                'customer_id' => $pesanan['pelanggan'],
+                'order_status_id' => $status_id,
+                'delivery_date' => $pesanan['tanggal_kirim'],
                 'payment_method' => $pesanan['metode_pembayaran'],
+                'shipping_cost' => $pesanan['ongkos_kirim'],
             )
         );
 
         return $edit_pesanan;
     }
 
-    public function delete_pesanan($id_pesanan)
+    public function deletePesanan($id_pesanan)
     {
-        $delete_pesanan = PesananModel::where('id', $id_pesanan->delete());
+        $delete_pesanan = PesananModel::where('id', $id_pesanan)->delete();
         return $delete_pesanan;
     }
 

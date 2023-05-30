@@ -27,7 +27,7 @@
                                             <td class="px-6 py-2">{{ $item->unit_product_name }}</td>
                                             <td class="px-6 py-2">Rp
                                                 {{ number_format($item->item_purchase_price, 0, ',', '.') }}</td>
-                                            <td class="px-6 py-2">{{ number_format($item->jumlah) }}</td>
+                                            <td class="px-6 py-2">{{ $item->jumlah }}</td>
                                             <td class="px-6 py-2">Rp
                                                 {{ number_format($item->item_purchase_price * $item->jumlah, 0, ',', '.') }}
                                             </td>
@@ -66,7 +66,7 @@
                                                 @endif
                                             @endforeach
                                             <td>{{ $item->produk->product_name }}</td>
-                                            <td>{{ number_format($item->item_size) }}</td>
+                                            <td>{{ $item->item_size }}</td>
                                             <td>
                                                 <input type="checkbox" name="check" id="check">
                                             </td>

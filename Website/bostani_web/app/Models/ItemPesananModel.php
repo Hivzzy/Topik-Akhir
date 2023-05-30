@@ -31,23 +31,23 @@ class ItemPesananModel extends Model
         // return $add_item_pesanan;
     }
 
-    public function updateItemPesanan($item_pesanan, $id)
+    static function updateItemPesanan($item_pesanan, $id)
     {
-        $edit_item_pesanan = ItemPesananModel::where('id', $id)->update(
+        $edit_item_pesanan = ItemPesananModel::where('order_id', $id)->update(
             array(
                 'product_id' => $item_pesanan['product_id'],
-                'number_of_item' => $item_pesanan['number_of_item'],
+                'item_size' => $item_pesanan['number_of_item'],
                 'item_purchase_price' => $item_pesanan['item_purchase_price'],
                 'item_selling_price' => $item_pesanan['item_selling_price'],
             )
         );
 
-        return $edit_item_pesanan;
+        // return $edit_item_pesanan;
     }
 
-    public function deleteItemPesanan($id_item_pesanan)
+    public function deleteItemPesanan($id_pesanan)
     {
-        $delete_item_pesanan = ItemPesananModel::where('id', $id_item_pesanan->delete());
+        $delete_item_pesanan = ItemPesananModel::where('order_id', $id_pesanan)->delete();
         return $delete_item_pesanan;
     }
 

@@ -15,7 +15,6 @@ function add_cart() {
             quantity: quantity,
         },
         success: function (response) {
-            // console.log(response);
             document.getElementById("item_pesanan_form").reset();
             get_cart();
         },
@@ -31,7 +30,6 @@ function get_cart() {
         method: "GET",
         contentType: "application/json",
     }).done(function (data) {
-        // console.log(data);
         $("#cart").html(data);
     });
 }
