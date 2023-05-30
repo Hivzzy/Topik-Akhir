@@ -1,6 +1,4 @@
 function add_cart() {
-    // $("#item_pesanan_form").on("submit", function (e) {
-    // e.preventDefault();
     let product_id = $("#product_id").val();
     let unit = $("#satuan").val();
     let price = $("#harga").val();
@@ -18,13 +16,13 @@ function add_cart() {
         },
         success: function (response) {
             // console.log(response);
+            document.getElementById("item_pesanan_form").reset();
             get_cart();
         },
         error: function (response) {
             console.error(response);
         },
     });
-    // });
 }
 
 function get_cart() {
@@ -34,6 +32,16 @@ function get_cart() {
         contentType: "application/json",
     }).done(function (data) {
         // console.log(data);
-        $('#cart').html(data);
+        $("#cart").html(data);
+    });
+}
+
+function delete_all_cart() {
+    $.ajax({
+        url: "/cart/delete/",
+        method: "GET",
+        contentType: "application/json",
+    }).done(function (data) {
+        get_cart();
     });
 }

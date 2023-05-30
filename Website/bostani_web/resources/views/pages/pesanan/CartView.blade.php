@@ -14,12 +14,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
+                        {{-- @php
                             $total_pesanan = 0;
-                        @endphp
+                        @endphp --}}
                         @foreach ($data as $item)
                             @php
-                                $total_pesanan = $total_pesanan + $item['item_size'] * $item['item_selling_price'];
+                                // $total_pesanan = $total_pesanan + $item['item_size'] * $item['item_selling_price'];
                             @endphp
                             <tr>
                                 <td>{{ $item['item_name'] }}</td>
@@ -30,10 +30,10 @@
                                     {{ number_format($item['item_size'] * $item['item_selling_price'], 0, ',', '.') }}
                                 </td>
                                 <td>
-                                    <a href="/cart/delete/{{ $item['product_id'] }}"
+                                    <button onclick="delete_cart({{ $item['product_id'] }})"
                                         class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700">
                                         Hapus
-                                    </a>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
@@ -44,6 +44,7 @@
     </div>
 </div>
 
+<script src="/assets/js/cart.js"></script>
 <script>
     var table = $("#tabel_item_pesanan")
         .DataTable({
@@ -54,4 +55,14 @@
         })
         .columns.adjust()
         .responsive.recalc();
+
+    function delete_cart(product_id) {
+        $.ajax({
+            url: "/cart/delete/" + product_id,
+            method: "GET",
+            contentType: "application/json",
+        }).done(function (data) {
+            get_cart();
+        });
+    }
 </script>
