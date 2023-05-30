@@ -72,7 +72,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="grid grid-rows-1">
                             <label class="font-medium" for="">Tanggal Kirim</label>
-                            <input type="date" name="tanggal_kirim" min="{{ date("Y-m-d") }}"
+                            <input type="date" name="tanggal_kirim" min="{{ date('Y-m-d') }}"
                                 class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                                 required />
                         </div>
@@ -96,16 +96,16 @@
             </div>
         </form>
 
-        <form id="item_pesanan_form" action="/cart/add" method="POST">
-            {{-- <form id="item_pesanan_form"> --}}
+        {{-- <form id="item_pesanan_form" action="/cart/add" method="POST"> --}}
+        <form id="item_pesanan_form">
+            @csrf
             <div class="bg-white p-4 space-y-6 rounded shadow-md">
                 <h2 class="text-lg font-semibold">Item Pesanan</h2>
                 <hr>
-                @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Nama Item</label>
-                        <select data-te-select-init data-te-select-filter="true" id="produk" name="product_id" required>
+                        <select data-te-select-init data-te-select-filter="true" id="product_id" name="product_id">
                             <option value=""></option>
                             @foreach ($products as $product)
                                 <option value="{{ $product->id }}">{{ $product->product_name }}</option>
@@ -126,72 +126,26 @@
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Jumlah</label>
-                        <input type="text" name="quantity"
+                        <input type="text" name="quantity" id="quantity"
                             class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                             required />
                     </div>
                 </div>
                 <div class="flex justify-end mt-6">
-                    <input type="submit" form="item_pesanan_form"
+                    {{-- <input type="submit" form="item_pesanan_form"
                         class="inline-block rounded bg-primary p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                        value="Tambah Item">
-                    {{-- <button type="button" id="tambah_item"
+                        value="Tambah Item"> --}}
+                    <button type="button" id="tambah_item" onclick="add_cart()"
                         class="inline-block rounded bg-primary p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">Tambah
-                        Item</button> --}}
+                        Item</button>
                 </div>
             </div>
         </form>
 
-        <div class="bg-white p-4 space-y-6 rounded shadow-md">
-            <div class="flex flex-col">
-                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="inline-block min-w-full sm:px-6 lg:px-8">
-                        <div class="overflow-hidden">
-                            <table id="tabel_item_pesanan" class="stripe hover" width="100%">
-                                <thead class="bg-[#272727] text-white">
-                                    <tr>
-                                        <th>Nama Item</th>
-                                        <th>Jumlah</th>
-                                        <th>Satuan</th>
-                                        <th>Harga Satuan</th>
-                                        <th>Sub Total Harga</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $total_pesanan = 0;
-                                    @endphp
-                                    @foreach ($items as $item)
-                                        @php
-                                            $total_pesanan = $total_pesanan + $item['item_size'] * $item['item_selling_price'];
-                                        @endphp
-                                        <tr>
-                                            <td>{{ $item['item_name'] }}</td>
-                                            <td>{{ $item['item_size'] }}</td>
-                                            <td>{{ $item['item_unit']['unit_product_name'] }}</td>
-                                            <td>Rp {{ number_format($item['item_selling_price'], 0, ',', '.') }}</td>
-                                            <td>Rp
-                                                {{ number_format($item['item_size'] * $item['item_selling_price'], 0, ',', '.') }}
-                                            </td>
-                                            <td>
-                                                <a href="/cart/delete/{{ $item['product_id'] }}"
-                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700">
-                                                    Hapus
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="bg-white p-4 space-y-6 rounded shadow-md" id="cart"></div>
 
         <div class="bg-white p-4 gap-4 rounded shadow-md flex flex-wrap items-center justify-between">
-            <p class="text-xl font-semibold">Total Pesanan : Rp {{ number_format($total_pesanan, 0, ',', '.') }}</p>
+            {{-- <p class="text-xl font-semibold">Total Pesanan : Rp {{ number_format($total_pesanan, 0, ',', '.') }}</p> --}}
             <div class="flex space-x-2">
                 <input type="submit" form="pesanan_form"
                     class="inline-block rounded bg-success px-4 pb-2 pt-2.5 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#14a44d] transition duration-150 ease-in-out hover:bg-success-600 hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] focus:bg-success-600 focus:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] focus:outline-none focus:ring-0 active:bg-success-700 active:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(20,164,77,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)]"
@@ -213,23 +167,13 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="/assets/js/cart.js"></script>
     <script>
         $(document).ready(function() {
-            var table = $("#tabel_item_pesanan")
-                .DataTable({
-                    responsive: true,
-                    searching: false,
-                    lengthChange: false,
-                    info: true,
-                })
-                .columns.adjust()
-                .responsive.recalc();
-        });
-
-        $(document).ready(function() {
+            get_cart();
             $(document).on('change', '#pelanggan', function() {
                 var p_id = $(this).val();
-                console.log(p_id);
+                // console.log(p_id);
 
                 $.ajax({
                     type: 'GET',
@@ -251,10 +195,8 @@
                     error: function() {}
                 });
             });
-        });
 
-        $(document).ready(function() {
-            $(document).on('change', '#produk', function() {
+            $(document).on('change', '#product_id', function() {
                 var p_id = $(this).val();
                 // console.log(p_id);
 
@@ -275,9 +217,7 @@
                     error: function() {}
                 });
             });
-        });
 
-        $(document).ready(function() {
             $('select[name="kota"]').on('change', function() {
                 var kotaID = $(this).val();
                 if (kotaID) {
@@ -321,28 +261,6 @@
                     $('select[name="kelurahan"]').empty();
                 }
             });
-
-            // $("#tambah_item").click(function(event) {
-            //     event.preventDefault();
-            //     var data = $("#item_pesanan_form").serialize();
-            //     // console.log(data);
-
-            //     $.ajax({
-            //         type: 'POST',
-            //         url: '/cart/add',
-            //         data: {
-            //             data: data,
-            //             _token: '{{ csrf_token() }}'
-            //         },
-            //         // dataType: 'json',
-            //         success: function(data) {
-            //             console.log(data);
-            //         },
-            //         error: function(errMsg) {
-            //             console.log('error');
-            //         }
-            //     });
-            // });
         });
     </script>
 @endsection

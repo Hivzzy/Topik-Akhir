@@ -27,6 +27,10 @@
 
     @yield('script')
     @include('sweetalert::alert')
+
+    <script type="text/javascript">
+        var token = '{{ csrf_token() }}';
+    </script>
 </body>
 
 </html>

@@ -42,7 +42,7 @@ class PesananController extends Controller
             'customers' => PelangganModel::all(),
             'cities' => KotaModel::all(),
             'products' => ProdukModel::all(),
-            'items' => $item_pesanan->showCart(),
+            // 'data' => $item_pesanan->showCart(),
         ]);
     }
 

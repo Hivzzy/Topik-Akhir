@@ -16,6 +16,7 @@ class ItemPesananController extends Controller
 
    public function addToCartItemPesanan(Request $request)
    {
+        // return response()->json($request);
         $product = ProdukModel::find($request->product_id);
         if (!$product) {
             return response()->json(['message' => 'Item pesanan tidak ditemukan'], 404);
@@ -41,7 +42,8 @@ class ItemPesananController extends Controller
         }
 
         Session::put('cart', $cart);
-        return back();
+        // return back();
+        return response()->json($cart);
     }
 
     public function showCart()
@@ -49,7 +51,10 @@ class ItemPesananController extends Controller
         $cart = Session::get('cart', []);
 
         // return response()->json($cart);
-        return $cart;
+        // return $cart;
+        return view('pages.pesanan.CartView')->with([
+            'data' => $cart
+        ]);
     }
 
     public function deleteItemCart($id)
