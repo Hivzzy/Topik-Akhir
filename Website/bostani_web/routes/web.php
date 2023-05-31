@@ -13,6 +13,7 @@ use App\Http\Controllers\SubKategoriController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WilayahController;
 use App\Models\SubKategoriModel;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,12 +53,15 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/kategori', [KategoriController::class, 'index']);
     Route::post('/kategori/tambah', [KategoriController::class, 'createKategori']);
     Route::post('/kategori/edit/{id}', [KategoriController::class, 'updateKategori']);
-    Route::delete('/kategori/hapus/{id}', [KategoriController::class, 'deleteKategori']);
+    Route::delete('kategori/hapus/{id}', [KategoriController::class, 'deleteKategori']);
     
     //Sub Kategori
-    Route::get('/subkategori/get/{id}', [SubKategoriModel::class, 'getSubKategori']);
     Route::get('/subkategori/{id}', [SubKategoriController::class, 'index']);
-    
+    Route::get('/subkategori/get/{id}', [SubKategoriController::class, 'getSubKategori']);
+    Route::post('/subkategori/tambah', [SubKategoriController::class, 'createSubKategori']);
+    Route::post('/subkategori/edit/{id}', [SubKategoriController::class, 'updateSubKategori']);
+    Route::delete('/subkategori/hapus/{id}', [SubKategoriController::class, 'deleteSubKategori']);
+
     //Pesanan
     Route::get('/pesanan', [PesananController::class, 'index']);
     Route::get('/pesanan/detail/{id}', [PesananController::class, 'getDetailPesanan']);

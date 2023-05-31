@@ -4,7 +4,7 @@
     <div class="space-y-4 sm:space-y-6">
         <h1 class="text-lg sm:text-2xl font-semibold">Sub Kategori - {{ $category->category_name }}</h1>
         <div class="bg-white p-4 rounded shadow-md flex space-x-[10px]">
-            <a href="/tambah-produk"
+            <a href="#" data-te-toggle="modal" data-te-target="#addSubCategoryModal"
                 class="inline-block rounded bg-primary p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
                 <div class="flex space-x-1 items-center">
                     <x-icons.plus />
@@ -31,11 +31,12 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $sub_category->sub_category_name }}</td>
                                             <td>
-                                                <a href="/kategori/edit/{{ $sub_category->id }}"
+                                                <a href="#" data-te-toggle="modal"
+                                                    data-te-target="#editSubCategoryModal{{ $sub_category->id }}"
                                                     class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
                                                     Edit
                                                 </a>
-                                                <a href="/kategori/hapus/{{ $sub_category->id }}"
+                                                <a href="/subkategori/hapus/{{ $sub_category->id }}"
                                                     class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700"
                                                     data-confirm-delete="true">
                                                     Hapus
@@ -56,6 +57,7 @@
             <span>Kembali</span>
         </button>
     </div>
+    @include('pages.subkategori.ModalSubKategori')
 @endsection
 
 @section('script')

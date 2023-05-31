@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\KategoriModel;
 use App\Models\SubKategoriModel;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SubKategoriController extends Controller
 {
@@ -35,5 +36,63 @@ class SubKategoriController extends Controller
             $data = '';
         }
         return json_encode($data);
+    }
+
+    public function testview(){
+        return view ("pages.kategori.SubKategoriView");
+    }
+
+    public function createSubKategori(Request $request){
+    
+        $validatedData = $request->validate([
+            'kategori_id' =>'required',
+            'nama_sub_kategori' => 'required'
+        ]);
+        
+        $sub_kategori = new SubKategoriModel();
+        $data = $sub_kategori->createSubKategori($validatedData);
+        if ($data){
+            Alert::success('Success', 'Sub Kategori' . $validatedData['nama_sub_kategori'] . ' berhasil ditambahkan');
+            return redirect('/subkategori/'.$validatedData['kategori_id']);
+        }else {
+            Alert::error('Error', 'Sub Kategori gagal ditambahkan');
+            return redirect()->back();
+        }
+    }
+
+    public function updateSubKategori(Request $request, $id)
+    {
+        
+        $validatedData = $request->validate([
+            'kategori_id' => 'required',
+            'nama_sub_kategori' => 'required',
+        ]);
+
+        $sub_kategori = new SubKategoriModel();
+        $data = $sub_kategori->editSubKategori($validatedData, $id);
+
+        if ($data) {
+            Alert::success('Success', 'Kategori berhasil diperbarui');
+            return redirect('/subkategori/'.$validatedData['kategori_id']);
+        } else {
+            Alert::error('Error', 'Kategori gagal diperbarui');
+            return redirect()->back();
+        }
+    }
+
+    public function deleteSubKategori($id)
+    {
+        $category_id = SubKategoriModel::find($id);
+        $sub_kategori = new SubKategoriModel();
+        $data = $sub_kategori->deleteSubKategori($id);
+
+
+        if ($data) {
+            Alert::success('Success', 'Kategori berhasil dihapus');
+            return redirect('/subkategori/'.$category_id['category_id']);
+        } else {
+            Alert::error('Error', 'Kategori gagal dihapus');
+            return redirect()->back();
+        }
     }
 }

@@ -23,9 +23,11 @@ class KategoriController extends Controller
 
     public function createKategori(Request $request)
     {
+        
         $validatedData = $request->validate([
             'nama_kategori' => 'required',
         ]);
+    
 
         $kategori = new KategoriModel();
         $data = $kategori->createKategori($validatedData);
