@@ -25,5 +25,13 @@ class PengirimanController extends Controller
             'pengirimans' => $data,
         ]);
     }
+
+    public function getDetailPengiriman()
+    {
+        return view('pages.pengiriman.DetailPengirimanView', [
+            'title' => 'Detail Pengiriman',
+            'active' => 'deliveries',
+        ]);
+    }
 }
 ?>

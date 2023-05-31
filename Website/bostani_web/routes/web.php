@@ -77,6 +77,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
     //Pengiriman
     Route::get('/pengiriman', [PengirimanController::class, 'index']);
+    Route::get('/pengiriman/detail', [PengirimanController::class, 'getDetailPengiriman']);
 
     // Penjualan
     Route::get('/penjualan', [PenjualanController::class, 'displayPenjualan']);
