@@ -47,8 +47,7 @@
                 <tr>
                     <td>Ongkos Kirim</td>
                     <td>:</td>
-                    <td>Rp
-                        {{ number_format($order->shipping_cost, 0, ',', '.') }}</td>
+                    <td>Rp{{ number_format($order->shipping_cost, 2, ',', '.') }}</td>
                 </tr>
                 <tr>
                     <td>Status Pesanan</td>
@@ -94,11 +93,9 @@
                                         <tr class="">
                                             <td class="px-6 py-2">{{ $item->produk->product_name }}</td>
                                             <td class="px-6 py-2">{{ $item->produk->satuan->unit_product_name }}</td>
-                                            <td class="px-6 py-2">Rp
-                                                {{ number_format($item->item_selling_price, 0, ',', '.') }}</td>
+                                            <td class="px-6 py-2 text-right">Rp{{ number_format($item->item_selling_price, 2, ',', '.') }}</td>
                                             <td class="px-6 py-2">{{ $item->item_size }}</td>
-                                            <td class="px-6 py-2">Rp
-                                                {{ number_format($item->item_selling_price * $item->item_size, 0, ',', '.') }}
+                                            <td class="px-6 py-2 text-right">Rp{{ number_format($item->item_selling_price * $item->item_size, 2, ',', '.') }}
                                             </td>
                                             {{-- <td class="px-6 py-2">
                                                 <a href="#"

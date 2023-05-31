@@ -27,11 +27,9 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td class="px-6 py-2">{{ $item->product_name }}</td>
                                             <td class="px-6 py-2">{{ $item->unit_product_name }}</td>
-                                            <td class="px-6 py-2">Rp
-                                                {{ number_format($item->item_purchase_price, 0, ',', '.') }}</td>
+                                            <td class="px-6 py-2 text-right">Rp{{ number_format($item->item_purchase_price, 2, ',', '.') }}</td>
                                             <td class="px-6 py-2">{{ $item->jumlah }}</td>
-                                            <td class="px-6 py-2">Rp
-                                                {{ number_format($item->item_purchase_price * $item->jumlah, 0, ',', '.') }}
+                                            <td class="px-6 py-2 text-right">Rp{{ number_format($item->item_purchase_price * $item->jumlah, 2, ',', '.') }}
                                             </td>
                                         </tr>
                                     @endforeach

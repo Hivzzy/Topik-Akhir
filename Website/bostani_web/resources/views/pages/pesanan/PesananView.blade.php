@@ -43,8 +43,7 @@
                                             <td>{{ date('H:i', strtotime($order->order_time)) }}</td>
                                             <td>{{ date('d M Y', strtotime($order->delivery_date)) }}</td>
                                             <td>{{ $order->payment_method }}</td>
-                                            <td>Rp
-                                                {{ number_format($order->shipping_cost, 0, ',', '.') }}</td>
+                                            <td class="text-right">Rp{{ number_format($order->shipping_cost, 2, ',', '.') }}</td>
                                             <td>{{ $order->status_pesanan->order_status_name }}</td>
                                             <td>
                                                 <a href="/pesanan/detail/{{ $order->id }}"
