@@ -28,9 +28,12 @@
                                     @foreach ($categories as $category)
                                         <tr>
                                             <td><a
-                                                    href="/subkategori/{{ $category->id }}">{{ $category->category_name }}</a>
+                                                    href="/subkategori/{{ $category->id }} ">{{ $category->category_name }}</a>
                                             </td>
                                             <td>
+                                                <a href="/subkategori/{{ $category->id }}" class="inline-block whitespace-nowrap rounded-[0.27rem] bg-success-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-success-700">
+                                                    Lihat
+                                                </a>
                                                 <a href="#" data-te-toggle="modal"
                                                     data-te-target="#editCategoryModal{{ $category->id }}"
                                                     class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
@@ -41,6 +44,7 @@
                                                     data-confirm-delete="true">
                                                     Hapus
                                                 </a>
+
                                             </td>
                                         </tr>
                                     @endforeach
