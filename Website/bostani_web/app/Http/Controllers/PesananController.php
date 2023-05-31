@@ -21,6 +21,10 @@ class PesananController extends Controller
             Session::forget('cart');
         }
 
+        $today = now();
+        $pesanan = new PesananModel();
+        $data = $pesanan->getPesanan($today);
+
         $title = 'Hapus Pesanan!';
         $text = "Anda yakin ingin menghapus data pesanan?";
         confirmDelete($title, $text);
@@ -28,7 +32,7 @@ class PesananController extends Controller
         return view('pages.pesanan.PesananView', [
             'title' => 'Data Pesanan',
             'active' => 'order',
-            'orders' => PesananModel::all(),
+            'orders' => $data,
         ]);
     }
 

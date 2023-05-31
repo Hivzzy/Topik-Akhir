@@ -13,9 +13,9 @@ class PesananModel extends Model
     protected $guarded = ['id'];
     public $timestamps = false;
 
-    public function getPesanan()
+    public function getPesanan($date)
     {
-        $pesanan = PesananModel::all();
+        $pesanan = PesananModel::whereDate('delivery_date', '>=', date('Y-m-d', strtotime($date)))->orderBy('delivery_date', 'ASC')->get();
         return $pesanan;
     }
 
