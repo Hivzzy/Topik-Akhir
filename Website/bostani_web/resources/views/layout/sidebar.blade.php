@@ -4,7 +4,7 @@
     data-te-sidenav-init data-te-sidenav-hidden="false" data-te-sidenav-mode="side" data-te-sidenav-content="#content">
     <div class="mx-4 my-6 space-x-4 flex items-center">
         <a class="flex items-center" href="/dashboard">
-            <img src="/assets/img/logo_bostani.png" width="75px" alt="bostani logo">
+            <img src="/assets/icons/Logo.svg" width="75px" alt="bostani logo">
         </a>
         <span class="text-sm text-white font-bold">Selamat Datang, {{ auth()->user()->name }}</span>
     </div>

@@ -20,6 +20,7 @@
                             <table id="tabel_pengiriman" class="stripe hover py-4" width="100%">
                                 <thead class="bg-[#272727] text-white">
                                     <tr>
+                                        <th>No</th>
                                         <th>Tanggal Pengiriman</th>
                                         <th>Nama Pelanggan</th>
                                         <th>Alamat</th>

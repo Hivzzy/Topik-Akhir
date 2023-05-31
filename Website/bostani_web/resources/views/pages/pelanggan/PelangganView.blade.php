@@ -19,6 +19,7 @@
                                 style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                                 <thead class="bg-[#272727] text-white">
                                     <tr>
+                                        <th>No</th>
                                         <th>Nama Pelanggan</th>
                                         <th>No Telepon</th>
                                         <th>Alamat</th>
@@ -31,6 +32,7 @@
                                 <tbody>
                                     @foreach ($customers as $customer)
                                         <tr>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>{{ $customer->customer_name }}</td>
                                             <td>{{ $customer->customer_phone }}</td>
                                             <td>{{ $customer->customer_address }}</td>

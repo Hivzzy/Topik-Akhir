@@ -13,6 +13,7 @@
                             <table class="tabel_belanja stripe hover" width="100%">
                                 <thead class="bg-[#272727] text-white">
                                     <tr>
+                                        <th>No</th>
                                         <th>Nama Item</th>
                                         <th>Satuan</th>
                                         <th>Harga Satuan</th>
@@ -23,6 +24,7 @@
                                 <tbody>
                                     @foreach ($list_item as $item)
                                         <tr class="">
+                                            <td>{{ $loop->iteration }}</td>
                                             <td class="px-6 py-2">{{ $item->product_name }}</td>
                                             <td class="px-6 py-2">{{ $item->unit_product_name }}</td>
                                             <td class="px-6 py-2">Rp
@@ -50,6 +52,7 @@
                             <table class="tabel_belanja stripe hover" width="100%">
                                 <thead class="bg-[#272727] text-white">
                                     <tr>
+                                        <th>No</th>
                                         <th>Nama Pemesan</th>
                                         <th>Nama Item</th>
                                         <th>Jumlah</th>   
@@ -60,6 +63,7 @@
                                 <tbody>
                                     @foreach ($items as $item)
                                         <tr>
+                                            <td>{{ $loop->iteration }}</td>
                                             @foreach ($belanja as $bj)
                                                 @if ($bj->id == $item->order_id)
                                                     <td>{{ $bj->customers->customer_name }}</td>

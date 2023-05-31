@@ -21,6 +21,7 @@
                                 style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                                 <thead class="bg-[#272727] text-white">
                                     <tr>
+                                        <th>No</th>
                                         <th>Penerima Pesanan</th>
                                         <th>Pelanggan</th>
                                         <th>Tanggal Pemesanan</th>
@@ -35,6 +36,7 @@
                                 <tbody>
                                     @foreach ($orders as $order)
                                         <tr>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>{{ $order->users->name }}</td>
                                             <td>{{ $order->customers->customer_name }}</td>
                                             <td>{{ date('d M Y', strtotime($order->order_time)) }}</td>

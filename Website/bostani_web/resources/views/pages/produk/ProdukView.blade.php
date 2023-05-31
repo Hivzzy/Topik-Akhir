@@ -28,6 +28,7 @@
                                 <table id="tabel_produk" class="stripe hover py-4" width="100%">
                                     <thead class="bg-[#272727] text-white">
                                         <tr>
+                                            <th>No</th>
                                             <th>Nama Item</th>
                                             <th>Satuan</th>
                                             <th>Kategori</th>
@@ -41,6 +42,7 @@
                                     <tbody>
                                         @foreach ($produks as $produk)
                                             <tr>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $produk->product_name }}</td>
                                                 <td>{{ $produk->satuan->unit_product_name }}</td>
                                                 <td>
@@ -80,7 +82,8 @@
 @section('script')
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js">
+    </script>
 
     <script type="text/javascript">
         $(document).ready(function() {

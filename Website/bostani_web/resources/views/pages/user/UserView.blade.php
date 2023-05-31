@@ -24,6 +24,7 @@
                                 <table id="tabel_user" class="stripe hover py-4" width="100%">
                                     <thead class="bg-[#272727] text-white">
                                         <tr>
+                                            <th>No</th>
                                             <th>Nama User</th>
                                             <th>Username</th>
                                             <th>Password</th>
@@ -34,6 +35,7 @@
                                     <tbody>
                                         @foreach ($users as $user)
                                             <tr>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->username }}</td>
                                                 <td>

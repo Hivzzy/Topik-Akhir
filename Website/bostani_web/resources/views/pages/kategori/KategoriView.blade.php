@@ -20,6 +20,7 @@
                             <table id="tabel_kategori" class="stripe hover py-4" width="100%">
                                 <thead class="bg-[#272727] text-white">
                                     <tr>
+                                        <th>No</th>
                                         <th>Nama Kategori</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -27,6 +28,7 @@
                                 <tbody>
                                     @foreach ($categories as $category)
                                         <tr>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td><a
                                                     href="/subkategori/{{ $category->id }}">{{ $category->category_name }}</a>
                                             </td>
