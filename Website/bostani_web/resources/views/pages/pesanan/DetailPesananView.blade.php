@@ -142,9 +142,10 @@
                         type: 'GET',
                         url: '/pesanan/status/' + orderID + '/' + statusID,
                         dataType: 'json',
-                        success: function(data) {
+                        success: function(response) {
                             // console.log(data);
-                        }
+                            swal("Success!", ""+response.message+"", "success");
+                        },
                     });
                 }
             });

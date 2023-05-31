@@ -40,7 +40,6 @@ class PesananController extends Controller
             'customers' => PelangganModel::all(),
             'cities' => KotaModel::all(),
             'products' => ProdukModel::all(),
-            // 'data' => $item_pesanan->showCart(),
         ]);
     }
 
@@ -219,7 +218,7 @@ class PesananController extends Controller
     {
         $pesanan = new PesananModel();
         $pesanan->updateStatusPesanan($order_id, $status_id);
-        // return back();
+        return response()->json(['message' => 'Status pesanan berhasil diperbarui'], 200);
     }
 
     public function getListBelanja()
@@ -228,7 +227,6 @@ class PesananController extends Controller
         $item_belanja = new ItemPesananModel();
         $id_pesanan = [];
         $tanggal_kirim = date('Y/m/d', strtotime(now()));
-        // $tanggal_kirim = '2023/06/16';
 
         $dt_belanja = $belanja->getListBelanja($tanggal_kirim);
         foreach ($dt_belanja as $dt) {
