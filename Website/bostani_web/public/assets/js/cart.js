@@ -19,7 +19,9 @@ function add_cart() {
             get_cart();
         },
         error: function (response) {
-            console.error(response);
+            // console.log(response);
+            // alert(response.responseJSON.message);
+            swal("Oops!", ""+response.responseJSON.message+"", "error");
         },
     });
 }
@@ -39,7 +41,18 @@ function delete_all_cart() {
         url: "/cart/delete/",
         method: "GET",
         contentType: "application/json",
-    }).done(function (data) {
-        get_cart();
+        success: function (response) {
+            // console.log(response);
+            swal("Success!", ""+response.message+"", "success");
+            get_cart();
+        },
+        error: function (response) {
+            // console.log(response);
+            // alert(response.responseJSON.message);
+            swal("Oops!", ""+response.responseJSON.message+"", "error");
+        },
     });
+    // .done(function (data) {
+    //     get_cart();
+    // });
 }
