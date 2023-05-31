@@ -16,7 +16,7 @@
     </style>
 </head>
 
-<body class="flex bg-[#EBF4E2] w-full sm:w-screen font-inter">
+<body class="flex bg-[#EBF4E2] font-inter">
     @include('layout.sidebar')
     <div class="w-full sm:w-screen overflow-x-auto" id="content">
         @include('layout.header')
@@ -27,6 +27,10 @@
 
     @yield('script')
     @include('sweetalert::alert')
+
+    <script type="text/javascript">
+        var token = '{{ csrf_token() }}';
+    </script>
 </body>
 
 </html>

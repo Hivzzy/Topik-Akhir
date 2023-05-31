@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PelangganModel;
+use App\Models\PesananModel;
 use App\Models\ProdukModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,7 @@ class AuthController extends Controller
             'active' => 'dashboard',
             'products' => ProdukModel::count(),
             'customers' => PelangganModel::count(),
+            'orders' => PesananModel::count(),
         ]);
     }
 

@@ -7,14 +7,14 @@
             <a href="/tambah-produk"
                 class="inline-block rounded bg-primary p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
                 <div class="flex space-x-1 items-center">
-                    <img src="/assets/icons/add.svg" alt="tambah produk">
+                    <x-icons.plus />
                     <span class="hidden sm:block">Tambah Data</span>
                 </div>
             </a>
             <a href="#"
                 class="inline-block rounded bg-success p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-success-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-success-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-success-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
                 <div class="flex space-x-1 items-center">
-                    <img src="/assets/icons/export.svg" alt="edit produk">
+                    <x-icons.download />
                     <span class="hidden sm:block">Eksport Katalog</span>
                 </div>
             </a>
@@ -28,6 +28,7 @@
                                 <table id="tabel_produk" class="stripe hover py-4" width="100%">
                                     <thead class="bg-[#272727] text-white">
                                         <tr>
+                                            <th>No</th>
                                             <th>Nama Item</th>
                                             <th>Satuan</th>
                                             <th>Kategori</th>
@@ -41,6 +42,7 @@
                                     <tbody>
                                         @foreach ($produks as $produk)
                                             <tr>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $produk->product_name }}</td>
                                                 <td>{{ $produk->satuan->unit_product_name }}</td>
                                                 <td>
@@ -49,10 +51,8 @@
                                                     {{ $produk->sub_kategori != null ? $produk->sub_kategori->sub_category_name : '-' }}
                                                 </td>
                                                 {{-- <td>{{ $produk->product_size }}</td> --}}
-                                                <td>Rp
-                                                    {{ number_format($produk->product_purchase_price, 0, ',', '.') }}</td>
-                                                <td>Rp
-                                                    {{ number_format($produk->product_selling_price, 0, ',', '.') }}</td>
+                                                <td class="text-right">Rp{{ number_format($produk->product_purchase_price, 2, ',', '.') }}</td>
+                                                <td class="text-right">Rp{{ number_format($produk->product_selling_price, 2, ',', '.') }}</td>
                                                 <td>
                                                     <a href="/produk/edit/{{ $produk->id }}"
                                                         class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
@@ -80,7 +80,8 @@
 @section('script')
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js">
+    </script>
 
     <script type="text/javascript">
         $(document).ready(function() {

@@ -18,9 +18,9 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreignId('customer_id');
             $table->foreignId('order_status_id');
-            $table->foreignId('delivery_id');
-            $table->date('order_date');
-            $table->timestamp('order_time');
+            $table->foreignId('delivery_id')->nullable();
+            // $table->date('order_date');
+            $table->timestamp('order_time')->useCurrent();
             $table->dateTime('delivery_date');
             $table->integer('shipping_cost');
             $table->string('payment_method', 8);

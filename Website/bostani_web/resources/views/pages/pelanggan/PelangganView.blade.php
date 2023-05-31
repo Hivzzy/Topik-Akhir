@@ -5,11 +5,9 @@
         <h1 class="text-lg sm:text-2xl font-semibold">Data Pelanggan</h1>
         <div class="bg-white p-4 rounded shadow-md flex space-x-[10px]">
             <a href="/tambah-pelanggan"
-                class="inline-block rounded bg-primary p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
-                <div class="flex space-x-1 items-center">
-                    <img src="/assets/icons/add.svg" alt="add icon">
-                    <span class="hidden sm:block">Tambah Data</span>
-                </div>
+                class="flex gap-1 items-center inline-block rounded bg-primary p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
+                <x-icons.plus />
+                <span class="hidden sm:block">Tambah Data</span>
             </a>
         </div>
         <div class="bg-white p-4 space-y-4 rounded shadow-md">
@@ -21,6 +19,7 @@
                                 style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                                 <thead class="bg-[#272727] text-white">
                                     <tr>
+                                        <th>No</th>
                                         <th>Nama Pelanggan</th>
                                         <th>No Telepon</th>
                                         <th>Alamat</th>
@@ -33,6 +32,7 @@
                                 <tbody>
                                     @foreach ($customers as $customer)
                                         <tr>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>{{ $customer->customer_name }}</td>
                                             <td>{{ $customer->customer_phone }}</td>
                                             <td>{{ $customer->customer_address }}</td>

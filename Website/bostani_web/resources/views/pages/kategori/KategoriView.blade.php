@@ -7,7 +7,7 @@
             <a href="#" data-te-toggle="modal" data-te-target="#addCategoryModal"
                 class="inline-block rounded bg-primary p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
                 <div class="flex space-x-1 items-center">
-                    <img src="/assets/icons/add.svg" alt="add icon">
+                    <x-icons.plus />
                     <span class="hidden sm:block">Tambah Data</span>
                 </div>
             </a>
@@ -20,6 +20,7 @@
                             <table id="tabel_kategori" class="stripe hover py-4" width="100%">
                                 <thead class="bg-[#272727] text-white">
                                     <tr>
+                                        <th>No</th>
                                         <th>Nama Kategori</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -27,6 +28,7 @@
                                 <tbody>
                                     @foreach ($categories as $category)
                                         <tr>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td><a
                                                     href="/subkategori/{{ $category->id }} ">{{ $category->category_name }}</a>
                                             </td>
