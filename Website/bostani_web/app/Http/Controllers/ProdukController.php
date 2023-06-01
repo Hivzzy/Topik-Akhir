@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KategoriModel;
-use App\Models\ProdukModel;
 use App\Models\UnitModel;
+use App\Models\ProdukModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Models\KategoriModel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 
 class ProdukController extends Controller
 {
@@ -132,4 +133,13 @@ class ProdukController extends Controller
             return redirect()->back();
         }
     }
+
+    public function viewPdf (){
+
+        $data = ['name' => 'Gaji Karyawan'];
+        $pdf = Pdf::loadView('pages.produk.ExportProdukPdf', compact('data'));
+        return $pdf ->stream('invoice.pdf');
+    }
+
+
 }

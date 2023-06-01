@@ -48,6 +48,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::post('/produk/edit/{id}', [ProdukController::class, 'updateProduk']);
     Route::delete('/produk/hapus/{id}', [ProdukController::class, 'deleteProduk']);
     Route::get('/produk/get', [ProdukController::class, 'getProdukById']);
+    Route::get('/viewPdf', [ProdukController::class, 'viewPdf']);
     
     //Kategori
     Route::get('/kategori', [KategoriController::class, 'index']);
