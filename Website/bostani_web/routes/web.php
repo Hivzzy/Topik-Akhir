@@ -76,6 +76,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/pesanan/edit/{id}', [PesananController::class, 'displayEditPesanan']);
     Route::post('/pesanan/edit/{id}', [PesananController::class, 'updatePesanan']);
     Route::delete('/pesanan/hapus/{id}', [PesananController::class, 'deletePesanan']);
+    Route::get('/invoice/{id}', [PesananController::class, 'createInvoice']);
 
     //Belanja
     Route::get('/belanja', [PesananController::class, 'getListBelanja']);

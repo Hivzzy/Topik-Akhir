@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 
 class PesananController extends Controller
 {
@@ -247,5 +248,25 @@ class PesananController extends Controller
             'items' => $data,
             'list_item' => $sum_item,
         ]);
+    }
+
+    public function createInvoice($id)
+    {
+        $pesanan = new PesananModel();
+        $item_pesanan = new ItemPesananModel();
+        
+        // Ambil data pesanan
+        $detail_pesanan = $pesanan->getDetailPesanan($id);
+        $items= $item_pesanan->getItemPesanan($id);
+
+        // Ambil gambar
+        $path = base_path('public/assets/img/logo_bostani.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $pict = 'data:image/'.$type.';base64,'.base64_encode($data);
+        
+        $pdf = FacadePdf::loadView('pages.pesanan.InvoiceView', compact(['detail_pesanan', 'items', 'pict']));
+        return $pdf->stream();
+        // return $pdf->download('Invoice_'.$detail_pesanan->pelanggan->customer_name.'.pdf');
     }
 }
