@@ -4,10 +4,10 @@
     <div class="space-y-4 sm:space-y-6">
         <h1 class="text-lg sm:text-2xl font-semibold">Data Pengiriman</h1>
         <div class="bg-white p-4 rounded shadow-md flex space-x-[10px]">
-            <a href="#"
+            <a href="/tambah-pesanan"
                 class="inline-block rounded bg-primary p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
                 <div class="flex space-x-1 items-center">
-                    <x-icons.plus />
+                    <img src="/assets/icons/add.svg" alt="add icon">
                     <span class="hidden sm:block">Tambah Data</span>
                 </div>
             </a>
@@ -17,7 +17,8 @@
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                         <div class="overflow-hidden">
-                            <table id="tabel_pengiriman" class="stripe hover py-4" width="100%">
+                            <table id="tabel_pengiriman" class="stripe hover"
+                                style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
                                 <thead class="bg-[#272727] text-white">
                                     <tr>
                                         <th>No</th>
@@ -32,7 +33,43 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+                                    @foreach ($pengirimans as $pengiriman)
+                                        @foreach ($pengiriman->pesanans as $pesanan)
+                                            <tr>
+                                                <td>{{$loop->iteration}}</td>
+                                                <td>{{ date('d M Y', strtotime($pengiriman->delivery_date)) }}</td>
+                                                @if ($pesanan->customers)
+                                                    <td>{{ $pesanan->customers->customer_name ?? '-'}}</td>
+                                                    <td>{{ $pesanan->customers->customer_address ?? '-'}}</td>
+                                                @endif
+                                                @if ($pesanan->customers->kelurahan)
+                                                    <td>{{ $pesanan->customers->kelurahan->urban_village_name ?? '-'}}</td>
+                                                @endif
+                                                @if ($pesanan->customers->kelurahan->kecamatan)
+                                                    <td>{{ $pesanan->customers->kelurahan->kecamatan->district_name ?? '-'}}</td>
+                                                @endif
+                                                    <td>{{ $pengiriman->pesanan->shipping_cost??'0'}}</td>
+                                                @foreach ($pengirimanStatus as $status)
+                                                    <td>{{ $status->status_pengiriman->delivery_status_name??'-'}}</td>
+                                                    <td>
+                                                        <a href="/pengiriman/detail/{{ $pengiriman->id }}"
+                                                            class="inline-block whitespace-nowrap rounded-[0.27rem] bg-info-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-info-700">
+                                                            Lihat
+                                                        </a>
+                                                    <a href="/pengiriman/edit/{{ $pengiriman->id }}"
+                                                        class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
+                                                        Edit
+                                                        </a>
+                                                        <a href="/pengiriman/hapus/{{ $pengiriman->id }}"
+                                                            class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700"
+                                                            data-confirm-delete="true">
+                                                            Hapus
+                                                        </a>
+                                                    </td>
+                                            </tr>
+                                                @endforeach
+                                        @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

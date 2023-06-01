@@ -17,14 +17,17 @@ class PengirimanController extends Controller
         confirmDelete($title, $text);
 
         $pengiriman = new PengirimanModel();
-        $data = $pengiriman->getPengiriman();
+        $pengiriman = PengirimanModel::with('pesanans.customers.kelurahan.kecamatan')->get();
+        $pengirimanStatus = PengirimanModel::with('status_pengiriman')->get();
 
         return view('pages.pengiriman.PengirimanView', [
             'title' => 'Data Pengiriman',
             'active' => 'deliveries',
-            'pengirimans' => $data,
+            'pengirimans' => $pengiriman,
+            'pengirimanStatus'=> $pengirimanStatus,
         ]);
     }
+
 
     public function getDetailPengiriman()
     {

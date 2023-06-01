@@ -64,9 +64,9 @@ class PengirimanModel extends Model
     {
         return $this->belongsTo(StatusPengirimanModel::class,'delivery_status_id');
     }
-    public function pesanan()
+    public function pesanans()
     {
-        return $this->hasMany(PesananModel::class);
+        return $this->hasMany(PesananModel::class, 'delivery_id');
     }
 
 }

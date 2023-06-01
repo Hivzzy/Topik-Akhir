@@ -9,7 +9,7 @@ class statusPengirimanModel extends Model
     use HasFactory;
 
 
-    protected $table = 'orders_status';
+    protected $table = 'delivery_status';
     protected $guarded = ['id'];
     public $timestamps = false;
 
@@ -26,7 +26,7 @@ class statusPengirimanModel extends Model
     }
     public function pengiriman()
     {
-        return $this->hasMany(PengirimanModel::class);
+        return $this->hasMany(PengirimanModel::class,'id');
     }
 }
 ?>
