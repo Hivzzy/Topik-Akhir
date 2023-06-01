@@ -49,7 +49,7 @@
             <td colspan="4">
                 <table cellpadding="2">
                     <tr>
-                        <th class="text-center title" colspan="3">Invoice - {{ date('d M Y', strtotime(now())) }}
+                        <th class="text-center title" colspan="3">Invoice - {{ date('d M Y', strtotime($detail_pesanan->delivery_date)) }}
                         </th>
                     </tr>
                     <tr>

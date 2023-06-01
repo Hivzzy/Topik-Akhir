@@ -37,7 +37,7 @@
                             <label class="font-medium" for="">Alamat</label>
                             <input type="text" name="alamat" id="alamat"
                                 value="{{ $pesanan->customers->customer_address }}"
-                                class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                                class="text-name relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                                 required />
                         </div>
                     </div>
@@ -179,90 +179,10 @@
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="/assets/js/cart.js"></script>
+    <script src="/assets/js/script.js"></script>
     <script>
         $(document).ready(function() {
             get_cart();
-            $(document).on('change', '#pelanggan', function() {
-                let p_id = $(this).val();
-
-                $.ajax({
-                    type: 'GET',
-                    url: '/pelanggan/get',
-                    data: {
-                        'id': p_id
-                    },
-                    dataType: 'json',
-                    success: function(data) {
-                        // Set Nilai
-                        $('#no_telepon').val(data[0].customer_phone);
-                        $('#alamat').val(data[0].customer_address);
-                    },
-                    error: function() {}
-                });
-            });
-
-            $(document).on('change', '#product_id', function() {
-                let p_id = $(this).val();
-
-                $.ajax({
-                    type: 'GET',
-                    url: '/produk/get',
-                    data: {
-                        'id': p_id
-                    },
-                    dataType: 'json',
-                    success: function(data) {
-                        // Set Nilai
-                        $('#satuan').val(data[0].unit_product_name);
-                        $('#harga').val(data[0].product_selling_price);
-                    },
-                    error: function() {}
-                });
-            });
-
-            $('select[name="kota"]').on('change', function() {
-                var kotaID = $(this).val();
-                if (kotaID) {
-                    $.ajax({
-                        url: '/kecamatan/get/' + kotaID,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(data) {
-                            $('select[name="kecamatan"]').empty();
-                            $.each(data, function(key, value) {
-                                $('select[name="kecamatan"]').append(
-                                    '<option value="' + value['id'] + '">' + value[
-                                        'district_name'] +
-                                    '</option>');
-                            });
-                        }
-                    });
-                } else {
-                    $('select[name="kecamatan"]').empty();
-                }
-            });
-
-            $('select[name="kecamatan"]').on('change', function() {
-                var kecamatanID = $(this).val();
-                if (kecamatanID) {
-                    $.ajax({
-                        url: '/kelurahan/get/' + kecamatanID,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(data) {
-                            $('select[name="kelurahan"]').empty();
-                            $.each(data, function(key, value) {
-                                $('select[name="kelurahan"]').append(
-                                    '<option value="' + value['id'] + '">' + value[
-                                        'urban_village_name'] +
-                                    '</option>');
-                            });
-                        }
-                    });
-                } else {
-                    $('select[name="kelurahan"]').empty();
-                }
-            });
         });
     </script>
 @endsection

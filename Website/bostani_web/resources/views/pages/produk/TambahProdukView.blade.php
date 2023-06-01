@@ -78,39 +78,4 @@
 @section('script')
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="/assets/js/script.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('select[name="category"]').on('change', function() {
-                var kategoriID = $(this).val();
-                if (kategoriID) {
-                    $.ajax({
-                        url: 'subkategori/get/' + kategoriID,
-                        type: 'GET',
-                        dataType: 'json',
-                        success: function(data) {
-                            $('select[name="sub_category"]').empty();
-                            $.each(data, function(key, value) {
-                                $('select[name="sub_category"]').append(
-                                    '<option value="' + value['id'] + '">' + value[
-                                        'sub_category_name'] +
-                                    '</option>');
-                            });
-                        }
-                    });
-                } else {
-                    $('select[name="sub_category"]').append('<option value="">' + '</option>');
-                }
-            });
-        });
-
-        // // Set product name capitalize
-        // $('#product_name').on('change keydown paste', function(e) {
-        //     if (this.value.length = 1) {}
-        //     var $this_val = $(this).val();
-        //     this_val = $this_val.toLowerCase().replace(/\b[a-z]/g, function(char) {
-        //         return char.toUpperCase();
-        //     });
-        //     $(this).val(this_val);
-        // });
-    </script>
 @endsection
