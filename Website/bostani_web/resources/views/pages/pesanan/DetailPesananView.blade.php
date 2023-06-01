@@ -115,7 +115,7 @@
 
             <div class="flex flex-wrap gap-2 justify-between items-center">
                 <div>
-                    <p class="text-xl font-semibold">Total Pesanan : Rp {{ number_format($total_pesanan, 0, ',', '.') }}
+                    <p class="text-xl font-semibold">Total Pesanan : Rp{{ number_format($total_pesanan, 2, ',', '.') }}
                     </p>
                 </div>
                 <a href="/pesanan"
@@ -142,9 +142,10 @@
                         type: 'GET',
                         url: '/pesanan/status/' + orderID + '/' + statusID,
                         dataType: 'json',
-                        success: function(data) {
+                        success: function(response) {
                             // console.log(data);
-                        }
+                            swal("Success!", ""+response.message+"", "success");
+                        },
                     });
                 }
             });

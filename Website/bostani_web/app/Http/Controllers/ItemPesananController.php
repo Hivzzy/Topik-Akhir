@@ -14,25 +14,32 @@ use RealRashid\SweetAlert\Facades\Alert;
 class ItemPesananController extends Controller
 {
 
-   public function addToCartItemPesanan(Request $request)
-   {
-        // return response()->json($request);
+    public function addToCartItemPesanan(Request $request)
+    {
+        if ($request->product_id == '' || $request->quantity == '') {
+            return response()->json(['message' => 'Harap isi data item pesanan!'], 400);
+        }
+
+        if ($request->quantity <= 0) {
+            return response()->json(['message' => 'Jumlah item tidak valid!'], 400);
+        }
+
         $product = ProdukModel::find($request->product_id);
         if (!$product) {
             return response()->json(['message' => 'Item pesanan tidak ditemukan'], 404);
         }
 
-        $cart = Session()->get('cart',[]);
+        $cart = Session()->get('cart', []);
 
         // Cek apakah produk sudah ada di dalam cart
         if (array_key_exists($product->id, $cart)) {
             // Kondisi jika terdapat item yang sama
-            return response()->json(['message' => 'Item pesanan telah diinputkan'], 422);
+            $cart[$product->id]['item_size'] += $request->quantity;
         } else {
             // Kondisi jika item tidak sama
             $cart[$product->id] = [
                 'product_id' => $product->id,
-                'item_name' =>$product->product_name,
+                'item_name' => $product->product_name,
                 'item_size' => $request->quantity,
                 'item_unit' => $product->satuan->unit_product_name,
                 'item_purchase_price' => $product->product_purchase_price,
@@ -42,16 +49,11 @@ class ItemPesananController extends Controller
         }
 
         Session::put('cart', $cart);
-        // return back();
-        // return response()->json($cart);
     }
 
     public function showCart()
     {
         $cart = Session::get('cart', []);
-
-        // return response()->json($cart);
-        // return $cart;
         return view('pages.pesanan.CartView')->with([
             'data' => $cart
         ]);
@@ -62,18 +64,15 @@ class ItemPesananController extends Controller
         $cart = Session::get('cart', []);
         unset($cart[$id]);
         Session::put('cart', $cart);
-        // return back();
     }
 
     public function deleteAllCart()
     {
         if (Session::get('cart') != []) {
             Session::forget('cart');
-            toast('Item pesanan berhasil dihapus', 'success');
-            // return back();
+            return response()->json(['message' => 'Item pesanan berhasil dihapus!'], 200);
         } else {
-            toast('Item pesanan sudah kosong', 'error');
-            // return back();
+            return response()->json(['message' => 'Item pesanan sudah kosong!'], 400);
         }
     }
 
@@ -88,7 +87,7 @@ class ItemPesananController extends Controller
         ]);
 
         $item_pesanan = new ItemPesananModel();
-        $add_item_pesanan= $$item_pesanan->createItemPesanan($request->all());
+        $add_item_pesanan = $$item_pesanan->createItemPesanan($request->all());
 
         if ($add_item_pesanan) {
             return redirect('/pesanan');
@@ -96,9 +95,5 @@ class ItemPesananController extends Controller
             Alert::error('Error', 'ItemPesanan gagal ditambahkan');
             return redirect()->back();
         }
-
     }
 }
-
-
-?>

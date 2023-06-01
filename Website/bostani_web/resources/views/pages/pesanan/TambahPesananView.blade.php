@@ -14,7 +14,7 @@
                             <label class="font-medium" for="">Nama</label>
                             <select data-te-select-init data-te-select-filter="true" data-te-select-option-height="52"
                                 id="pelanggan" name="pelanggan">
-                                <option value=""></option>
+                                <option value="{{ old('pelanggan') }}"></option>
                                 @foreach ($customers as $customer)
                                     <option value="{{ $customer->id }}"
                                         data-te-select-secondary-text="{{ $customer->customer_address }}">
@@ -24,7 +24,7 @@
                         </div>
                         <div class="grid grid-rows-1">
                             <label class="font-medium" for="">No Telepon</label>
-                            <input type="text" name="no_telepon" id="no_telepon"
+                            <input type="text" name="no_telepon" id="no_telepon" value="{{ old('no_telepon') }}"
                                 class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                                 required />
                         </div>
@@ -32,7 +32,7 @@
                     <div>
                         <div class="grid grid-rows-1">
                             <label class="font-medium" for="">Alamat</label>
-                            <input type="text" name="alamat" id="alamat"
+                            <input type="text" name="alamat" id="alamat" value="{{ old('alamat') }}"
                                 class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                                 required />
                         </div>
@@ -72,7 +72,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="grid grid-rows-1">
                             <label class="font-medium" for="">Tanggal Kirim</label>
-                            <input type="date" name="tanggal_kirim" min="{{ date('Y-m-d') }}"
+                            <input type="date" name="tanggal_kirim" min="{{ date('Y-m-d') }}" value="{{ old('tanggal_kirim') }}"
                                 class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                                 required />
                         </div>
@@ -80,14 +80,15 @@
                             <label class="font-medium" for="">Metode Pembayaran</label>
                             <select name="metode_pembayaran" data-te-select-init
                                 class="px-2 py-1 border border-1 rounded appearance-none">
-                                <option value=""></option>
+                                <option value="{{ old('metode_pembayaran') }}">{{ old('metode_pembayaran') }}</option>
                                 <option value="COD">COD</option>
                                 <option value="Transfer">Transfer</option>
                             </select>
                         </div>
                         <div class="grid grid-rows-1">
                             <label class="font-medium" for="">Ongkos Kirim</label>
-                            <input type="text" name="ongkos_kirim"
+                            <input type="number" min="0" step="1" oninput="validity.valid||(value='');"
+                                name="ongkos_kirim" value="{{ old('ongkos_kirim') }}"
                                 class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                                 required />
                         </div>
@@ -120,13 +121,13 @@
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Harga</label>
-                        <input type="text" name="harga" id="harga"
+                        <input type="number" min="0" name="harga" id="harga"
                             class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                             readonly required />
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Jumlah</label>
-                        <input type="text" name="quantity" id="quantity"
+                        <input type="number" min="0" step="0.01" name="quantity" id="quantity"
                             class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                             required />
                     </div>

@@ -21,6 +21,10 @@ class PesananController extends Controller
             Session::forget('cart');
         }
 
+        $today = now();
+        $pesanan = new PesananModel();
+        $data = $pesanan->getPesanan($today);
+
         $title = 'Hapus Pesanan!';
         $text = "Anda yakin ingin menghapus data pesanan?";
         confirmDelete($title, $text);
@@ -28,7 +32,7 @@ class PesananController extends Controller
         return view('pages.pesanan.PesananView', [
             'title' => 'Data Pesanan',
             'active' => 'order',
-            'orders' => PesananModel::all(),
+            'orders' => $data,
         ]);
     }
 
@@ -40,7 +44,6 @@ class PesananController extends Controller
             'customers' => PelangganModel::all(),
             'cities' => KotaModel::all(),
             'products' => ProdukModel::all(),
-            // 'data' => $item_pesanan->showCart(),
         ]);
     }
 
@@ -97,9 +100,9 @@ class PesananController extends Controller
             'pelanggan' => 'required',
             'no_telepon' => 'required|min:10',
             'alamat' => 'required',
-            'kelurahan' => 'required',
-            'kecamatan' => 'required',
             'kota' => 'required',
+            'kecamatan' => 'required',
+            'kelurahan' => 'required',
             'tanggal_kirim' => 'required',
             'metode_pembayaran' => 'required',
             'ongkos_kirim' => 'required',
@@ -219,7 +222,7 @@ class PesananController extends Controller
     {
         $pesanan = new PesananModel();
         $pesanan->updateStatusPesanan($order_id, $status_id);
-        // return back();
+        return response()->json(['message' => 'Status pesanan berhasil diperbarui'], 200);
     }
 
     public function getListBelanja()
@@ -228,7 +231,6 @@ class PesananController extends Controller
         $item_belanja = new ItemPesananModel();
         $id_pesanan = [];
         $tanggal_kirim = date('Y/m/d', strtotime(now()));
-        // $tanggal_kirim = '2023/06/16';
 
         $dt_belanja = $belanja->getListBelanja($tanggal_kirim);
         foreach ($dt_belanja as $dt) {

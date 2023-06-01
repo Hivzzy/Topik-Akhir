@@ -95,7 +95,8 @@
                         </div>
                         <div class="grid grid-rows-1">
                             <label class="font-medium" for="">Ongkos Kirim</label>
-                            <input type="text" name="ongkos_kirim" value="{{ $pesanan->shipping_cost }}"
+                            <input type="number" min="0" step="1" oninput="validity.valid||(value='');"
+                                name="ongkos_kirim" value="{{ $pesanan->shipping_cost }}"
                                 class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                                 required />
                         </div>
@@ -133,7 +134,7 @@
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Jumlah</label>
-                        <input type="text" name="quantity" id="quantity"
+                        <input type="number" min="0" step="0.01" name="quantity" id="quantity"
                             class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                             required />
                     </div>

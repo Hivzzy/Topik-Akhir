@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DriversModel extends Model
 {
+
     use HasFactory;
 
     protected $table = 'drivers';
@@ -15,13 +16,13 @@ class DriversModel extends Model
 
     public function getDrivers()
     {
-        $drivers = Drivers::all();
-        return $pesanan;
+        $drivers = DriversModel::all();
+        return $drivers;
     }
 
     public function getDriver($id_driver)
     {
-        $driver = Drivers::where('id', $id_driver)->first();
+        $driver = DriversModel::where('id', $id_driver)->first();
         return $driver;
     }
 

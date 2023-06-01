@@ -19,12 +19,15 @@ class AuthController extends Controller
 
     public function dashboard()
     {
+        $pesanan = new PesananModel();
+        $data = $pesanan->getPesanan(now());
+
         return view('pages.DashboardView', [
             'title' => 'Dashboard',
             'active' => 'dashboard',
             'products' => ProdukModel::count(),
             'customers' => PelangganModel::count(),
-            'orders' => PesananModel::count(),
+            'orders' => $data->count(),
         ]);
     }
 

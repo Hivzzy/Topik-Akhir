@@ -52,7 +52,7 @@ class SubKategoriController extends Controller
         $sub_kategori = new SubKategoriModel();
         $data = $sub_kategori->createSubKategori($validatedData);
         if ($data){
-            Alert::success('Success', 'Sub Kategori' . $validatedData['nama_sub_kategori'] . ' berhasil ditambahkan');
+            Alert::success('Success', 'Sub Kategori ' . $validatedData['nama_sub_kategori'] . ' berhasil ditambahkan');
             return redirect('/subkategori/'.$validatedData['kategori_id']);
         }else {
             Alert::error('Error', 'Sub Kategori gagal ditambahkan');
@@ -72,10 +72,10 @@ class SubKategoriController extends Controller
         $data = $sub_kategori->editSubKategori($validatedData, $id);
 
         if ($data) {
-            Alert::success('Success', 'Kategori berhasil diperbarui');
+            Alert::success('Success', 'Sub Kategori berhasil diperbarui');
             return redirect('/subkategori/'.$validatedData['kategori_id']);
         } else {
-            Alert::error('Error', 'Kategori gagal diperbarui');
+            Alert::error('Error', 'Sub Kategori gagal diperbarui');
             return redirect()->back();
         }
     }
@@ -88,10 +88,10 @@ class SubKategoriController extends Controller
 
 
         if ($data) {
-            Alert::success('Success', 'Kategori berhasil dihapus');
+            Alert::success('Success', 'Sub Kategori berhasil dihapus');
             return redirect('/subkategori/'.$category_id['category_id']);
         } else {
-            Alert::error('Error', 'Kategori gagal dihapus');
+            Alert::error('Error', 'Sub Kategori gagal dihapus');
             return redirect()->back();
         }
     }
