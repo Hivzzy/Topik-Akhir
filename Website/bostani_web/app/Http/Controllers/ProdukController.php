@@ -51,6 +51,7 @@ class ProdukController extends Controller
         if ($request['sub_category'] == '') {
             $request['sub_category'] = NULL;
         }
+
         $validator = Validator::make($request->all(), [
             'product_name' => 'required|unique:products',
             'unit' => 'required',
@@ -63,7 +64,7 @@ class ProdukController extends Controller
 
         if ($validator->fails()) {
             toast($validator->messages()->all()[0], 'error');
-            return back();
+            return back()->withInput($request->all());
         }
 
         $produk = new ProdukModel();

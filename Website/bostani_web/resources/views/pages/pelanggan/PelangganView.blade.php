@@ -15,8 +15,7 @@
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
                         <div class="overflow-hidden">
-                            <table id="tabel_pelanggan" class="stripe hover"
-                                style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+                            <table id="tabel_pelanggan" class="stripe hover py-4" width="100%">
                                 <thead class="bg-[#272727] text-white">
                                     <tr>
                                         <th>No</th>

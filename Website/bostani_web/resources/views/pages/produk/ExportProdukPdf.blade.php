@@ -80,12 +80,13 @@
                     </div>
                     <?php
                             }
-                        } else {
-                            ?>
-                    <div class="item-list">{{ $produk->product_name }}
-                        <small>{{ $produk->product_selling_price }}/{{ $produk->satuan->unit_product_name }}</small>
-                    </div>
-                    <?php
+                        } 
+                        else {
+                           
+                    // <div class="item-list">{{ $produk->product_name }}
+                    //     <small>{{ $produk->product_selling_price }}/{{ $produk->satuan->unit_product_name }}</small>
+                    // </div>
+       
                         }
                     ?>
                 @endforeach

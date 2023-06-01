@@ -31,7 +31,7 @@
                     <div class="grid grid-cols-1 gap-2">
                         <input id="d1" type="hidden" name="kategori_id" value="{{ $category->id }}">
                         <label for="">Nama Sub Kategori</label>
-                        <input type="text" class="px-2 py-1 bg-gray-100 border border-1 rounded"
+                        <input type="text" class="text-name px-2 py-1 bg-gray-100 border border-1 rounded"
                             name="nama_sub_kategori">
                     </div>
                     <script>
@@ -92,7 +92,7 @@
                             <input id="d1" type="hidden" name="kategori_id"
                                 value="{{ $sub_category->category_id }}">
                             <label for="">Nama Sub Kategori</label>
-                            <input type="text" class="px-2 py-1 bg-gray-100 border border-1 rounded"
+                            <input type="text" class="text-name px-2 py-1 bg-gray-100 border border-1 rounded"
                                 name="nama_sub_kategori" value="{{ $sub_category->sub_category_name }}">
                         </div>
                         <div class="mt-6 flex flex-wrap justify-end">

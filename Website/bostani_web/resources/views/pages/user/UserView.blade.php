@@ -27,7 +27,7 @@
                                             <th>No</th>
                                             <th>Nama User</th>
                                             <th>Username</th>
-                                            <th>Password</th>
+                                            {{-- <th>Password</th> --}}
                                             <th>Role</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -38,8 +38,8 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->username }}</td>
-                                                <td>
-                                                    {{ $user->password }}</td>
+                                                {{-- <td>
+                                                    {{ $user->password }}</td> --}}
                                                 <td>
                                                     {{ $user->role->role_name }}
                                                 </td>

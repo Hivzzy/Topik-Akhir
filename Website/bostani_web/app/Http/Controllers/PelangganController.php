@@ -44,14 +44,14 @@ class PelangganController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_pelanggan' => 'required',
-            'no_telepon' => 'required|min:10',
+            'no_telepon' => 'required|min:10|numeric',
             'alamat' => 'required',
             'kelurahan' => 'required',
         ]);
 
         if ($validator->fails()) {
             toast($validator->messages()->all()[0], 'error');
-            return back();
+            return back()->withInput($request->all());
         }
 
         $pelanggan = new PelangganModel();
@@ -94,7 +94,7 @@ class PelangganController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_pelanggan' => 'required',
-            'no_telepon' => 'required|min:10',
+            'no_telepon' => 'required|min:10|numeric',
             'alamat' => 'required',
             'kelurahan' => 'required',
         ]);

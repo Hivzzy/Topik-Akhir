@@ -99,7 +99,7 @@ class PesananController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'pelanggan' => 'required',
-            'no_telepon' => 'required|min:10',
+            'no_telepon' => 'required|min:10|numeric',
             'alamat' => 'required',
             'kota' => 'required',
             'kecamatan' => 'required',
@@ -150,7 +150,7 @@ class PesananController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'pelanggan' => 'required',
-            'no_telepon' => 'required|min:10',
+            'no_telepon' => 'required|min:10|numeric',
             'alamat' => 'required',
             'kelurahan' => 'required',
             'kecamatan' => 'required',

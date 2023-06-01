@@ -14,7 +14,7 @@
 
             <div>
                 <select id="jenisLaporan" data-te-select-init>
-                    <option value="#">-- Pilih Jenis Laporan --</option>
+                    <option value="blank">-- Pilih Jenis Laporan --</option>
                     <option value="harian">Laporan Harian</option>
                     <option value="bulanan">Laporan Bulanan</option>
                     <option value="periode_waktu">Laporan Per Periode</option>

@@ -9,8 +9,9 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Nama Produk</label>
-                        <input type="text" name="product_name" id="product_name"
-                            class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary" required/>
+                        <input type="text" name="product_name" id="product_name" value="{{ old('product_name') }}"
+                            class="text-name relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                            required />
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Satuan Produk</label>
@@ -38,18 +39,23 @@
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Harga Beli</label>
-                        <input type="text" name="purchase_price"
-                            class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary" required/>
+                        <input type="number" min="0" oninput="validity.valid||(value='');"
+                            name="purchase_price" value="{{ old('purchase_price') }}"
+                            class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                            required />
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Harga Jual</label>
-                        <input type="text" name="selling_price"
-                            class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary" required/>
+                        <input type="number" min="0" oninput="validity.valid||(value='');"
+                            name="selling_price" value="{{ old('selling_price') }}"
+                            class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                            required />
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Ukuran</label>
-                        <input type="number" name="size"
-                            class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary" required/>
+                        <input type="number" min="0.1" step="0.01" name="size" value="{{ old('size') }}"
+                            class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                            required />
                     </div>
                 </div>
                 <div class="flex justify-end space-x-2 mt-6">
@@ -71,6 +77,7 @@
 
 @section('script')
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="/assets/js/script.js"></script>
     <script>
         $(document).ready(function() {
             $('select[name="category"]').on('change', function() {
@@ -96,14 +103,14 @@
             });
         });
 
-        // Set product name capitalize
-        $('#product_name').on('change keydown paste', function(e) {
-            if (this.value.length = 1) {}
-            var $this_val = $(this).val();
-            this_val = $this_val.toLowerCase().replace(/\b[a-z]/g, function(char) {
-                return char.toUpperCase();
-            });
-            $(this).val(this_val);
-        });
+        // // Set product name capitalize
+        // $('#product_name').on('change keydown paste', function(e) {
+        //     if (this.value.length = 1) {}
+        //     var $this_val = $(this).val();
+        //     this_val = $this_val.toLowerCase().replace(/\b[a-z]/g, function(char) {
+        //         return char.toUpperCase();
+        //     });
+        //     $(this).val(this_val);
+        // });
     </script>
 @endsection

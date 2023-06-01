@@ -30,7 +30,7 @@
                     @csrf
                     <div class="grid grid-cols-1 gap-2">
                         <label for="">Nama Kategori</label>
-                        <input type="text" class="px-2 py-1 bg-gray-100 border border-1 rounded"
+                        <input type="text" class="text-name px-2 py-1 bg-gray-100 border border-1 rounded"
                             name="nama_kategori">
                     </div>
                     <div class="mt-6 flex flex-wrap justify-end">
@@ -86,7 +86,7 @@
                         @csrf
                         <div class="grid grid-cols-1 gap-2">
                             <label for="">Nama Kategori</label>
-                            <input type="text" class="px-2 py-1 bg-gray-100 border border-1 rounded"
+                            <input type="text" class="text-name px-2 py-1 bg-gray-100 border border-1 rounded"
                                 name="nama_kategori" value="{{ $category->category_name }}">
                         </div>
                         <div class="mt-6 flex flex-wrap justify-end">
