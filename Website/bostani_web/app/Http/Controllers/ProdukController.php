@@ -6,6 +6,7 @@ use App\Models\UnitModel;
 use App\Models\ProdukModel;
 use Illuminate\Http\Request;
 use App\Models\KategoriModel;
+use App\Models\SubKategoriModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
@@ -47,8 +48,8 @@ class ProdukController extends Controller
 
     public function createProduk(Request $request)
     {
-        if($request['sub_category'] == '') {
-                $request['sub_category'] = NULL;
+        if ($request['sub_category'] == '') {
+            $request['sub_category'] = NULL;
         }
         $validator = Validator::make($request->all(), [
             'product_name' => 'required|unique:products',
@@ -134,12 +135,16 @@ class ProdukController extends Controller
         }
     }
 
-    public function viewPdf (){
+    public function viewPdf()
+    {
+        $produk = new ProdukModel();
+        $kategori = new KategoriModel();
 
-        $data = ['name' => 'Gaji Karyawan'];
-        $pdf = Pdf::loadView('pages.produk.ExportProdukPdf', compact('data'));
-        return $pdf ->stream('invoice.pdf');
+        $data_produk = $produk->getProduk();
+        $data_kategori = $kategori->getKategori();
+        $data_subkategori = SubKategoriModel::all();
+        
+        $pdf = Pdf::loadView('pages.produk.ExportProdukPdf', compact(['data_produk', 'data_kategori', 'data_subkategori']));
+        return $pdf->stream('invoice.pdf');
     }
-
-
 }
