@@ -29,11 +29,16 @@ class PengirimanController extends Controller
     }
 
 
-    public function getDetailPengiriman()
+   public function getDetailPengiriman($id_pengiriman)
     {
+        $detail_pengiriman = new PengirimanModel();
+        $detail_pengiriman = PengirimanModel::with('pesanans.customers.kelurahan.kecamatan.kota')->findOrFail($id_pengiriman);
+
         return view('pages.pengiriman.DetailPengirimanView', [
             'title' => 'Detail Pengiriman',
             'active' => 'deliveries',
+            'detail_pengiriman' => $detail_pengiriman,
+            'delivery_status' => StatusPengirimanModel::all(),
         ]);
     }
 }
