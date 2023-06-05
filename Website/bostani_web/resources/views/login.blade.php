@@ -59,7 +59,7 @@ section {
 </head>
 
 <body>
-    <section class="Form my-2 mx-2">
+    <section class="Form">
         <div class="container">
             <div class="row no-gutters">
                 <div class="col-lg-5">
