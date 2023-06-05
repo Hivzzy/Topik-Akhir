@@ -126,7 +126,7 @@
                     <table>
                         <tr>
                             @foreach ($data_produk as $produk)
-                                @if ($produk->sub_category_id == null)
+                                @if ($produk->category_id == $kategori->id)
                                     <div class="item-list"> {{ $produk->product_name }}
                                         <small> &nbsp;
                                             Rp
