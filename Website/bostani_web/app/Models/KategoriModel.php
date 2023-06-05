@@ -42,6 +42,26 @@ class KategoriModel extends Model
         return $delete_kategori;
     }
 
+    public function listProduk($id)
+    {
+        $data = KategoriModel::select('categories.category_name', 'products.product_name')
+            ->join('products', 'products.category_id', '=', 'categories.id')
+            ->where('categories.id', $id)
+            ->get();
+
+        return $data;
+    }
+
+    public function listSubKategori($id)
+    {
+        $data = KategoriModel::select('categories.category_name', 'sub_categories.sub_category_name')
+            ->join('sub_categories', 'sub_categories.category_id', '=', 'categories.id')
+            ->where('categories.id', $id)
+            ->get();
+
+        return $data;
+    }
+
     public function produks()
     {
         return $this->hasMany(ProdukModel::class);

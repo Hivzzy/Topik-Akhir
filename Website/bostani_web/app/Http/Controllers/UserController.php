@@ -124,8 +124,13 @@ class UserController extends Controller
     public function deleteUser($id)
     {
         $user = new UserModel();
-        $delete_user = $user->deleteUser($id);
 
+        if ($id == auth()->user()->id) {
+            Alert::error('Gagal', 'Tidak dapat menghapus user!');
+            return redirect()->back();
+        }
+
+        $delete_user = $user->deleteUser($id);
         if ($delete_user) {
             Alert::success('Success', 'Data user berhasil dihapus');
             return redirect('/kelola-akun');

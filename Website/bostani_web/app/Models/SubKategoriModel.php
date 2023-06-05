@@ -19,10 +19,11 @@ class SubKategoriModel extends Model
         return $sub_kategori;
     }
 
-    public function createSubKategori($sub_kategori){
+    public function createSubKategori($sub_kategori)
+    {
 
         $add_subkategori = SubKategoriModel::create([
-            'category_id' => $sub_kategori['kategori_id'], 
+            'category_id' => $sub_kategori['kategori_id'],
             'sub_category_name' => $sub_kategori['nama_sub_kategori'],
         ]);
 
@@ -43,7 +44,17 @@ class SubKategoriModel extends Model
         return $delete_subkategori;
     }
 
-    public function kategori() 
+    public function listProduk($id)
+    {
+        $data = SubKategoriModel::select('sub_categories.sub_category_name', 'products.product_name')
+            ->join('products', 'sub_categories.id', '=', 'products.sub_category_id')
+            ->where('sub_categories.id', $id)
+            ->get();
+
+        return $data;
+    }
+
+    public function kategori()
     {
         return $this->belongsTo(KategoriModel::class, 'category_id');
     }

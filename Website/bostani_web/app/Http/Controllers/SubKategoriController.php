@@ -7,6 +7,8 @@ use App\Models\SubKategoriModel;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
+use function PHPUnit\Framework\isEmpty;
+
 class SubKategoriController extends Controller
 {
     public function index($id)
@@ -29,7 +31,7 @@ class SubKategoriController extends Controller
     public function getSubKategori($id_kategori)
     {
         $sub_kategori = new SubKategoriModel();
-        
+
         if ($id_kategori != null) {
             $data = $sub_kategori->getSubKategori($id_kategori);
         } else {
@@ -38,23 +40,25 @@ class SubKategoriController extends Controller
         return json_encode($data);
     }
 
-    public function testview(){
-        return view ("pages.kategori.SubKategoriView");
+    public function testview()
+    {
+        return view("pages.kategori.SubKategoriView");
     }
 
-    public function createSubKategori(Request $request){
-    
+    public function createSubKategori(Request $request)
+    {
+
         $validatedData = $request->validate([
-            'kategori_id' =>'required',
+            'kategori_id' => 'required',
             'nama_sub_kategori' => 'required'
         ]);
-        
+
         $sub_kategori = new SubKategoriModel();
         $data = $sub_kategori->createSubKategori($validatedData);
-        if ($data){
+        if ($data) {
             Alert::success('Success', 'Sub Kategori ' . $validatedData['nama_sub_kategori'] . ' berhasil ditambahkan');
-            return redirect('/subkategori/'.$validatedData['kategori_id']);
-        }else {
+            return redirect('/subkategori/' . $validatedData['kategori_id']);
+        } else {
             Alert::error('Error', 'Sub Kategori gagal ditambahkan');
             return redirect()->back();
         }
@@ -62,7 +66,6 @@ class SubKategoriController extends Controller
 
     public function updateSubKategori(Request $request, $id)
     {
-        
         $validatedData = $request->validate([
             'kategori_id' => 'required',
             'nama_sub_kategori' => 'required',
@@ -73,7 +76,7 @@ class SubKategoriController extends Controller
 
         if ($data) {
             Alert::success('Success', 'Sub Kategori berhasil diperbarui');
-            return redirect('/subkategori/'.$validatedData['kategori_id']);
+            return redirect('/subkategori/' . $validatedData['kategori_id']);
         } else {
             Alert::error('Error', 'Sub Kategori gagal diperbarui');
             return redirect()->back();
@@ -84,12 +87,19 @@ class SubKategoriController extends Controller
     {
         $category_id = SubKategoriModel::find($id);
         $sub_kategori = new SubKategoriModel();
+
+        $cek_produk = $sub_kategori->listProduk($id);
+
+        // dd(empty($cek_produk));
+        if (!empty($cek_produk)) {
+            Alert::error('Gagal', 'Terdapat data produk pada sub kategori');
+            return redirect()->back();
+        }
+
         $data = $sub_kategori->deleteSubKategori($id);
-
-
         if ($data) {
             Alert::success('Success', 'Sub Kategori berhasil dihapus');
-            return redirect('/subkategori/'.$category_id['category_id']);
+            return redirect('/subkategori/' . $category_id['category_id']);
         } else {
             Alert::error('Error', 'Sub Kategori gagal dihapus');
             return redirect()->back();

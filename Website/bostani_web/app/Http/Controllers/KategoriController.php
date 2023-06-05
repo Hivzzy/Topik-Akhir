@@ -23,11 +23,11 @@ class KategoriController extends Controller
 
     public function createKategori(Request $request)
     {
-        
+
         $validatedData = $request->validate([
             'nama_kategori' => 'required',
         ]);
-    
+
 
         $kategori = new KategoriModel();
         $data = $kategori->createKategori($validatedData);
@@ -62,8 +62,15 @@ class KategoriController extends Controller
     public function deleteKategori($id)
     {
         $kategori = new KategoriModel();
-        $data = $kategori->deleteKategori($id);
+        $cek_subkategori = $kategori->listSubKategori($id);
+        $cek_produk = $kategori->listProduk($id);
 
+        if (!empty($cek_subkategori) || !empty($cek_produk)) {
+            Alert::error('Gagal', 'Terdapat data sub kategori / data produk pada kategori');
+            return redirect()->back();
+        }
+
+        $data = $kategori->deleteKategori($id);
         if ($data) {
             Alert::success('Success', 'Kategori berhasil dihapus');
             return redirect('/kategori');
