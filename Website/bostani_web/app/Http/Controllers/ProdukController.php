@@ -136,17 +136,40 @@ class ProdukController extends Controller
         }
     }
 
-    public function viewPdf()
+    public function createKatalog()
     {
-        $produk = new ProdukModel();
         $kategori = new KategoriModel();
-
-        $data_produk = $produk->getProduk();
+        $produk = new ProdukModel();
         $data_kategori = $kategori->getKategori();
         $data_subkategori = SubKategoriModel::all();
-        
-        dd( $data_kategori);
-        $pdf = Pdf::loadView('pages.produk.ExportProdukPdf', compact(['data_produk', 'data_kategori', 'data_subkategori']));
+        $data_produk = $produk->getProduk();
+
+        $kategori_id = KategoriModel::select('categories.id AS id_kategori')
+            ->join('sub_categories', 'sub_categories.category_id', '=', 'categories.id')
+            ->distinct()
+            ->orderBy('categories.id', 'ASC')
+            ->get();
+
+        $info_kategori = array();
+        foreach ($kategori_id as $value) {
+            $info_kategori[$value['id_kategori']] = $value;
+        }
+
+        // dd($info_kategori);
+
+        $sub_kategori_id = SubKategoriModel::select('sub_categories.id AS id_sub_kategori')
+            ->join('products', 'products.sub_category_id', '=', 'sub_categories.id')
+            ->distinct()
+            ->get();
+
+        $info_sub_kategori = array();
+        foreach ($sub_kategori_id as $value) {
+            $info_sub_kategori[$value['id_sub_kategori']] = $value;
+        }
+
+        // dd($info_sub_kategori);
+
+        $pdf = Pdf::loadView('pages.produk.ExportProdukPdf', compact(['data_produk', 'data_kategori', 'data_subkategori', 'info_kategori', 'info_sub_kategori']));
         return $pdf->stream('invoice.pdf');
     }
 }

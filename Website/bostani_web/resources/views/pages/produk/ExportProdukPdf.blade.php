@@ -17,7 +17,6 @@
 
         header h1 {
             text-align: center;
-            margin-bottom: 24px;
             font-size: 2rem;
         }
 
@@ -50,6 +49,11 @@
             font-weight: 500;
         }
 
+        .text-message {
+            font-size: .8em;
+            text-align: center;
+        }
+
         table {
             border: 0.01cm solid;
         }
@@ -72,10 +76,10 @@
             page-break-after: always;
         }
 
-        .footer {
+        .info {
             text-align: center;
             font-size: .8em;
-            margin-top: 64px;
+            color: lightslategray;
         }
     </style>
 </head>
@@ -84,68 +88,58 @@
 
     <header>
         <h1>Katalog Produk</h1>
+        <p class="info">Per {{ date('d M Y', strtotime(now())) }}</p>
     </header>
     <hr>
     <div class="container">
-        {{-- @foreach ($data_kategori as $kategori)
+        @foreach ($data_kategori as $kategori)
             <div class="page-break">
                 <h3 class="category_name">{{ $kategori->category_name }}</h3>
-                @if ($sub_kategori != null)
+                @if (array_key_exists($kategori->id, $info_kategori))
                     @foreach ($data_subkategori as $sub_kategori)
                         @if ($sub_kategori->category_id == $kategori->id)
                             <table>
-                                <th>
-                                    <h4 class="sub_category_name">{{ $sub_kategori->sub_category_name }}</h4>
-                                </th>
                                 <tr>
-                                    @if ($sub_kategori != null)
-                                        @if ($produk->sub_category_id != null)
-                                            @if ($produk->sub_category_id == $sub_kategori->id)
-                                                @if ($produk->sub_category_id != null)
-                                                    <div class="item-list"> {{ $produk->product_name }}
-                                                        <small> &nbsp;
-                                                            Rp
-                                                            {{ number_format($produk->product_selling_price, 0, ',', '.') }}/{{ $produk->satuan->unit_product_name }}</small>
-                                                    </div>
-                                                @endif
-                                            @endif
-                                        @endif
+                                    <th>
+                                        <h4 class="sub_category_name">{{ $sub_kategori->sub_category_name }}</h4>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    @if (array_key_exists($sub_kategori->id, $info_sub_kategori))
                                         @foreach ($data_produk as $produk)
+                                            @if ($produk->sub_category_id == $sub_kategori->id)
+                                                <div class="item-list"> {{ $produk->product_name }}
+                                                    <small> &nbsp;
+                                                        Rp
+                                                        {{ number_format($produk->product_selling_price, 0, ',', '.') }}/{{ $produk->satuan->unit_product_name }}</small>
+                                                </div>
+                                            @endif
                                         @endforeach
                                     @else
+                                        <p class="text-message">Tidak ada produk</p>
                                     @endif
                                 </tr>
                             </table>
                         @endif
                     @endforeach
                 @else
+                    <table>
+                        <tr>
+                            @foreach ($data_produk as $produk)
+                                @if ($produk->sub_category_id == null)
+                                    <div class="item-list"> {{ $produk->product_name }}
+                                        <small> &nbsp;
+                                            Rp
+                                            {{ number_format($produk->product_selling_price, 0, ',', '.') }}/{{ $produk->satuan->unit_product_name }}</small>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </tr>
+                    </table>
                 @endif
             </div>
-        @endforeach --}}
-    </div>
-
-    <div class="container">
-        @foreach ($data_kategori as $kategori)
-            <h3 class="category_name">{{ $kategori->category_name }}</h3>
-            @if ($data_kategori->id != null)
-                @foreach ($data_subkategori as $sub_kategori)
-                    @if ($sub_kategori->category_id == $kategori->id)
-                        <table>
-                            <th>
-                                <h4 class="sub_category_name">{{ $sub_kategori->sub_category_name }}</h4>
-                            </th>
-                        </table>
-                    @else
-                        
-                    @endif
-                @endforeach
-            @else
-                
-            @endif
         @endforeach
     </div>
-
-    <footer class="footer">Katalog Produk per {{ date('d M Y', strtotime(now())) }}</footer>
 </body>
 
 </html>
