@@ -29,9 +29,11 @@
 
         .item-list {
             display: inline-block;
-            width: 30%;
+            width: 45%;
             font-size: .8rem;
             line-height: 1.2rem;
+            margin-left: 0.05cm;
+            margin-top: 0.05cm;
         }
 
         .category_name {
@@ -65,6 +67,7 @@
             border-bottom: 1px solid #000000;
             color: black;
         }
+
         .page-break {
             page-break-after: always;
         }
@@ -84,32 +87,61 @@
     </header>
     <hr>
     <div class="container">
-        @foreach ($data_kategori as $kategori)
+        {{-- @foreach ($data_kategori as $kategori)
             <div class="page-break">
                 <h3 class="category_name">{{ $kategori->category_name }}</h3>
+                @if ($sub_kategori != null)
+                    @foreach ($data_subkategori as $sub_kategori)
+                        @if ($sub_kategori->category_id == $kategori->id)
+                            <table>
+                                <th>
+                                    <h4 class="sub_category_name">{{ $sub_kategori->sub_category_name }}</h4>
+                                </th>
+                                <tr>
+                                    @if ($sub_kategori != null)
+                                        @if ($produk->sub_category_id != null)
+                                            @if ($produk->sub_category_id == $sub_kategori->id)
+                                                @if ($produk->sub_category_id != null)
+                                                    <div class="item-list"> {{ $produk->product_name }}
+                                                        <small> &nbsp;
+                                                            Rp
+                                                            {{ number_format($produk->product_selling_price, 0, ',', '.') }}/{{ $produk->satuan->unit_product_name }}</small>
+                                                    </div>
+                                                @endif
+                                            @endif
+                                        @endif
+                                        @foreach ($data_produk as $produk)
+                                        @endforeach
+                                    @else
+                                    @endif
+                                </tr>
+                            </table>
+                        @endif
+                    @endforeach
+                @else
+                @endif
+            </div>
+        @endforeach --}}
+    </div>
+
+    <div class="container">
+        @foreach ($data_kategori as $kategori)
+            <h3 class="category_name">{{ $kategori->category_name }}</h3>
+            @if ($data_kategori->id != null)
                 @foreach ($data_subkategori as $sub_kategori)
                     @if ($sub_kategori->category_id == $kategori->id)
                         <table>
                             <th>
                                 <h4 class="sub_category_name">{{ $sub_kategori->sub_category_name }}</h4>
                             </th>
-                            <tr>
-                                @foreach ($data_produk as $produk)
-                                    @if ($produk->sub_category_id != null)
-                                        @if ($produk->sub_category_id == $sub_kategori->id)
-                                            @if ($produk->sub_category_id)
-                                                <div class="item-list"> {{ $produk->product_name }}
-                                                    <small> &nbsp; {{ $produk->product_selling_price }}/{{ $produk->satuan->unit_product_name }}</small>
-                                                </div>
-                                            @endif
-                                        @endif
-                                    @endif
-                                @endforeach
-                            </tr>
                         </table>
+                    @else
+                        
                     @endif
                 @endforeach
-            </div>
+            @else
+                
+            @endif
         @endforeach
     </div>
 
