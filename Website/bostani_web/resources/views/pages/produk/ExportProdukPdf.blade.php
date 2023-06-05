@@ -65,6 +65,7 @@
             border-bottom: 1px solid #000000;
             color: black;
         }
+
         .page-break {
             page-break-after: always;
         }
@@ -83,68 +84,6 @@
         <h1>Katalog Produk</h1>
     </header>
     <hr>
-    {{-- @foreach ($data_kategori as $kategori)
-        <div class="container">
-            <h3 class="category_name">{{ $kategori->category_name }}</h3>
-            
-
-                @foreach ($data_subkategori as $sub_kategori)
-                    <?php
-                if ($sub_kategori->category_id == $kategori->id) {
-            ?>
-                
-                            <h4 class="sub_category_name">{{ $sub_kategori->sub_category_name }}</h4>
-                     
-                    @foreach ($data_produk as $produk)
-                    
-
-
-                            <?php
-                        if ($produk->sub_category_id != null) {
-                            if ($produk->sub_category_id == $sub_kategori->id) {
-                                ?>
-                            <div class="item-list"> {{ $produk->product_name }}
-                                <small>{{ $produk->product_selling_price }}/{{ $produk->satuan->unit_product_name }}</small>
-                            </div>
-
-                            <?php
-                            }
-                        } 
-                        else {
-                           
-                    // <div class="item-list">{{ $produk->product_name }}
-                    //     <small>{{ $produk->product_selling_price }}/{{ $produk->satuan->unit_product_name }}</small>
-                    // </div>
-       
-                        }
-                    ?>
-                        
-                    @endforeach
-                    <?php
-                }
-            ?>
-                @endforeach
-
-                <?php
-                if ($kategori->category_name == 'Buah-Buahan') {
-                    ?>
-                @foreach ($data_produk as $produk)
-                    <?php
-                                if ($produk->kategori->category_name == 'Buah-Buahan') {
-                                    ?>
-                    <div class="item-list">{{ $produk->product_name }}
-                        <small>{{ $produk->product_selling_price }}/{{ $produk->satuan->unit_product_name }}</small>
-                    </div>
-                    <?php
-                                }
-                            ?>
-                @endforeach
-                <?php
-                }
-            ?>
-        </div>
-    @endforeach --}}
-
     <div class="container">
         @foreach ($data_kategori as $kategori)
             <div class="page-break">
