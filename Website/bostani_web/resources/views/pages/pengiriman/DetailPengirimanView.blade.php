@@ -8,63 +8,68 @@
                 <tr>
                     <td>Nama Pelanggan</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{$detail_pengiriman->pesanans[0]->customers->customer_name}}</td>
                 </tr>
                 <tr>
                     <td>Tanggal Pengiriman</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{date('d M Y', strtotime($detail_pengiriman->delivery_date))}}</td>
                 </tr>
                 <tr>
                     <td>Alamat Pengiriman</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{$detail_pengiriman->pesanans[0]->customers->customer_address}}</td>
                 </tr>
                 <tr>
                     <td>Kelurahan</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{$detail_pengiriman->pesanans[0]->customers->kelurahan->urban_village_name}}</td>
                 </tr>
                 <tr>
                     <td>Kecamatan</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{$detail_pengiriman->pesanans[0]->customers->kelurahan->kecamatan->district_name}}</td>
                 </tr>
                 <tr>
                     <td>Kota</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{$detail_pengiriman->pesanans[0]->customers->kelurahan->kecamatan->kota->city_name}}</td>
                 </tr>
                 <tr>
                     <td>No Telepon</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{$detail_pengiriman->pesanans[0]->customers->customer_phone}}</td>
                 </tr>
                 <tr>
                     <td>Metode Pembayaran</td>
                     <td>:</td>
-                    <td></td>
+                    <td>{{$detail_pengiriman->pesanans[0]->payment_method}}</td>
                 </tr>
                 <tr>
                     <td>Ongkos Kirim</td>
                     <td>:</td>
-                    <td></td>
+                    <td>Rp{{ number_format($detail_pengiriman->pesanans[0]->shipping_cost, 2, ',', '.') }}</td>
                 </tr>
                 <tr>
                     <td>Status Pengiriman</td>
                     <td>:</td>
-                    <td>
-                        <select name="delivery_status" data-te-select-init>
+                    <td>{{$delivery_status[0]->delivery_status_name}}
+                        <!-- <select name="delivery_status" data-te-select-init>
                             <option value=""></option>
-                            {{-- <option value="{{ $order->order_status_id }}">
-                                {{ $order->status_pesanan->order_status_name }}</option>
-                            @foreach ($order_status as $status)
+                            {{-- <option value="{{ $detail_pengiriman->statusPengiriman->delivery_status_id }}">
+                                {{ $detail_pengiriman->statusPengiriman->delivery_status_name }}</option>
+                            @foreach ($delivery_status as $status)
                                 <option value="{{ $status->id }}">
-                                    {{ $status->order_status_name }}</option>
+                                    {{ $status->delivery_status_name }}</option>
                             @endforeach --}}
                         </select>
-                        <input type="hidden" name="order_id" value="">
-                    </td>
+                        <input type="hidden" name="delivery_id" value="{{ $detail_pengiriman->id }}">
+                    </td> -->
+                </tr>
+                <tr>
+                    <td>Nama Driver</td>
+                    <td>:</td>
+                    <td>{{$detail_pengiriman->drivers->driver_name}}</td>
                 </tr>
             </table>
 
