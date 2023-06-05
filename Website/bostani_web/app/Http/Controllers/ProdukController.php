@@ -145,6 +145,7 @@ class ProdukController extends Controller
         $data_kategori = $kategori->getKategori();
         $data_subkategori = SubKategoriModel::all();
         
+        dd( $data_kategori);
         $pdf = Pdf::loadView('pages.produk.ExportProdukPdf', compact(['data_produk', 'data_kategori', 'data_subkategori']));
         return $pdf->stream('invoice.pdf');
     }
