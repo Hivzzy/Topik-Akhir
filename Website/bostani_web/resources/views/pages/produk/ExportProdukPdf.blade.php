@@ -65,7 +65,6 @@
             border-bottom: 1px solid #000000;
             color: black;
         }
-
         .page-break {
             page-break-after: always;
         }
@@ -100,7 +99,7 @@
                                         @if ($produk->sub_category_id == $sub_kategori->id)
                                             @if ($produk->sub_category_id)
                                                 <div class="item-list"> {{ $produk->product_name }}
-                                                    <small>{{ $produk->product_selling_price }}/{{ $produk->satuan->unit_product_name }}</small>
+                                                    <small> &nbsp; {{ $produk->product_selling_price }}/{{ $produk->satuan->unit_product_name }}</small>
                                                 </div>
                                             @endif
                                         @endif
