@@ -79,7 +79,7 @@
                                         <th scope="col" class=" px-6 py-2">Harga Satuan</th>
                                         <th scope="col" class=" px-6 py-2">Jumlah</th>
                                         <th scope="col" class=" px-6 py-2">Sub Total Harga</th>
-                                        {{-- <th scope="col" class=" px-6 py-2">Aksi</th> --}}
+                                        {{-- <th scope="col" class=" px-6 py-2">Keterangan</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -93,16 +93,14 @@
                                         <tr class="">
                                             <td class="px-6 py-2">{{ $item->produk->product_name }}</td>
                                             <td class="px-6 py-2">{{ $item->produk->satuan->unit_product_name }}</td>
-                                            <td class="px-6 py-2 text-right">Rp{{ number_format($item->item_selling_price, 2, ',', '.') }}</td>
+                                            <td class="px-6 py-2 text-right">
+                                                Rp{{ number_format($item->item_selling_price, 2, ',', '.') }}</td>
                                             <td class="px-6 py-2">{{ $item->item_size }}</td>
-                                            <td class="px-6 py-2 text-right">Rp{{ number_format($item->item_selling_price * $item->item_size, 2, ',', '.') }}
+                                            <td class="px-6 py-2 text-right">
+                                                Rp{{ number_format($item->item_selling_price * $item->item_size, 2, ',', '.') }}
                                             </td>
                                             {{-- <td class="px-6 py-2">
-                                                <a href="#"
-                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700"
-                                                    data-confirm-delete="true">
-                                                    Hapus
-                                                </a>
+                                                {{ $item->shop_item_id != null ? $item->belanja->shop_item_information : '' }}
                                             </td> --}}
                                         </tr>
                                     @endforeach
@@ -144,7 +142,7 @@
                         dataType: 'json',
                         success: function(response) {
                             // console.log(data);
-                            swal("Success!", ""+response.message+"", "success");
+                            swal("Success!", "" + response.message + "", "success");
                         },
                     });
                 }

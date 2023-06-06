@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BelanjaModel;
 use App\Models\ProdukModel;
 use App\Models\PesananModel;
 use App\Models\ItemPesananModel;
@@ -95,5 +96,46 @@ class ItemPesananController extends Controller
             Alert::error('Error', 'ItemPesanan gagal ditambahkan');
             return redirect()->back();
         }
+    }
+
+    public function createKeteranganItemBelanja(Request $request, $id)
+    {
+        $cek = ItemPesananModel::find($id);
+
+        if ($cek->shop_item_id != null) {
+            toast('Produk sudah memiliki keterangan', 'error');
+            return redirect()->back();
+        }
+
+        $belanja = new BelanjaModel();
+        $item = new ItemPesananModel();
+
+        $id_info = $belanja->createKeteranganItemBelanja($request->all()['product_information'], $id);
+        $item->updateShopId($id, $id_info);
+
+        toast('Keterangan berhasil ditambahkan', 'success');
+        return redirect('/belanja');
+    }
+
+    public function updateKeteranganItemBelanja(Request $request, $id)
+    {
+        $belanja = new BelanjaModel();
+        $belanja->updateKeteranganItemBelanja($request->all()['product_information'], $id);
+        toast('Keterangan berhasil diperbarui', 'success');
+        return redirect('/belanja');
+    }
+
+    public function deleteKeteranganItemBelanja($id)
+    {
+        $order_item_id = BelanjaModel::find($id);
+
+        $belanja = new BelanjaModel();
+        $item = new ItemPesananModel();
+
+        $belanja->deleteKeteranganItemBelanja($id);
+        $item->updateShopId($order_item_id->order_item_id, null);
+
+        toast('Keterangan berhasil dihapus', 'success');
+        return redirect('/belanja');
     }
 }

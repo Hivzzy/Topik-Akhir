@@ -53,7 +53,7 @@ class ItemPesananModel extends Model
 
     public function getItemBelanja($id_pesanan)
     {
-        $item_belanja = ItemPesananModel::whereIn('order_id', $id_pesanan)->get();
+        $item_belanja = ItemPesananModel::whereIn('order_id', $id_pesanan)->orderBy('id', 'ASC')->get();
         return $item_belanja;
     }
 
@@ -68,6 +68,13 @@ class ItemPesananModel extends Model
         return $item_belanja;
     }
 
+    static function updateShopId($order_item_id, $shop_id)
+    {
+        ItemPesananModel::where('id', $order_item_id)->update([
+            'shop_item_id' => $shop_id,
+        ]);
+    }
+
     public function pesanan()
     {
         return $this->belongsTo(PesananModel::class,'order_id');
@@ -78,6 +85,10 @@ class ItemPesananModel extends Model
         return $this->belongsTo(ProdukModel::class,'product_id');
     }
 
+    public function belanja()
+    {
+        return $this->hasOne(BelanjaModel::class, 'order_item_id');
+    }
 }
 
 ?>

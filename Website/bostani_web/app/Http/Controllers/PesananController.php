@@ -241,6 +241,7 @@ class PesananController extends Controller
         $data = $item_belanja->getItemBelanja($id_pesanan);
         $sum_item = $item_belanja->getTotalItem($id_pesanan);
 
+        // dd($data);
         return view('pages.belanja.BelanjaView', [
             'title' => 'Daftar Belanja',
             'active' => 'shop-item',

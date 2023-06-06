@@ -27,9 +27,11 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td class="px-6 py-2">{{ $item->product_name }}</td>
                                             <td class="px-6 py-2">{{ $item->unit_product_name }}</td>
-                                            <td class="px-6 py-2 text-right">Rp{{ number_format($item->item_purchase_price, 2, ',', '.') }}</td>
+                                            <td class="px-6 py-2 text-right">
+                                                Rp{{ number_format($item->item_purchase_price, 2, ',', '.') }}</td>
                                             <td class="px-6 py-2">{{ $item->jumlah }}</td>
-                                            <td class="px-6 py-2 text-right">Rp{{ number_format($item->item_purchase_price * $item->jumlah, 2, ',', '.') }}
+                                            <td class="px-6 py-2 text-right">
+                                                Rp{{ number_format($item->item_purchase_price * $item->jumlah, 2, ',', '.') }}
                                             </td>
                                         </tr>
                                     @endforeach
@@ -53,9 +55,10 @@
                                         <th>No</th>
                                         <th>Nama Pemesan</th>
                                         <th>Nama Item</th>
-                                        <th>Jumlah</th>   
-                                        <th>Check</th>
+                                        <th>Jumlah</th>
+                                        {{-- <th>Check</th> --}}
                                         <th>Keterangan</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -69,14 +72,27 @@
                                             @endforeach
                                             <td>{{ $item->produk->product_name }}</td>
                                             <td>{{ $item->item_size }}</td>
-                                            <td>
+                                            {{-- <td>
                                                 <input type="checkbox" name="check" id="check">
+                                            </td> --}}
+                                            <td>
+                                                {{ $item->shop_item_id != null ? $item->belanja->shop_item_information : '' }}
                                             </td>
                                             <td>
-                                                <form action="#" method="post">
-                                                    <input type="text" class="p-2 bg-gray-100 rounded text-xs">
-                                                    {{-- <input type="submit" value="Tambah" class="bg-info rounded text-xs text-white p-2"> --}}
-                                                </form>
+                                                <a href="#" data-te-toggle="modal"
+                                                    data-te-target="#addInformationModal{{ $item->id }}"
+                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-info-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-info-700">
+                                                    Tambah Keterangan
+                                                </a>
+                                                <a href="#" data-te-toggle="modal"
+                                                    data-te-target="#editInformationModal{{ $item->shop_item_id }}"
+                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700 {{ $item->shop_item_id == null ? 'pointer-events-none' : '' }}">
+                                                    Edit Keterangan
+                                                </a>
+                                                <a href="/keterangan/hapus/{{ $item->shop_item_id }}"
+                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700 {{ $item->shop_item_id == null ? 'pointer-events-none' : '' }}">
+                                                    Hapus Keterangan
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -88,6 +104,7 @@
             </div>
         </div>
     </div>
+    @include('pages.belanja.KeteranganModal')
 @endsection
 
 @section('script')

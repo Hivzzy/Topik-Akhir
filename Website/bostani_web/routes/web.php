@@ -80,6 +80,9 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
     //Belanja
     Route::get('/belanja', [PesananController::class, 'getListBelanja']);
+    Route::post('/keterangan/tambah/{id}', [ItemPesananController::class, 'createKeteranganItemBelanja']);
+    Route::post('/keterangan/edit/{id}', [ItemPesananController::class, 'updateKeteranganItemBelanja']);
+    Route::get('/keterangan/hapus/{id}', [ItemPesananController::class, 'deleteKeteranganItemBelanja']);
 
     //Pengiriman
     Route::get('/pengiriman', [PengirimanController::class, 'index']);

@@ -49,7 +49,8 @@
             <td colspan="4">
                 <table cellpadding="2">
                     <tr>
-                        <th class="text-center title" colspan="3">Invoice - {{ date('d M Y', strtotime($detail_pesanan->delivery_date)) }}
+                        <th class="text-center title" colspan="3">Invoice -
+                            {{ date('d M Y', strtotime($detail_pesanan->delivery_date)) }}
                         </th>
                     </tr>
                     <tr>
@@ -96,7 +97,7 @@
             <th>Jumlah</th>
             <th>Harga</th>
             <th>Sub Total</th>
-            <th>Keterangan</th>
+            {{-- <th>Keterangan</th> --}}
         </tr>
         @php
             $total_harga = 0;
@@ -113,7 +114,7 @@
                 <td class="text-right">Rp{{ number_format($item->item_selling_price, 2, ',', '.') }}</td>
                 <td class="text-right">Rp{{ number_format($item->item_selling_price * $item->item_size, 2, ',', '.') }}
                 </td>
-                <td></td>
+                {{-- <td>{{ $item->shop_item_id != null ? $item->belanja->shop_item_information : '' }}</td> --}}
             </tr>
         @endforeach
         <tr>
