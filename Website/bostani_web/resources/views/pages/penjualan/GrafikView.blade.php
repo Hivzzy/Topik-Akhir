@@ -35,22 +35,6 @@
             </div>
         </div>
 
-        {{-- Line Chart --}}
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div class="bg-white p-4 space-y-4 rounded shadow-md">
-                <div class="text-xl font-medium">Grafik Pendapatan Harian</div>
-                <div class="mx-auto w-3/5 overflow-hidden">
-                    <canvas id="grafik-pendapatan-harian"></canvas>
-                </div>
-            </div>
-            <div class="bg-white p-4 space-y-4 rounded shadow-md">
-                <div class="text-xl font-medium">Grafik Pendapatan Bulanan</div>
-                <div class="mx-auto w-3/5 overflow-hidden">
-                    <canvas id="grafik-pendapatan-bulanan"></canvas>
-                </div>
-            </div>
-        </div>
-
         {{-- Bar Chart --}}
         <div class="grid grid-cols-1">
             <div class="bg-white p-4 space-y-4 rounded shadow-md">
@@ -61,9 +45,10 @@
             </div>
         </div>
 
-        <button type="button" onclick="history.go(-1);"
-            class="inline-block rounded bg-info px-6 pb-2 pt-2.5 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#54b4d3] transition duration-150 ease-in-out hover:bg-info-600 hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:bg-info-600 focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:outline-none focus:ring-0 active:bg-info-700 active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(84,180,211,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)]">
-            Kembali
-        </button>
+        <a href="/penjualan"
+            class="flex gap-1 items-center w-fit inline-block rounded bg-info p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#54b4d3] transition duration-150 ease-in-out hover:bg-info-600 hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:bg-info-600 focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:outline-none focus:ring-0 active:bg-info-700 active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(84,180,211,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)]">
+            <x-icons.arrow-circle-left />
+            <span>Kembali</span>
+        </a>
     </div>
 @endsection

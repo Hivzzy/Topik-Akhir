@@ -32,41 +32,41 @@
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
             <div class="overflow-hidden">
-                <table class="min-w-full font-light">
-                    <thead class="border-b bg-neutral-800 font-medium text-left text-white dark:bg-neutral-900">
+                <table class="tabel-penjualan min-w-full">
+                    <thead class="bg-neutral-800 font-medium text-left text-white">
                         <tr>
-                            <th scope="col" class="px-6 py-4">Tanggal Transaksi</th>
-                            <th scope="col" class="px-6 py-4">Pendapatan</th>
-                            <th scope="col" class="px-6 py-4">Pengeluaran</th>
-                            <th scope="col" class="px-6 py-4">Keuntungan</th>
+                            <th>Tanggal Transaksi</th>
+                            <th>Pendapatan</th>
+                            <th>Modal Belanja</th>
+                            <th>Profit</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="border-b">
-                            <td class="whitespace-nowrap px-6 py-4">21 Maret 2023</td>
-                            <td class="whitespace-nowrap px-6 py-4">Rp 1.500.000</td>
-                            <td class="whitespace-nowrap px-6 py-4">Rp 1.000.000</td>
-                            <td class="whitespace-nowrap px-6 py-4">Rp 500.000</td>
+                        <tr>
+                            <td>21 Maret 2023</td>
+                            <td>Rp 1.500.000</td>
+                            <td>Rp 1.000.000</td>
+                            <td>Rp 500.000</td>
                         </tr>
-                        <tr class="border-b">
-                            <td class="whitespace-nowrap px-6 py-4">22 Maret 2023</td>
-                            <td class="whitespace-nowrap px-6 py-4">Rp 1.500.000</td>
-                            <td class="whitespace-nowrap px-6 py-4">Rp 1.000.000</td>
-                            <td class="whitespace-nowrap px-6 py-4">Rp 500.000</td>
+                        <tr>
+                            <td>22 Maret 2023</td>
+                            <td>Rp 1.500.000</td>
+                            <td>Rp 1.000.000</td>
+                            <td>Rp 500.000</td>
                         </tr>
-                        <tr class="border-b">
-                            <td class="whitespace-nowrap px-6 py-4">23 Maret 2023</td>
-                            <td class="whitespace-nowrap px-6 py-4">Rp 1.500.000</td>
-                            <td class="whitespace-nowrap px-6 py-4">Rp 1.000.000</td>
-                            <td class="whitespace-nowrap px-6 py-4">Rp 500.000</td>
+                        <tr>
+                            <td>23 Maret 2023</td>
+                            <td>Rp 1.500.000</td>
+                            <td>Rp 1.000.000</td>
+                            <td>Rp 500.000</td>
                         </tr>
                     </tbody>
-                    <tfoot class="border-b text-lg font-semibold bg-gray-100">
-                        <tr class="border-b">
-                            <td colspan="1" class="whitespace-nowrap px-6 py-4">Total</td>
-                            <td class="whitespace-nowrap px-6 py-4">Rp 4.500.000</td>
-                            <td class="whitespace-nowrap px-6 py-4">Rp 3.000.000</td>
-                            <td class="whitespace-nowrap px-6 py-4">Rp 1.500.000</td>
+                    <tfoot class="text-lg font-semibold bg-gray-100">
+                        <tr>
+                            <td colspan="1">Total</td>
+                            <td>Rp 4.500.000</td>
+                            <td>Rp 3.000.000</td>
+                            <td>Rp 1.500.000</td>
                         </tr>
                     </tfoot>
                 </table>
