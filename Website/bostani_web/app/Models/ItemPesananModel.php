@@ -68,7 +68,7 @@ class ItemPesananModel extends Model
         return $item_belanja;
     }
 
-    static function updateShopId($order_item_id, $shop_id)
+    static function updateKeteranganProdukPesanan($order_item_id, $shop_id)
     {
         ItemPesananModel::where('id', $order_item_id)->update([
             'shop_item_id' => $shop_id,

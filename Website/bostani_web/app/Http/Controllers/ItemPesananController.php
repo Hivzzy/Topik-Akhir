@@ -110,8 +110,8 @@ class ItemPesananController extends Controller
         $belanja = new BelanjaModel();
         $item = new ItemPesananModel();
 
-        $id_info = $belanja->createKeteranganItemBelanja($request->all()['product_information'], $id);
-        $item->updateShopId($id, $id_info);
+        $id_item = $belanja->createKeteranganItemBelanja($request->all()['product_information'], $id);
+        $item->updateKeteranganProdukPesanan($id, $id_item);
 
         toast('Keterangan berhasil ditambahkan', 'success');
         return redirect('/belanja');
@@ -133,7 +133,7 @@ class ItemPesananController extends Controller
         $item = new ItemPesananModel();
 
         $belanja->deleteKeteranganItemBelanja($id);
-        $item->updateShopId($order_item_id->order_item_id, null);
+        $item->updateKeteranganProdukPesanan($order_item_id->order_item_id, null);
 
         toast('Keterangan berhasil dihapus', 'success');
         return redirect('/belanja');
