@@ -81,6 +81,56 @@ class PesananModel extends Model
         return $belanja;
     }
 
+    public function getPenjualanHarian($tanggal)
+    {
+        $penjualan_harian = PesananModel::select(PesananModel::raw('orders.id, orders.delivery_date, customers.customer_name, SUM(order_items.item_selling_price * order_items.item_size) AS pendapatan, SUM(order_items.item_purchase_price * order_items.item_size) AS modal_belanja'))
+            ->join('order_items', 'order_items.order_id', '=', 'orders.id')
+            ->join('deliveries', 'deliveries.order_id', '=', 'orders.id')
+            ->join('customers', 'customers.id', '=', 'orders.customer_id')
+            ->where([
+                ['orders.delivery_date', '=', $tanggal],
+                ['orders.order_status_id', '=', 2],
+                ['deliveries.delivery_status_id', '=', 2],
+            ])
+            ->groupBy(['orders.id', 'customers.customer_name'])
+            ->get();
+
+        return $penjualan_harian;
+    }
+
+    public function getPenjualanBulanan($bulan, $tahun)
+    {
+        $penjualan_bulanan = PesananModel::select(PesananModel::raw('orders.delivery_date, COUNT(orders.id) AS jumlah_pesanan, SUM(order_items.item_selling_price * order_items.item_size) AS pendapatan, SUM(order_items.item_purchase_price * order_items.item_size) AS modal_belanja'))
+            ->join('order_items', 'order_items.order_id', '=', 'orders.id')
+            ->join('deliveries', 'deliveries.order_id', '=', 'orders.id')
+            ->whereMonth('orders.delivery_date', $bulan)
+            ->whereYear('orders.delivery_date', $tahun)
+            ->where([
+                ['orders.order_status_id', '=', 2],
+                ['deliveries.delivery_status_id', '=', 2],
+            ])
+            ->groupBy('orders.delivery_date')
+            ->get();
+
+        return $penjualan_bulanan;
+    }
+
+    public function getPenjualanPeriodeWaktu($tanggal_awal, $tanggal_akhir)
+    {
+        $penjualan_periode = PesananModel::select(PesananModel::raw('orders.delivery_date, COUNT(orders.id) AS jumlah_pesanan, SUM(order_items.item_selling_price * order_items.item_size) AS pendapatan, SUM(order_items.item_purchase_price * order_items.item_size) AS modal_belanja'))
+            ->join('order_items', 'order_items.order_id', '=', 'orders.id')
+            ->join('deliveries', 'deliveries.order_id', '=', 'orders.id')
+            ->whereBetween('orders.delivery_date', [$tanggal_awal, $tanggal_akhir])
+            ->where([
+                ['orders.order_status_id', '=', 2],
+                ['deliveries.delivery_status_id', '=', 2],
+            ])
+            ->groupBy('orders.delivery_date')
+            ->get();
+
+        return $penjualan_periode;
+    }
+
     public function users()
     {
         return $this->belongsTo(UserModel::class, 'user_id');

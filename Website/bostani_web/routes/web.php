@@ -91,6 +91,9 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     // Penjualan
     Route::get('/penjualan', [PenjualanController::class, 'displayPenjualan']);
     Route::get('/grafik-penjualan', [PenjualanController::class, 'displayGrafikPenjualan']);
+    Route::get('/penjualan/harian/{tanggal}', [PenjualanController::class, 'getDataPenjualanHarian']);
+    Route::get('/penjualan/bulanan/{tanggal}', [PenjualanController::class, 'getDataPenjualanBulanan']);
+    Route::get('/penjualan/periode/{tanggal_awal}/{tanggal_akhir}', [PenjualanController::class, 'getDataPenjualanPeriodeWaktu']);
     
     // Pelanggan
     Route::get('/pelanggan', [PelangganController::class, 'index']);
