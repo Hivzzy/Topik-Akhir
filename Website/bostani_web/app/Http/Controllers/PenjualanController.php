@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ItemPesananModel;
 use App\Models\PesananModel;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 
 class PenjualanController extends Controller
 {
@@ -30,10 +31,10 @@ class PenjualanController extends Controller
     {
         $bulan = date('m', strtotime($tanggal));
         $tahun = date('Y', strtotime($tanggal));
-        
+
         $penjualan = new PesananModel();
         $penjualan_bulanan = $penjualan->getPenjualanBulanan($bulan, $tahun);
-        
+
         return view('pages.penjualan.TabelPenjualanBulanan')->with([
             'penjualan_bulanan' => $penjualan_bulanan,
         ]);
@@ -72,5 +73,20 @@ class PenjualanController extends Controller
             'title' => 'Grafik Penjualan',
             'active' => 'sell-item'
         ]);
+    }
+
+    public function createLaporanPenjualanHarian($tanggal)
+    {
+        $data_penjualan = PenjualanController::getPenjualanHarian($tanggal);
+        $item_penjualan = $data_penjualan[1];
+
+        // Ambil gambar
+        $path = base_path('public/assets/img/logo_bostani.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data = file_get_contents($path);
+        $pict = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
+        $pdf = FacadePdf::loadView('pages.penjualan.LaporanPenjualanHarian', compact(['tanggal', 'item_penjualan', 'pict']));
+        return $pdf->setPaper('a4', 'landscape')->stream();
     }
 }

@@ -81,3 +81,11 @@ function getPenjualanPeriode(tanggal_awal, tanggal_akhir) {
         },
     });
 }
+
+$("#btn-daily-pdf").click(function () {
+    var tanggal = $("#tanggal_penjualan").val();
+    if (tanggal === "") {
+        tanggal = new Date().toISOString().slice(0, 10);
+    }
+    window.location.href = "/laporan/harian/rekap/" + tanggal + "";
+});

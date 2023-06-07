@@ -94,6 +94,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/penjualan/harian/{tanggal}', [PenjualanController::class, 'getDataPenjualanHarian']);
     Route::get('/penjualan/bulanan/{tanggal}', [PenjualanController::class, 'getDataPenjualanBulanan']);
     Route::get('/penjualan/periode/{tanggal_awal}/{tanggal_akhir}', [PenjualanController::class, 'getDataPenjualanPeriodeWaktu']);
+    Route::get('/laporan/harian/rekap/{tanggal}', [PenjualanController::class, 'createLaporanPenjualanHarian']);
     
     // Pelanggan
     Route::get('/pelanggan', [PelangganController::class, 'index']);
