@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('customer_name', 32);
             $table->string('customer_phone', 15);
             $table->string('customer_address');
-            $table->string('customer_postal_code', 5);
+            $table->string('customer_postal_code', 5)->nullable();
         });
     }
 
