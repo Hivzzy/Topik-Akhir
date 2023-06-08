@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RoleModel;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -139,4 +140,59 @@ class UserController extends Controller
             return redirect()->back();
         }
     }
+
+    public function displayEditSelfUser()
+    {
+        $now_userid = Auth::user()->id;
+        $now_userrole = Auth::user()->role_id;
+
+        $user = new UserModel();
+        $detail_user = $user->getDataUser($now_userid);
+
+        $role = new RoleModel();
+        $data_role = $role->getRole($now_userrole);
+
+        return view('pages.user.EditSelfUserView', [
+            'title' => 'Edit User',
+            'active' => 'user-account',
+            'user' => $detail_user,
+            'roles' => $data_role,
+        ]);
+    }
+
+    public function updateSelfUser(Request $request)
+    {
+        $now_userid = Auth::user()->id;
+        $validator = Validator::make($request->all(), [
+            'nama_user' => 'required',
+            'role' => 'required',
+            'username' => 'required|min:8|max:16',
+            'password' => [
+                'required', 'max:16',
+                Password::min(8)
+                    ->letters()
+                    ->mixedCase()
+                    ->symbols()
+                // ->uncompromised()   
+            ],
+        ]);
+
+        if ($validator->fails()) {
+            toast($validator->messages()->all()[0], 'error');
+            return back();
+        }
+
+        $user = new UserModel();
+        $edit_user = $user->updateUser($request->all(), $now_userid);
+
+        if ($edit_user) {
+            Alert::success('Success', 'Data user berhasil diperbarui');
+            return redirect('/kelola-akun');
+        } else {
+            Alert::error('Error', 'Data user gagal diperbarui');
+            return redirect()->back();
+        }
+    }
+    
+    
 }

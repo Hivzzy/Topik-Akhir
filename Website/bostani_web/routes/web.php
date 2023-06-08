@@ -1,20 +1,22 @@
 <?php
 
+use App\Mail\SendEmail;
+use GuzzleHttp\Promise\Create;
+use App\Models\SubKategoriModel;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\PesananController;
+use App\Http\Controllers\WilayahController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PelangganController;
 use App\Http\Controllers\PenjualanController;
-use App\Http\Controllers\PesananController;
-use App\Http\Controllers\ItemPesananController;
 use App\Http\Controllers\PengirimanController;
-use App\Http\Controllers\ProdukController;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ItemPesananController;
 use App\Http\Controllers\SubKategoriController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\WilayahController;
-use App\Models\SubKategoriModel;
-use GuzzleHttp\Promise\Create;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +37,9 @@ Route::redirect('/', 'login');
 
 Route::get('/login', [AuthController::class, 'userLogin'])->name('login');
 Route::post('/user/login', [AuthController::class, 'authenticate']);
+
+Route::get('/forget',[AuthController::class, 'forget' ]);
+Route::post('/send-email',[AuthController::class, 'authenticateForget']);
 
 Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/dashboard', [AuthController::class, 'dashboard']);
@@ -114,4 +119,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::post('/akun/edit/{id}', [UserController::class, 'updateUser']);
     Route::delete('/akun/hapus/{id}', [UserController::class, 'deleteUser']);
     Route::get('/role', [RoleController::class, 'displayRole']);
+
+    Route::get('/akun/edit-user', [UserController::class, 'displayEditSelfUser']);
+    Route::post('/akun/edit-user', [UserController::class, 'updateSelfUser']);
 });

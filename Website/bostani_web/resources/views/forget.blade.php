@@ -55,10 +55,6 @@
             align-items: center;
             height: 100vh;
         }
-
-        a {
-            padding-left: 6rem;
-        }
     </style>
 </head>
 
@@ -73,34 +69,19 @@
                 <div class="col-lg-7 px-5 pt-5">
                     <h1 class="font-weight-bold font-inter py-3">Welcome</h1>
                     <h4 class="col-lg-7">Login</h4>
-                    <form method="post" action="/user/login">
+                    <form method="post" action="/send-email">
                         @csrf
                         <div class="row no-gutters col-lg-7">
                             <input id="username" name="username" class="form-control my-4 p-2" type="text"
                                 name="" placeholder="Username">
                         </div>
-                        <div class="row no-gutters col-lg-7">
-                            <input id="password" name="password" class="form-control mb-3 p-2" type="password"
-                                name="" placeholder="******">
-                        </div>
-                        @if (session()->has('success'))
-                            <div class="ml-3 col-lg-7 alert alert-success form-control p-2">
-                                {!! html_entity_decode(session()->get('success')) !!}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @endif
                         @error('username')
                             <div id="error" class="row no-gutters col-lg-7">{{ $message }}</div>
                         @enderror
                         <div class="col-lg-7">
-                            <button class="btn1 mt-3 mb-5 " type="submit">Login</button>
+                            <button class="btn1 mt-3 mb-5 " type="submit">Send Mail</button>
                         </div>
                     </form>
-                    <div class="col-lg-9 no-gutters">
-                        <a href="/forget" class="">Forget Password</a>
-                    </div>
                 </div>
             </div>
         </div>

@@ -33,7 +33,7 @@ class PengirimanModel extends Model
             'delivery_date' => $pengiriman['tanggal_pengiriman'],
         ]);
 
-        return $add_pesanan;
+        return $add_pengiriman;
     }
 
     public function updatePengiriman($pengiriman, $id)

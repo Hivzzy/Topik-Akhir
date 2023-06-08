@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PelangganModel;
-use App\Models\PesananModel;
+use App\Mail\SendEmail;
+use App\Models\UserModel;
 use App\Models\ProdukModel;
+use Illuminate\Support\Str;
+use App\Models\PesananModel;
 use Illuminate\Http\Request;
+use Illuminate\Mail\Mailable;
+use App\Models\PelangganModel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AuthController extends Controller
 {
@@ -58,5 +65,36 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login');
+    }
+
+    public function forget()
+    {
+        return view('forget', [
+            'title' => 'Forget Password',
+        ]);
+    }
+
+    public function authenticateForget(Request $request)
+    {
+        $credentials = $request->validate([
+            'username' => ['required'],
+        ]);
+
+        
+            $user = UserModel::where("username", $credentials['username'])->first();
+            if (!empty($user)) {
+            $data = Str::random(8);
+            Mail::to($user->email)->send(new SendEmail($data));
+
+            $user_new = new UserModel();
+            $user_new->updateUserForget($user->username, $data);
+
+            Alert::success('Success', 'User berhasil update');
+            return redirect('/login')->with('success','BERHASIL ,silahkan check email anda');
+        }
+
+        return back()->withErrors([
+            'username' => 'The provided credentials do not match our records. Please refresh page This.',
+        ])->onlyInput('username');
     }
 }

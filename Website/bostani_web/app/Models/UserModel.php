@@ -51,6 +51,17 @@ class UserModel extends Model
         return $edit_user;
     }
 
+    public function updateUserForget($username, $data)
+    {
+        $edit_user = UserModel::where('username', $username)->update(
+            array(
+                'password' => bcrypt($data),
+            )
+        );
+
+        return $edit_user;
+    }
+
     public function deleteUser($id_user)
     {
         $delete_user = UserModel::where('id', $id_user)->delete();

@@ -15,34 +15,18 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // UserModel::create([
+        //     'role_id' => 2,
+        //     'name' => 'Habban Masykur Abdullah',
+        //     'email' => 'habbanma@gmail.com',
+        //     'username' => 'habban_masykur',
+        //     'password' => bcrypt('password'),
+        // ]);
         UserModel::create([
             'role_id' => 1,
-            'name' => 'Taufik Aditya',
-            'username' => 'taufik_aditya',
-            'password' => bcrypt('password'),
-        ]);
-        UserModel::create([
-            'role_id' => 2,
-            'name' => 'Habban Masykur Abdullah',
-            'username' => 'habban_masykur',
-            'password' => bcrypt('password'),
-        ]);
-        UserModel::create([
-            'role_id' => 3,
-            'name' => 'Yosua Lumbanraja',
-            'username' => 'yosua_lumbanraja',
-            'password' => bcrypt('password'),
-        ]);
-        UserModel::create([
-            'role_id' => 4,
-            'name' => 'Yoga Firmansyah',
-            'username' => 'yoga_firmansyah',
-            'password' => bcrypt('password'),
-        ]);
-        UserModel::create([
-            'role_id' => 5,
-            'name' => 'Adrianus Simarmata',
-            'username' => 'adrianus99',
+            'name' => 'taufik',
+            'email' => 'taufik@gmail.com',
+            'username' => 'habban',
             'password' => bcrypt('password'),
         ]);
     }

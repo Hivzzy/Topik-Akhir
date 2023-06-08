@@ -72,6 +72,13 @@
                 <span class="ml-2 text-sm font-medium">Kelola Akun</span>
             </a>
         </li>
+        <li class="relative">
+            <a class="{{ $active === 'user-account' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
+                href="/akun/edit-user">
+                <x-icons.users />
+                <span class="ml-2 text-sm font-medium">Akun</span>
+            </a>
+        </li>
     </ul>
 </nav>
 <!-- Sidenav -->
