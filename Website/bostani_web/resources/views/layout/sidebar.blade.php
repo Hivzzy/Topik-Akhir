@@ -16,62 +16,71 @@
                 <span class="ml-2 text-sm font-medium">Dashboard</span>
             </a>
         </li>
-        <li class="relative">
-            <a class="{{ $active === 'product' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
-                href="/produk">
-                <x-icons.cube />
-                <span class="ml-2 text-sm font-medium">Data Produk</span>
-            </a>
-        </li>
-        <li class="relative">
-            <a class="{{ $active === 'category' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
-                href="/kategori">
-                <x-icons.collection />
-                <span class="ml-2 text-sm font-medium">Data Kategori</span>
-            </a>
-        </li>
-        <li class="relative">
-            <a class="{{ $active === 'order' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
-                href="/pesanan">
-                <x-icons.shopping-cart />
-                <span class="ml-2 text-sm font-medium">Data Pesanan</span>
-            </a>
-        </li>
-        <li class="relative">
-            <a class="{{ $active === 'shop-item' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
-                href="/belanja">
-                <x-icons.shopping-bag />
-                <span class="ml-2 text-sm font-medium">Data Belanja</span>
-            </a>
-        </li>
-        <li class="relative">
-            <a class="{{ $active === 'deliveries' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
-                href="/pengiriman">
-                <x-icons.truck />
-                <span class="ml-2 text-sm font-medium">Data Pengiriman</span>
-            </a>
-        </li>
-        <li class="relative">
-            <a class="{{ $active === 'sell-item' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
-                href="/penjualan">
-                <x-icons.chart-square-bar />
-                <span class="ml-2 text-sm font-medium">Data Penjualan</span>
-            </a>
-        </li>
-        <li class="relative">
-            <a class="{{ $active === 'customer' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
-                href="/pelanggan">
-                <x-icons.user-group />
-                <span class="ml-2 text-sm font-medium">Data Pelanggan</span>
-            </a>
-        </li>
-        <li class="relative">
-            <a class="{{ $active === 'user-account' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
-                href="/kelola-akun">
-                <x-icons.users />
-                <span class="ml-2 text-sm font-medium">Kelola Akun</span>
-            </a>
-        </li>
+
+        @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+            <li class="relative">
+                <a class="{{ $active === 'product' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
+                    href="/produk">
+                    <x-icons.cube />
+                    <span class="ml-2 text-sm font-medium">Data Produk</span>
+                </a>
+            </li>
+            <li class="relative">
+                <a class="{{ $active === 'category' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
+                    href="/kategori">
+                    <x-icons.collection />
+                    <span class="ml-2 text-sm font-medium">Data Kategori</span>
+                </a>
+            </li>
+            <li class="relative">
+                <a class="{{ $active === 'order' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
+                    href="/pesanan">
+                    <x-icons.shopping-cart />
+                    <span class="ml-2 text-sm font-medium">Data Pesanan</span>
+                </a>
+            </li>
+            <li class="relative">
+                <a class="{{ $active === 'deliveries' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
+                    href="/pengiriman">
+                    <x-icons.truck />
+                    <span class="ml-2 text-sm font-medium">Data Pengiriman</span>
+                </a>
+            </li>
+            <li class="relative">
+                <a class="{{ $active === 'customer' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
+                    href="/pelanggan">
+                    <x-icons.user-group />
+                    <span class="ml-2 text-sm font-medium">Data Pelanggan</span>
+                </a>
+            </li>
+            <li class="relative">
+                <a class="{{ $active === 'user-account' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
+                    href="/kelola-akun">
+                    <x-icons.users />
+                    <span class="ml-2 text-sm font-medium">Kelola Akun</span>
+                </a>
+            </li>
+        @endif
+
+        @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 5)
+            <li class="relative">
+                <a class="{{ $active === 'shop-item' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
+                    href="/belanja">
+                    <x-icons.shopping-bag />
+                    <span class="ml-2 text-sm font-medium">Data Belanja</span>
+                </a>
+            </li>
+        @endif
+
+        @if (auth()->user()->role_id == 1 || auth()->user()->role_id == 3 || auth()->user()->role_id == 4)
+            <li class="relative">
+                <a class="{{ $active === 'sell-item' ? 'flex items-center w-full h-12 px-3 mt-2 font-medium text-[#27272A] bg-white rounded' : 'flex items-center w-full h-12 px-3 mt-2 font-medium rounded hover:bg-gray-700 text-white' }}"
+                    href="/penjualan">
+                    <x-icons.chart-square-bar />
+                    <span class="ml-2 text-sm font-medium">Data Penjualan</span>
+                </a>
+            </li>
+        @endif
     </ul>
 </nav>
 <!-- Sidenav -->
