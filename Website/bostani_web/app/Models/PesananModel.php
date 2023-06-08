@@ -131,6 +131,61 @@ class PesananModel extends Model
         return $penjualan_periode;
     }
 
+    public function getDataPenjualan($from_date, $to_date)
+    {
+        $id_penjualan = PesananModel::select('orders.id')
+            ->join('deliveries', 'deliveries.order_id', '=', 'orders.id')
+            ->whereBetween('orders.delivery_date', [$from_date, $to_date])
+            ->where([
+                ['orders.order_status_id', '=', 2],
+                ['deliveries.delivery_status_id', '=', 2],
+            ])
+            ->get()
+            ->toArray();
+
+        return $id_penjualan;
+    }
+
+    public function getItemPenjualan($id_pesanan)
+    {
+        $item_penjualan = ItemPesananModel::select(ItemPesananModel::raw('products.product_name AS nama_item, units.unit_product_name AS satuan, SUM(order_items.item_size) AS jumlah_item'))
+            ->join('products', 'products.id', '=', 'order_items.product_id')
+            ->join('units', 'units.id', '=', 'products.unit_id')
+            ->whereIn('order_items.order_id', $id_pesanan)
+            ->orderBy('jumlah_item', 'DESC')
+            ->groupBy(['products.product_name', 'order_items.item_size', 'units.unit_product_name'])
+            ->take(10)
+            ->get();
+
+        return $item_penjualan;
+    }
+
+    public function getWilayahPenjualan($id_pesanan)
+    {
+        $wilayah_penjualan = PesananModel::select(PesananModel::raw('COUNT(orders.id) AS jumlah_pesanan, urban_villages.urban_village_name AS kelurahan'))
+            ->join('customers', 'customers.id', '=', 'orders.customer_id')
+            ->join('urban_villages', 'urban_villages.id', '=', 'customers.urban_village_id')
+            ->whereIn('orders.id', $id_pesanan)
+            ->orderBy('jumlah_pesanan', 'DESC')
+            ->groupBy(['urban_villages.urban_village_name'])
+            ->take(10)
+            ->get();
+
+        return $wilayah_penjualan;
+    }
+
+    public function getPelangganPenjualan($id_pesanan)
+    {
+        $pelanggan = PesananModel::select(PesananModel::raw('COUNT(orders.id) AS jumlah_pesanan, customers.customer_name AS pelanggan'))
+            ->join('customers', 'customers.id', '=', 'orders.customer_id')
+            ->whereIn('orders.id', $id_pesanan)
+            ->orderBy('jumlah_pesanan', 'DESC')
+            ->groupBy(['pelanggan'])
+            ->first();
+
+        return $pelanggan;
+    }
+
     public function users()
     {
         return $this->belongsTo(UserModel::class, 'user_id');

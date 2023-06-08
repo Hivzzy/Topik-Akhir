@@ -6,6 +6,7 @@ use App\Models\ItemPesananModel;
 use App\Models\PesananModel;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Carbon\Carbon;
 
 class PenjualanController extends Controller
 {
@@ -14,6 +15,22 @@ class PenjualanController extends Controller
         return view('pages.penjualan.PenjualanView', [
             'title' => 'Data Penjualan',
             'active' => 'sell-item',
+        ]);
+    }
+
+    public function getGrafikPenjualan()
+    {
+        $data_penjualan = PenjualanController::getDataPenjualan();
+        $produk_penjualan = $data_penjualan[0];
+        $wilayah_penjualan = $data_penjualan[1];
+        $pelanggam = $data_penjualan[2];
+
+        return view('pages.penjualan.GrafikView', [
+            'title' => 'Grafik Penjualan',
+            'active' => 'sell-item',
+            'penjualan_produk' => $produk_penjualan,
+            'wilayah_penjualan' => $wilayah_penjualan,
+            'pelanggan' => $pelanggam,
         ]);
     }
 
@@ -81,12 +98,18 @@ class PenjualanController extends Controller
         return [$penjualan_harian, $item_penjualan];
     }
 
-    public function displayGrafikPenjualan()
+    public function getDataPenjualan()
     {
-        return view('pages.penjualan.GrafikView', [
-            'title' => 'Grafik Penjualan',
-            'active' => 'sell-item'
-        ]);
+        $to_date = date('Y-m-d', strtotime(Carbon::today()));
+        $from_date = date('Y-m-d', strtotime(Carbon::today()->subDays(7)));
+
+        $penjualan = new PesananModel();
+        $id_pesanan = $penjualan->getDataPenjualan($from_date, $to_date);
+        $item_penjualan = $penjualan->getItemPenjualan($id_pesanan);
+        $wilayah_penjualan = $penjualan->getWilayahPenjualan($id_pesanan);
+        $pelanggan_penjualan = $penjualan->getPelangganPenjualan($id_pesanan);
+        
+        return [$item_penjualan, $wilayah_penjualan, $pelanggan_penjualan];
     }
 
     public function createLaporanPenjualanHarian($tanggal)
