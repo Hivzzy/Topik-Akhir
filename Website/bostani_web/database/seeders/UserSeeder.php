@@ -23,10 +23,10 @@ class UserSeeder extends Seeder
         //     'password' => bcrypt('password'),
         // ]);
         UserModel::create([
-            'role_id' => 1,
-            'name' => 'taufik',
-            'email' => 'taufik@gmail.com',
-            'username' => 'habban',
+            'role_id' => 4,
+            'name' => 'asep',
+            'email' => 'asep@gmail.com',
+            'username' => 'asep',
             'password' => bcrypt('password'),
         ]);
     }

@@ -41,9 +41,14 @@ Route::get('/forget',[AuthController::class, 'forget' ]);
 Route::post('/send-email',[AuthController::class, 'authenticateForget']);
 
 Route::group(['middleware' => ['auth']], function () {
+    //Dashboard
     Route::get('/dashboard', [AuthController::class, 'dashboard']);
     Route::post('/user/logout', [AuthController::class, 'logout']);
 
+    //Edit All User
+    Route::get('/akun/edit-user', [UserController::class, 'displayEditSelfUser']);
+    Route::post('/akun/edit-user', [UserController::class, 'updateSelfUser']);
+    
     Route::group(['middleware' => ['CekRole:1,5']], function () {
         //Belanja
         Route::get('/belanja', [PesananController::class, 'getListBelanja']);
@@ -130,9 +135,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('/akun/hapus/{id}', [UserController::class, 'deleteUser']);
         Route::get('/role', [RoleController::class, 'displayRole']);
 
-    Route::get('/akun/edit-user', [UserController::class, 'displayEditSelfUser']);
-    Route::post('/akun/edit-user', [UserController::class, 'updateSelfUser']);
+
     });
+
 });
 
 // Route::middleware(['auth', 'auth.session'])->group(function () {
