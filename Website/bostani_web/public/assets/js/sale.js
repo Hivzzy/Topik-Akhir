@@ -89,3 +89,26 @@ $("#btn-daily-pdf").click(function () {
     }
     window.location.href = "/laporan/harian/rekap/" + tanggal + "";
 });
+
+$("#btn-month-pdf").click(function () {
+    var tanggal = $("#bulan_penjualan").val();
+    if (tanggal === "") {
+        tanggal = new Date().toISOString().slice(0, 10);
+    }
+    window.location.href = "/laporan/bulanan/rekap/" + tanggal + "";
+});
+
+$("#btn-periode-pdf").click(function () {
+    var tanggal_awal = $("#tanggal_awal").val();
+    var tanggal_akhir = $("#tanggal_akhir").val();
+
+    if (tanggal_awal === "") {
+        tanggal_awal = new Date().toISOString().slice(0, 10);
+    }
+
+    if (tanggal_akhir === "") {
+        tanggal_akhir = new Date().toISOString().slice(0, 10);
+    }
+    window.location.href =
+        "/laporan/periode/rekap/" + tanggal_awal + "/" + tanggal_akhir + "";
+});

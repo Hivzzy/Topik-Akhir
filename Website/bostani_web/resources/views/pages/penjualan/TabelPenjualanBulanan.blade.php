@@ -50,4 +50,3 @@
         </div>
     </div>
 </div>
-<script src="/assets/js/sale.js"></script>

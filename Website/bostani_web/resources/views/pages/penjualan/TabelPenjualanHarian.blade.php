@@ -7,7 +7,7 @@
                         <tr>
                             <th class="px-6 py-2">Tanggal</th>
                             <th class="px-6 py-2">Nama Pelanggan</th>
-                            <th class="px-6 py-2">Deskripsi</th>
+                            {{-- <th class="px-6 py-2">Deskripsi</th> --}}
                             <th class="px-6 py-2">Pendapatan</th>
                             <th class="px-6 py-2">Modal Belanja</th>
                             <th class="px-6 py-2">Profit</th>
@@ -28,11 +28,11 @@
                             <tr>
                                 <td class="px-6 py-2">{{ date('d M Y', strtotime($penjualan->delivery_date)) }}</td>
                                 <td class="px-6 py-2">{{ $penjualan->customer_name }}</td>
-                                <td class="px-6 py-2">
+                                {{-- <td class="px-6 py-2">
                                     @foreach ($item_penjualan as $item)
                                         {{ $item->produk->product_name }},
                                     @endforeach
-                                </td>
+                                </td> --}}
                                 <td class="text-right px-6 py-2">Rp{{ number_format($penjualan->pendapatan, 2, ',', '.') }}</td>
                                 <td class="text-right px-6 py-2">Rp{{ number_format($penjualan->modal_belanja, 2, ',', '.') }}
                                 </td>
@@ -43,7 +43,7 @@
                     </tbody>
                     <tfoot class="text-lg font-semibold bg-gray-100">
                         <tr>
-                            <td colspan="3">Total</td>
+                            <td colspan="2">Total</td>
                             <td class="text-right px-6 py-2">Rp{{ number_format($pendapatan_total, 2, ',', '.') }}</td>
                             <td class="text-right px-6 py-2">Rp{{ number_format($modal_total, 2, ',', '.') }}</td>
                             <td class="text-right px-6 py-2">Rp{{ number_format($profit_total, 2, ',', '.') }}</td>
@@ -54,5 +54,3 @@
         </div>
     </div>
 </div>
-
-<script src="/assets/js/sale.js"></script>

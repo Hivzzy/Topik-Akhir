@@ -49,13 +49,13 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::delete('/produk/hapus/{id}', [ProdukController::class, 'deleteProduk']);
     Route::get('/produk/get', [ProdukController::class, 'getProdukById']);
     Route::get('/viewPdf', [ProdukController::class, 'createKatalog']);
-    
+
     //Kategori
     Route::get('/kategori', [KategoriController::class, 'index']);
     Route::post('/kategori/tambah', [KategoriController::class, 'createKategori']);
     Route::post('/kategori/edit/{id}', [KategoriController::class, 'updateKategori']);
     Route::delete('kategori/hapus/{id}', [KategoriController::class, 'deleteKategori']);
-    
+
     //Sub Kategori
     Route::get('/subkategori/{id}', [SubKategoriController::class, 'index']);
     Route::get('/subkategori/get/{id}', [SubKategoriController::class, 'getSubKategori']);
@@ -95,21 +95,23 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/penjualan/bulanan/{tanggal}', [PenjualanController::class, 'getDataPenjualanBulanan']);
     Route::get('/penjualan/periode/{tanggal_awal}/{tanggal_akhir}', [PenjualanController::class, 'getDataPenjualanPeriodeWaktu']);
     Route::get('/laporan/harian/rekap/{tanggal}', [PenjualanController::class, 'createLaporanPenjualanHarian']);
-    
+    Route::get('/laporan/bulanan/rekap/{tanggal}', [PenjualanController::class, 'createLaporanPenjualanBulanan']);
+    Route::get('/laporan/periode/rekap/{tanggal_awal}/{tanggal_akhir}', [PenjualanController::class, 'createLaporanPenjualanPeriode']);
+
     // Pelanggan
     Route::get('/pelanggan', [PelangganController::class, 'index']);
     Route::get('/tambah-pelanggan', [PelangganController::class, 'displayTambahPelanggan']);
     Route::post('/pelanggan/tambah', [PelangganController::class, 'createPelanggan']);
     Route::get('/pelanggan/hapus/{id}', [PelangganController::class, 'deletePelanggan']);
     Route::get('/pelanggan/edit/{id}', [PelangganController::class, 'displayEditPelanggan']);
-    Route::delete('/pelanggan/hapus/{id}',[PelangganController::class, 'deletePelanggan']);
+    Route::delete('/pelanggan/hapus/{id}', [PelangganController::class, 'deletePelanggan']);
     Route::get('/pelanggan/get', [PelangganController::class, 'getPelangganById']);
     Route::post('/pelanggan/edit/{id}', [PelangganController::class, 'updatePelanggan']);
 
     //Wilayah
     Route::get('/kecamatan/get/{id}', [WilayahController::class, 'getKecamatan']);
     Route::get('/kelurahan/get/{id}', [WilayahController::class, 'getKelurahan']);
-    
+
     // User
     Route::get('/kelola-akun', [UserController::class, 'index']);
     Route::get('/tambah-akun', [UserController::class, 'displayTambahUser']);
