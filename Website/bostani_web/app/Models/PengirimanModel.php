@@ -29,7 +29,7 @@ class PengirimanModel extends Model
     {
         $add_pengiriman = PengirimanModel::create([
             'delivery_status_id' => $pengiriman['delivery_status'],
-            'driver_id' => $pengiriman['driver'],
+            'driver_type' => $pengiriman['driver'],
             'delivery_date' => $pengiriman['tanggal_pengiriman'],
         ]);
 
@@ -41,7 +41,7 @@ class PengirimanModel extends Model
         $edit_pengiriman = PengirimanModel::where('id', $id)->update(
             array(
                 'delivery_status_id' => $pengiriman['delivery_status'],
-                'driver_id' => $pengiriman['driver'],
+                'driver_type' => $pengiriman['driver'],
                 'delivery_date' => $pengiriman['tanggal_pengiriman'],
             )
         );
@@ -55,12 +55,7 @@ class PengirimanModel extends Model
         return $delete_pengiriman;
     }
 
-    public function drivers()
-    {
-        return $this->belongsTo(DriversModel::class,'driver_id');
-    }
-
-    public function status_pengiriman()
+    public function statusPengiriman()
     {
         return $this->belongsTo(StatusPengirimanModel::class,'delivery_status_id');
     }
@@ -68,7 +63,6 @@ class PengirimanModel extends Model
     {
         return $this->hasMany(PesananModel::class, 'delivery_id');
     }
-
 }
 
 ?>

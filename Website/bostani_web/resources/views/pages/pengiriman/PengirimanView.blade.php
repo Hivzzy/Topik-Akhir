@@ -23,34 +23,23 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Tanggal Pengiriman</th>
-                                        <th>Nama Pelanggan</th>
-                                        <th>Alamat</th>
-                                        <th>Kelurahan</th>
-                                        <th>Kecamatan</th>
-                                        <th>Ongkos Kirim</th>
+                                        <th>Jumlah Pesanan</th>
+                                        <th>Jumlah Ongkos Kirim</th>
+                                        <th>Driver</th>
                                         <th>Status Pengiriman</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pengirimans as $pengiriman)
-                                        @foreach ($pengiriman->pesanans as $pesanan)
+                                        @foreach ($pengirimans as $pengiriman)
                                             <tr>
+                                            @if($pengiriman)
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>{{ date('d M Y', strtotime($pengiriman->delivery_date)) }}</td>
-                                                @if ($pesanan->customers)
-                                                    <td>{{ $pesanan->customers->customer_name ?? '-'}}</td>
-                                                    <td>{{ $pesanan->customers->customer_address ?? '-'}}</td>
-                                                @endif
-                                                @if ($pesanan->customers->kelurahan)
-                                                    <td>{{ $pesanan->customers->kelurahan->urban_village_name ?? '-'}}</td>
-                                                @endif
-                                                @if ($pesanan->customers->kelurahan->kecamatan)
-                                                    <td>{{ $pesanan->customers->kelurahan->kecamatan->district_name ?? '-'}}</td>
-                                                @endif
-                                                    <td>{{ $pengiriman->pesanan->shipping_cost??'0'}}</td>
-                                                @foreach ($pengirimanStatus as $status)
-                                                    <td>{{ $status->status_pengiriman->delivery_status_name??'-'}}</td>
+                                                <td>{{$jumlahPesanan}}</td>
+                                                <td>{{$jumlahOngkir[0]->pesanans[0]->total_shipping_cost}}</td>
+                                                <td>{{ $pengiriman->driver_type??'-'}}</td>
+                                                <td>{{ $pengiriman->statusPengiriman->delivery_status_name??'-'}}</td>
                                                     <td>
                                                         <a href="/pengiriman/detail/{{ $pengiriman->id }}"
                                                             class="inline-block whitespace-nowrap rounded-[0.27rem] bg-info-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-info-700">
@@ -67,9 +56,8 @@
                                                         </a>
                                                     </td>
                                             </tr>
-                                                @endforeach
+                                            @endif
                                         @endforeach
-                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

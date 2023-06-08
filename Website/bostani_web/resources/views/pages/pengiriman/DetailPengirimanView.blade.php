@@ -6,49 +6,19 @@
         <div class="bg-white p-4 space-y-4 rounded shadow-md">
             <table cellpadding="5">
                 <tr>
-                    <td>Nama Pelanggan</td>
-                    <td>:</td>
-                    <td>{{$detail_pengiriman->pesanans[0]->customers->customer_name}}</td>
-                </tr>
-                <tr>
                     <td>Tanggal Pengiriman</td>
                     <td>:</td>
                     <td>{{date('d M Y', strtotime($detail_pengiriman->delivery_date))}}</td>
                 </tr>
                 <tr>
-                    <td>Alamat Pengiriman</td>
+                    <td>Nama Driver</td>
                     <td>:</td>
-                    <td>{{$detail_pengiriman->pesanans[0]->customers->customer_address}}</td>
+                    <td>{{ $detail_pengiriman->driver_type??'-'}}</td>
                 </tr>
                 <tr>
-                    <td>Kelurahan</td>
+                    <td>Total Ongkos Kirim</td>
                     <td>:</td>
-                    <td>{{$detail_pengiriman->pesanans[0]->customers->kelurahan->urban_village_name}}</td>
-                </tr>
-                <tr>
-                    <td>Kecamatan</td>
-                    <td>:</td>
-                    <td>{{$detail_pengiriman->pesanans[0]->customers->kelurahan->kecamatan->district_name}}</td>
-                </tr>
-                <tr>
-                    <td>Kota</td>
-                    <td>:</td>
-                    <td>{{$detail_pengiriman->pesanans[0]->customers->kelurahan->kecamatan->kota->city_name}}</td>
-                </tr>
-                <tr>
-                    <td>No Telepon</td>
-                    <td>:</td>
-                    <td>{{$detail_pengiriman->pesanans[0]->customers->customer_phone}}</td>
-                </tr>
-                <tr>
-                    <td>Metode Pembayaran</td>
-                    <td>:</td>
-                    <td>{{$detail_pengiriman->pesanans[0]->payment_method}}</td>
-                </tr>
-                <tr>
-                    <td>Ongkos Kirim</td>
-                    <td>:</td>
-                    <td>Rp{{ number_format($detail_pengiriman->pesanans[0]->shipping_cost, 2, ',', '.') }}</td>
+                    <td>Rp. {{ number_format($jumlahTotalOngkir->pesanans[0]->total_shipping_cost, 2, ',', '.') }}</td>
                 </tr>
                 <tr>
                     <td>Status Pengiriman</td>
@@ -66,13 +36,48 @@
                         <input type="hidden" name="delivery_id" value="{{ $detail_pengiriman->id }}">
                     </td> -->
                 </tr>
-                <tr>
-                    <td>Nama Driver</td>
-                    <td>:</td>
-                    <td>{{$detail_pengiriman->drivers->driver_name}}</td>
-                </tr>
             </table>
+            <div class="flex flex-col">
+                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                        <div class="overflow-hidden">
+                            <table class="min-w-full">
+                                <thead class="border-b bg-neutral-800 font-medium text-white text-left">
+                                    <tr>
+                                        <th scope="col" class=" px-6 py-2">No</th>
+                                        <th scope="col" class=" px-6 py-2">Nama Pelanggan</th>
+                                        <th scope="col" class=" px-6 py-2">Alamat</th>
+                                        <th scope="col" class=" px-6 py-2">Kelurahan</th>
+                                        <th scope="col" class=" px-6 py-2">Kecamatan</th>
+                                        <th scope="col" class=" px-6 py-2">Kota</th>
+                                        <th scope="col" class=" px-6 py-2">Ongkos Kirim</th>
+                                        <th scope="col" class=" px-6 py-2">Payment Method</th>
 
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($detail_pengiriman->pesanans as $list_pesanan)
+                                    <tr>
+                                            <td scope="col" class=" px-6 py-2">{{$loop->iteration}}</td>
+                                            <td scope="col" class=" px-6 py-2">{{$list_pesanan->customers->customer_name}}</td>
+                                            <td scope="col" class=" px-6 py-2">{{$list_pesanan->customers->customer_address}}</td>
+                                            <td scope="col" class=" px-6 py-2">{{$list_pesanan->customers->kelurahan->urban_village_name??'-'}}</td>
+                                            <td scope="col" class=" px-6 py-2">{{$list_pesanan->customers->kelurahan->kecamatan->district_name??'-'}}</td>
+                                            <td scope="col" class=" px-6 py-2">{{$list_pesanan->customers->kelurahan->kecamatan->kota->city_name??'-'}}</td>
+                                            <td scope="col" class=" px-6 py-2">{{ number_format($list_pesanan->shipping_cost, 2, ',', '.') }}</td>
+                                            <td scope="col" class=" px-6 py-2">{{$list_pesanan->payment_method}}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2 justify-between items-center">
+                <div>
+                </div>
             <div class="flex flex-wrap gap-2 justify-end items-center">
                 <a href="/pengiriman"
                     class="flex gap-1 items-center inline-block rounded bg-info p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#dc4c64] transition duration-150 ease-in-out hover:bg-info-600 hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:bg-info-600 focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:outline-none focus:ring-0 active:bg-info-700 active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(220,76,100,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)]">
