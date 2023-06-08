@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('role_id');
             $table->string('name', 32);
+            $table->string('email')->unique();
             $table->string('username', 16)->unique();
             $table->string('password');
         });
