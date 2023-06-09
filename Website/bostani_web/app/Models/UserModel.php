@@ -30,6 +30,7 @@ class UserModel extends Model
         $add_user = UserModel::create([
             'role_id' => $user['role'],
             'name' => $user['nama_user'],
+            'email' => $user['email'],
             'username' => $user['username'],
             'password' => bcrypt($user['password']),
         ]);
@@ -43,6 +44,7 @@ class UserModel extends Model
             array(
                 'role_id' => $user['role'],
                 'name' => $user['nama_user'],
+                'email' => $user['email'],
                 'username' => $user['username'],
                 'password' => bcrypt($user['password']),
             )
