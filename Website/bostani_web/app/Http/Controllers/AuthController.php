@@ -90,7 +90,7 @@ class AuthController extends Controller
             $user_new->updateUserForget($user->username, $data);
 
             Alert::success('Success', 'User berhasil update');
-            return redirect('/login')->with('success','BERHASIL ,silahkan check email anda');
+            return redirect('/login')->with('success','<strong>BERHASIL</strong>, silahkan check email anda');
         }
 
         return back()->withErrors([

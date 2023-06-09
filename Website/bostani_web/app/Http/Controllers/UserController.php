@@ -154,7 +154,7 @@ class UserController extends Controller
 
         return view('pages.user.EditSelfUserView', [
             'title' => 'Edit User',
-            'active' => 'user-account',
+            'active' => 'Self-Account',
             'user' => $detail_user,
             'roles' => $data_role,
         ]);

@@ -72,7 +72,7 @@
                         class="img-fluid" alt="Unsplash">
                 </div>
                 <div class="col-lg-7 px-5 pt-5">
-                    <h1 class="font-weight-bold font-inter py-3">Welcome</h1>
+                    <h1 class="font-weight-bold font-inter py-3">Aplikasi Pengelolaan Penjualan Bostani</h1>
                     <h4 class="col-lg-7">Login</h4>
                     <form method="post" action="/user/login">
                         @csrf
