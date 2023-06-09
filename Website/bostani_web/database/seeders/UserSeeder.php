@@ -17,32 +17,32 @@ class UserSeeder extends Seeder
     {
         UserModel::create([
             'role_id' => 1,
-            'name' => 'Taufik Aditya',
-            'username' => 'taufik_aditya',
+            'name' => 'CEO',
+            'username' => 'ceo',
             'password' => bcrypt('password'),
         ]);
         UserModel::create([
             'role_id' => 2,
-            'name' => 'Habban Masykur Abdullah',
-            'username' => 'habban_masykur',
+            'name' => 'Head of Administration',
+            'username' => 'administration',
             'password' => bcrypt('password'),
         ]);
         UserModel::create([
             'role_id' => 3,
-            'name' => 'Yosua Lumbanraja',
-            'username' => 'yosua_lumbanraja',
+            'name' => 'Head of Finance',
+            'username' => 'finance',
             'password' => bcrypt('password'),
         ]);
         UserModel::create([
             'role_id' => 4,
-            'name' => 'Yoga Firmansyah',
-            'username' => 'yoga_firmansyah',
+            'name' => 'Head of Marketing',
+            'username' => 'marketing',
             'password' => bcrypt('password'),
         ]);
         UserModel::create([
             'role_id' => 5,
-            'name' => 'Adrianus Simarmata',
-            'username' => 'adrianus99',
+            'name' => 'Head of Operation',
+            'username' => 'operation',
             'password' => bcrypt('password'),
         ]);
     }

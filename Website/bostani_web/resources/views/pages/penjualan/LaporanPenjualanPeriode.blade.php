@@ -49,7 +49,8 @@
 
 <body>
     <header>
-        <h1>Laporan Penjualan Tanggal {{ date('d M Y', strtotime($tanggal_awal)) }} s/d {{ date('d M Y', strtotime($tanggal_akhir)) }}</h1>
+        <h1>Laporan Penjualan Tanggal {{ date('d M Y', strtotime($tanggal_awal)) }} s/d
+            {{ date('d M Y', strtotime($tanggal_akhir)) }}</h1>
         <img src="{{ $pict }}" alt="">
         <h2>Toko Bostani</h2>
     </header>
@@ -59,7 +60,6 @@
             <thead>
                 <tr>
                     <th>Tanggal</th>
-                    {{-- <th>No</th> --}}
                     <th>Jumlah Pesanan</th>
                     <th>Pendapatan</th>
                     <th>Modal Belanja</th>
@@ -73,17 +73,22 @@
                     $total_modal = 0;
                     $total_profit = 0;
                 @endphp
-                @foreach ($data_penjualan as $item)
+                @foreach ($transaksi as $item)
                     @php
-                        $total_pesanan += $item->jumlah_pesanan;
                         $total_pendapatan += $item->pendapatan;
                         $total_modal += $item->modal_belanja;
                         $total_profit += $item->pendapatan - $item->modal_belanja;
                     @endphp
                     <tr>
-                        <td class="text-center">{{ date('d/m/Y', strtotime($item->delivery_date)) }}</td>
-                        {{-- <td class="text-center">{{ $loop->iteration }}</td> --}}
-                        <td class="text-center">{{ $item->jumlah_pesanan }}</td>
+                        <td class="text-center">{{ date('d/m/Y', strtotime($item->tanggal_transaksi)) }}</td>
+                        @foreach ($pesanan as $value)
+                            @if ($value->tanggal_transaksi == $item->tanggal_transaksi)
+                                @php
+                                    $total_pesanan += $value->jumlah_pesanan;
+                                @endphp
+                                <td class="text-center">{{ $value->jumlah_pesanan }}</td>
+                            @endif
+                        @endforeach
                         <td class="text-right">Rp{{ number_format($item->pendapatan, 2, ',', '.') }}</td>
                         <td class="text-right">Rp{{ number_format($item->modal_belanja, 2, ',', '.') }}</td>
                         <td class="text-right">
@@ -93,7 +98,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td class="text-bold">Total</td>
+                    <td class="text-bold text-center">Total</td>
                     <td class="text-bold text-center">{{ $total_pesanan }}</td>
                     <td class="text-bold text-right">Rp{{ number_format($total_pendapatan, 2, ',', '.') }}</td>
                     <td class="text-bold text-right">Rp{{ number_format($total_modal, 2, ',', '.') }}</td>

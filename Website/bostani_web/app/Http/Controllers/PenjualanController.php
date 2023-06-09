@@ -37,18 +37,24 @@ class PenjualanController extends Controller
     public function getDataPenjualanPeriodeWaktu($tanggal_awal, $tanggal_akhir)
     {
         $penjualan_periode = PenjualanController::getPenjualanPeriodeWaktu($tanggal_awal, $tanggal_akhir);
+        $jumlah_pesanan = $penjualan_periode[0];
+        $total_transaksi = $penjualan_periode[1];
 
         return view('pages.penjualan.TabelPenjualanPeriode')->with([
-            'penjualan_periode' => $penjualan_periode,
+            'pesanan' => $jumlah_pesanan,
+            'transaksi' => $total_transaksi,
         ]);
     }
 
     public function getDataPenjualanBulanan($tanggal)
     {
         $penjualan_bulanan = PenjualanController::getPenjualanBulanan($tanggal);
+        $jumlah_pesanan = $penjualan_bulanan[0];
+        $total_transaksi = $penjualan_bulanan[1];
 
         return view('pages.penjualan.TabelPenjualanBulanan')->with([
-            'penjualan_bulanan' => $penjualan_bulanan,
+            'pesanan' => $jumlah_pesanan,
+            'transaksi' => $total_transaksi,
         ]);
     }
 
@@ -64,21 +70,36 @@ class PenjualanController extends Controller
 
     public function getPenjualanPeriodeWaktu($tanggal_awal, $tanggal_akhir)
     {
+        $tanggal_transaksi = [];
+
         $penjualan = new PesananModel();
         $penjualan_periode = $penjualan->getPenjualanPeriodeWaktu($tanggal_awal, $tanggal_akhir);
 
-        return $penjualan_periode;
+        foreach ($penjualan_periode as $value) {
+            array_push($tanggal_transaksi, $value->tanggal_transaksi);
+        }
+
+        $total_transaksi = $penjualan->getTotalTransaksi($tanggal_transaksi);
+
+        return [$penjualan_periode, $total_transaksi];
     }
 
     public function getPenjualanBulanan($tanggal)
     {
         $bulan = date('m', strtotime($tanggal));
         $tahun = date('Y', strtotime($tanggal));
+        $tanggal_transaksi = [];
 
         $penjualan = new PesananModel();
         $penjualan_bulanan = $penjualan->getPenjualanBulanan($bulan, $tahun);
 
-        return $penjualan_bulanan;
+        foreach ($penjualan_bulanan as $value) {
+            array_push($tanggal_transaksi, $value->tanggal_transaksi);
+        }
+
+        $total_transaksi = $penjualan->getTotalTransaksi($tanggal_transaksi);
+
+        return [$penjualan_bulanan, $total_transaksi];
     }
 
     public function getPenjualanHarian($tanggal)
@@ -130,26 +151,32 @@ class PenjualanController extends Controller
     public function createLaporanPenjualanBulanan($tanggal)
     {
         $data_penjualan = PenjualanController::getPenjualanBulanan($tanggal);
+        $pesanan = $data_penjualan[0];
+        $transaksi = $data_penjualan[1];
+
         // Ambil gambar
         $path = base_path('public/assets/img/logo_bostani.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data = file_get_contents($path);
         $pict = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
-        $pdf = FacadePdf::loadView('pages.penjualan.LaporanPenjualanBulanan', compact(['data_penjualan', 'tanggal', 'pict']));
+        $pdf = FacadePdf::loadView('pages.penjualan.LaporanPenjualanBulanan', compact(['pesanan', 'transaksi', 'tanggal', 'pict']));
         return $pdf->setPaper('a4', 'landscape')->stream();
     }
 
     public function createLaporanPenjualanPeriode($tanggal_awal, $tanggal_akhir)
     {
         $data_penjualan = PenjualanController::getPenjualanPeriodeWaktu($tanggal_awal, $tanggal_akhir);
+        $pesanan = $data_penjualan[0];
+        $transaksi = $data_penjualan[1];
+
         // Ambil gambar
         $path = base_path('public/assets/img/logo_bostani.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data = file_get_contents($path);
         $pict = 'data:image/' . $type . ';base64,' . base64_encode($data);
 
-        $pdf = FacadePdf::loadView('pages.penjualan.LaporanPenjualanPeriode', compact(['data_penjualan', 'tanggal_awal', 'tanggal_akhir', 'pict']));
+        $pdf = FacadePdf::loadView('pages.penjualan.LaporanPenjualanPeriode', compact(['pesanan', 'transaksi', 'tanggal_awal', 'tanggal_akhir', 'pict']));
         return $pdf->setPaper('a4', 'landscape')->stream();
     }
 }

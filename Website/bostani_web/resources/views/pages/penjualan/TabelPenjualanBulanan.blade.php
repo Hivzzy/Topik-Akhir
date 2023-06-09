@@ -19,19 +19,28 @@
                             $modal_total = 0;
                             $profit_total = 0;
                         @endphp
-                        @foreach ($penjualan_bulanan as $penjualan)
+                        @foreach ($transaksi as $penjualan)
                             @php
-                                $pesanan_total += $penjualan->jumlah_pesanan;
                                 $pendapatan_total += $penjualan->pendapatan;
                                 $modal_total += $penjualan->modal_belanja;
                                 $profit_total += $penjualan->pendapatan - $penjualan->modal_belanja;
                             @endphp
                             <tr>
-                                <td class="px-6 py-2">{{ date('d M Y', strtotime($penjualan->delivery_date)) }}</td>
-                                <td class="px-6 py-2">{{ $penjualan->jumlah_pesanan }}</td>
-                                <td class="text-right px-6 py-2">Rp{{ number_format($penjualan->pendapatan, 2, ',', '.') }}</td>
-                                <td class="text-right px-6 py-2">Rp{{ number_format($penjualan->modal_belanja, 2, ',', '.') }}</td>
-                                <td class="text-right px-6 py-2">Rp{{ number_format($penjualan->pendapatan - $penjualan->modal_belanja, 2, ',', '.') }}
+                                <td class="px-6 py-2">{{ date('d M Y', strtotime($penjualan->tanggal_transaksi)) }}</td>
+                                @foreach ($pesanan as $item)
+                                    @if ($item->tanggal_transaksi == $penjualan->tanggal_transaksi)
+                                        @php
+                                            $pesanan_total += $item->jumlah_pesanan;
+                                        @endphp
+                                        <td class="px-6 py-2">{{ $item->jumlah_pesanan }}</td>
+                                    @endif
+                                @endforeach
+                                <td class="text-right px-6 py-2">
+                                    Rp{{ number_format($penjualan->pendapatan, 2, ',', '.') }}</td>
+                                <td class="text-right px-6 py-2">
+                                    Rp{{ number_format($penjualan->modal_belanja, 2, ',', '.') }}</td>
+                                <td class="text-right px-6 py-2">
+                                    Rp{{ number_format($penjualan->pendapatan - $penjualan->modal_belanja, 2, ',', '.') }}
                                 </td>
                             </tr>
                         @endforeach
