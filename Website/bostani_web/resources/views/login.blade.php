@@ -12,49 +12,53 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     @vite('resources/css/login.css')
     <style>
-        * {
-            padding: 0;
-            margin: 0;
-        }
+         * {
+                    padding: 0;
+                    margin: 0;
+                }
 
-        body {
-            background: #9DC183;
-            backdrop-filter: blur(20px);
-        }
+                body {
+                    background: #9DC183;
+                    backdrop-filter: blur(20px);
+                }
 
-        .row {
-            background: white;
-            border-radius: 30px;
-        }
+                .row {
+                    background: white;
+                    border-radius: 30px;
+                }
 
-        img {
-            border-top-left-radius: 30px;
-            border-bottom-left-radius: 30px;
-            height: 500px;
-        }
+                img {
+                    border-top-left-radius: 30px;
+                    border-bottom-left-radius: 30px;
+                    height: 500px;
+                }
 
-        .btn1 {
-            border: none;
-            outline: none;
-            height: 50px;
-            width: 100%;
-            background-color: black;
-            color: white;
-            border-radius: 4px;
-            font-weight: bold;
-        }
+                .btn1 {
+                    border: none;
+                    outline: none;
+                    height: 50px;
+                    width: 100%;
+                    background-color: black;
+                    color: white;
+                    border-radius: 4px;
+                    font-weight: bold;
+                }
 
-        .btn1:hover {
-            background-color: white;
-            border: 1px solid;
-            color: black
-        }
+                .btn1:hover {
+                    background-color: white;
+                    border: 1px solid;
+                    color: black
+                }
 
-        section {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+                section {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                }
+
+        a {
+            padding-left: 6rem;
         }
     </style>
 </head>
