@@ -46,6 +46,7 @@ class UserController extends Controller
             'nama_user' => 'required',
             'role' => 'required',
             'username' => 'required|unique:users|min:8|max:16',
+            'email' => 'required|unique:users',
             'password' => [
                 'required', 'max:16',
                 Password::min(8)
@@ -95,6 +96,7 @@ class UserController extends Controller
             'nama_user' => 'required',
             'role' => 'required',
             'username' => 'required|min:8|max:16',
+            'email' => 'required',
             'password' => [
                 'required', 'max:16',
                 Password::min(8)
