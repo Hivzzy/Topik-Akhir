@@ -8,6 +8,7 @@ use App\Models\PelangganModel;
 use App\Models\PesananModel;
 use App\Models\ProdukModel;
 use App\Models\StatusPesananModel;
+use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -108,22 +109,34 @@ class PesananController extends Controller
             'metode_pembayaran' => 'required',
             'ongkos_kirim' => 'required',
         ]);
-
         // Mengecek inputan tidak sesuai
         if ($validator->fails()) {
             toast($validator->messages()->all()[0], 'error');
             return redirect()->back()->withInput($request->all());
         }
-
         // Mengecek item pesanan
         if (Session::get('cart') == []) {
             toast('Harap isi item pesanan!', 'error');
             return redirect()->back()->withInput($request->all());
         }
-
+        // Mengecek alamat pelanggan
+        $pelanggan = new PelangganModel();
+        $cek_pelanggan = $pelanggan->getPelangganById($request['pelanggan']);
+        if ($cek_pelanggan->customer_address != $request['alamat']) {
+            $pelanggan_baru = [
+                'kelurahan' => $request->all()['kelurahan'],
+                'nama_pelanggan' => $cek_pelanggan->customer_name,
+                'no_telepon' => $request['no_telepon'],
+                'alamat' => $request['alamat'],
+            ];
+            $add_pelanggan = $pelanggan->createPelanggan($pelanggan_baru);
+            $request['pelanggan'] = $add_pelanggan;
+        }
+        // dd($request['pelanggan']);
+        // Create data pesanan
         $pesanan = new PesananModel();
         $id_pesanan = $pesanan->createPesanan($request->all());
-
+        // Create data item pesanan
         $cart = Session::get('cart');
         foreach ($cart as $c => $val) {
             $item_pesanan = [
@@ -255,17 +268,17 @@ class PesananController extends Controller
     {
         $pesanan = new PesananModel();
         $item_pesanan = new ItemPesananModel();
-        
+
         // Ambil data pesanan
         $detail_pesanan = $pesanan->getDetailPesanan($id);
-        $items= $item_pesanan->getItemPesanan($id);
+        $items = $item_pesanan->getItemPesanan($id);
 
         // Ambil gambar
         $path = base_path('public/assets/img/logo_bostani.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data = file_get_contents($path);
-        $pict = 'data:image/'.$type.';base64,'.base64_encode($data);
-        
+        $pict = 'data:image/' . $type . ';base64,' . base64_encode($data);
+
         $pdf = FacadePdf::loadView('pages.pesanan.InvoiceView', compact(['detail_pesanan', 'items', 'pict']));
         return $pdf->stream();
         // return $pdf->download('Invoice_'.$detail_pesanan->pelanggan->customer_name.'.pdf');

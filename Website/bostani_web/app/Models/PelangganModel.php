@@ -20,7 +20,8 @@ class PelangganModel extends Model
             ->join('cities', 'districts.city_id', '=', 'cities.id')
             ->select('customers.*', 'urban_villages.urban_village_name', 'districts.district_name', 'cities.city_name')
             ->where('customers.id', $id)
-            ->get();
+            ->first();
+            
         return $data;
     }
 
@@ -33,7 +34,7 @@ class PelangganModel extends Model
             'customer_address' => $pelanggan['alamat'],
         ]);
 
-        return $add_pelanggan;
+        return $add_pelanggan->id;
     }
 
     public function deletePelanggan($id_pelanggan)

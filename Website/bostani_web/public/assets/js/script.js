@@ -47,8 +47,8 @@ $(document).on('change', '#pelanggan', function() {
             // console.log(data);
 
             // Set Nilai
-            $('#no_telepon').val(data[0].customer_phone);
-            $('#alamat').val(data[0].customer_address);
+            $('#no_telepon').val(data.customer_phone);
+            $('#alamat').val(data.customer_address);
             // $('#kota_input').val(data[0].city_name);
             // $('#kecamatan_input').val(data[0].district_name);
             // $('#kelurahan_input').val(data[0].urban_village_name);
