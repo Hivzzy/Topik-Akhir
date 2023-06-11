@@ -91,7 +91,7 @@ class SubKategoriController extends Controller
         $cek_produk = $sub_kategori->listProduk($id);
 
         // dd(empty($cek_produk));
-        if (!empty($cek_produk)) {
+        if ($cek_produk != []) {
             Alert::error('Gagal', 'Terdapat data produk pada sub kategori');
             return redirect()->back();
         }
