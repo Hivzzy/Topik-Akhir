@@ -28,6 +28,7 @@ class AuthController extends Controller
     {
         $pesanan = new PesananModel();
         $data = $pesanan->getPesanan(now());
+        $info_pesanan = $pesanan->getInfoPesanan();
 
         return view('pages.DashboardView', [
             'title' => 'Dashboard',
@@ -35,6 +36,7 @@ class AuthController extends Controller
             'products' => ProdukModel::count(),
             'customers' => PelangganModel::count(),
             'orders' => $data->count(),
+            'order_info' => $info_pesanan, 
         ]);
     }
 

@@ -22,13 +22,13 @@ class RoleSeeder extends Seeder
             'role_name' => 'Head of Administration',
         ]);
         RoleModel::create([
-            'role_name' => 'Head of Operation',
+            'role_name' => 'Head of Finance',
         ]);
         RoleModel::create([
             'role_name' => 'Head of Marketing',
         ]);
         RoleModel::create([
-            'role_name' => 'Head of Finance',
+            'role_name' => 'Head of Operation',
         ]);
     }
 }

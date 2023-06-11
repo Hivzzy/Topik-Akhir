@@ -245,7 +245,10 @@ class PesananController extends Controller
         $item_belanja = new ItemPesananModel();
         $id_pesanan = [];
         $tanggal_kirim = date('Y/m/d', strtotime(now()));
+        // $tanggal_awal = date('Y-m-d', strtotime(now()));
+        // $tanggal_akhir = date('Y-m-d', strtotime('tomorrow'));
 
+        // $dt_belanja = $belanja->getListBelanja($tanggal_awal, $tanggal_akhir);
         $dt_belanja = $belanja->getListBelanja($tanggal_kirim);
         foreach ($dt_belanja as $dt) {
             array_push($id_pesanan, $dt->id);

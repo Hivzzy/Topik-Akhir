@@ -2,6 +2,7 @@
 
 @section('container')
     <div class="space-y-4 sm:space-y-6">
+        {{-- <h1 class="text-lg sm:text-2xl font-semibold">Data Belanja {{ date('d M Y', strtotime(now())) }} - {{ date('d M Y', strtotime('tomorrow')) }}</h1> --}}
         <h1 class="text-lg sm:text-2xl font-semibold">Data Belanja - {{ date('d M Y', strtotime(now())) }}</h1>
         <div class="bg-white p-4 space-y-4 rounded shadow-md">
             <h2 class="text-xl font-semibold">Info Item Belanja</h2>

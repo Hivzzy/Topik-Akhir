@@ -73,11 +73,14 @@ class PesananModel extends Model
     }
 
     public function getListBelanja($tanggal_kirim)
+    // public function getListBelanja($tanggal_awal, $tanggal_akhir)
     {
         $belanja = PesananModel::where([
             ['delivery_date', date($tanggal_kirim)],
             ['order_status_id', 1],
-        ])->get(['id', 'customer_id']);
+        ])
+            // ->whereBetween('delivery_date', [$tanggal_awal, $tanggal_akhir])
+            ->get(['id', 'customer_id']);
         return $belanja;
     }
 
@@ -194,6 +197,17 @@ class PesananModel extends Model
             ->first();
 
         return $pelanggan;
+    }
+
+    public function getInfoPesanan()
+    {
+        $from_date = date("Y-m-d", strtotime("+1 day"));
+        $to_date = date("Y-m-d", strtotime("+3 day"));
+        $info_pesanan = PesananModel::whereBetween('delivery_date', [$from_date, $to_date])
+            ->orderBy('delivery_date', 'ASC')
+            ->get();
+
+        return $info_pesanan;
     }
 
     public function users()

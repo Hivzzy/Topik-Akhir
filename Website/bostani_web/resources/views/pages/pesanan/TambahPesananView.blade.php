@@ -72,7 +72,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="grid grid-rows-1">
                             <label class="font-medium" for="">Tanggal Kirim</label>
-                            <input type="date" name="tanggal_kirim" min="{{ date('Y-m-d') }}" value="{{ old('tanggal_kirim') }}"
+                            <input type="date" id="tanggal_kirim" name="tanggal_kirim" min=""
+                                value="{{ old('tanggal_kirim') }}"
                                 class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                                 required />
                         </div>
