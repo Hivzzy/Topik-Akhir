@@ -51,8 +51,10 @@
                                                     {{ $produk->sub_kategori != null ? $produk->sub_kategori->sub_category_name : '-' }}
                                                 </td>
                                                 {{-- <td>{{ $produk->product_size }}</td> --}}
-                                                <td class="text-right">Rp{{ number_format($produk->product_purchase_price, 2, ',', '.') }}</td>
-                                                <td class="text-right">Rp{{ number_format($produk->product_selling_price, 2, ',', '.') }}</td>
+                                                <td class="text-right">
+                                                    Rp{{ number_format($produk->product_purchase_price, 2, ',', '.') }}</td>
+                                                <td class="text-right">
+                                                    Rp{{ number_format($produk->product_selling_price, 2, ',', '.') }}</td>
                                                 <td>
                                                     <a href="/produk/edit/{{ $produk->id }}"
                                                         class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">

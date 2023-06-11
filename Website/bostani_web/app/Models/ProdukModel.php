@@ -18,15 +18,7 @@ class ProdukModel extends Model
 
     public function getProduk()
     {
-        $key_cache = 'produk';
-        $produk = Cache::get($key_cache);
-        
-        if ($produk) {
-            return $produk;
-        }
         $produk = ProdukModel::all();
-
-        Cache::put($key_cache, $produk, 10);
         return $produk;
     }
 
