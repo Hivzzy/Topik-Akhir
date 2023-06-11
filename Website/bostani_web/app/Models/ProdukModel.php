@@ -19,7 +19,6 @@ class ProdukModel extends Model
     public function getProduk()
     {
         $produk = ProdukModel::all();
-
         return $produk;
     }
 

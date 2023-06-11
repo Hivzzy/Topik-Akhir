@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
         UserModel::create([
             'role_id' => 1,
             'name' => 'CEO',
-            'email' => 'habbanma@gmail.com',
+            'email' => 'habban.masykur.tif20@polban.ac.id',
             'username' => 'ceo',
             'password' => bcrypt('password'),
         ]);
