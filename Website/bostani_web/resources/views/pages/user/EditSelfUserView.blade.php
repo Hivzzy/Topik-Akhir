@@ -4,7 +4,7 @@
     <div class="space-y-4 sm:space-y-6">
         <h1 class="text-lg sm:text-2xl font-semibold">Edit Akun</h1>
         <div class="bg-white p-4 space-y-6 rounded shadown-md">
-            <form method="POST" action="/akun/edit/{{ $user->id }}">
+            <form method="POST" action="/akun/edit-user">
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="grid grid-rows-1">
@@ -21,6 +21,12 @@
                                 <option value="{{ $role->id }}">{{ $role->role_name }}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="grid grid-rows-1 hidden">
+                        <label class="font-medium" for="">Email</label>
+                        <input type="email" name="email" value="{{ $user->email }}"
+                            class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                            required />
                     </div>
                     <div class="grid grid-rows-1">
                         <label class="font-medium" for="">Username</label>

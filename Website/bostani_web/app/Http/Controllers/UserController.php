@@ -168,6 +168,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'nama_user' => 'required',
             'role' => 'required',
+            'email' => 'required',
             'username' => 'required|min:8|max:16',
             'password' => [
                 'required', 'max:16',
@@ -189,7 +190,7 @@ class UserController extends Controller
 
         if ($edit_user) {
             Alert::success('Success', 'Data user berhasil diperbarui');
-            return redirect('/kelola-akun');
+            return redirect('/dashboard');
         } else {
             Alert::error('Error', 'Data user gagal diperbarui');
             return redirect()->back();
