@@ -27,7 +27,7 @@
                         <div class="grid grid-rows-1">
                             <label class="font-medium" for="">No Telepon</label>
                             <input type="text" name="no_telepon" id="no_telepon"
-                                value="{{ $pesanan->customers->customer_phone }}"
+                                value="{{ $pesanan->customers->customer_phone }}" readonly
                                 class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                                 required />
                         </div>
@@ -36,13 +36,31 @@
                         <div class="grid grid-rows-1">
                             <label class="font-medium" for="">Alamat</label>
                             <input type="text" name="alamat" id="alamat"
-                                value="{{ $pesanan->customers->customer_address }}"
+                                value="{{ $pesanan->customers->customer_address }}" readonly
                                 class="text-name relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
                                 required />
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="grid grid-rows-1">
+                            <label class="font-medium" for="">Kota</label>
+                            <input type="text" name="kota" id="kota" value="{{ $pesanan->customers->kelurahan->kecamatan->kota->city_name }}" readonly
+                                class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                                readonly required />
+                        </div>
+                        <div class="grid grid-rows-1">
+                            <label class="font-medium" for="">Kecamatan</label>
+                            <input type="text" name="kecamatan" id="kecamatan" value="{{ $pesanan->customers->kelurahan->kecamatan->district_name }}" readonly
+                                class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                                readonly required />
+                        </div>
+                        <div class="grid grid-rows-1">
+                            <label class="font-medium" for="">Kelurahan</label>
+                            <input type="text" name="kelurahan" id="kelurahan" value="{{ $pesanan->customers->kelurahan->urban_village_name }}" readonly
+                                class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:focus:border-primary"
+                                readonly required />
+                        </div>
+                        {{-- <div class="grid grid-rows-1">
                             <label class="font-medium" for="">Kota</label>
                             <select name="kota" id="kota" data-te-select-init>
                                 <option value="{{ $pesanan->customers->kelurahan->kecamatan->city_id }}">
@@ -67,7 +85,7 @@
                                 <option value="{{ $pesanan->customers->urban_village_id }}">
                                     {{ $pesanan->customers->kelurahan->urban_village_name }}</option>
                             </select>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

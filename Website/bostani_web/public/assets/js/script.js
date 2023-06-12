@@ -58,9 +58,9 @@ $(document).on("change", "#pelanggan", function () {
             // Set Nilai
             $("#no_telepon").val(data.customer_phone);
             $("#alamat").val(data.customer_address);
-            // $('#kota_input').val(data[0].city_name);
-            // $('#kecamatan_input').val(data[0].district_name);
-            // $('#kelurahan_input').val(data[0].urban_village_name);
+            $('#kota').val(data.city_name);
+            $('#kecamatan').val(data.district_name);
+            $('#kelurahan').val(data.urban_village_name);
         },
         error: function () {},
     });

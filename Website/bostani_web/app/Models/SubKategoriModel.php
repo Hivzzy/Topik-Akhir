@@ -49,7 +49,8 @@ class SubKategoriModel extends Model
         $data = SubKategoriModel::select('sub_categories.sub_category_name', 'products.product_name')
             ->join('products', 'sub_categories.id', '=', 'products.sub_category_id')
             ->where('sub_categories.id', $id)
-            ->get();
+            ->get()
+            ->toArray();
 
         return $data;
     }

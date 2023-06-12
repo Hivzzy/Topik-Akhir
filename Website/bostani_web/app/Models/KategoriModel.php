@@ -47,7 +47,8 @@ class KategoriModel extends Model
         $data = KategoriModel::select('categories.category_name', 'products.product_name')
             ->join('products', 'products.category_id', '=', 'categories.id')
             ->where('categories.id', $id)
-            ->get();
+            ->get()
+            ->toArray();
 
         return $data;
     }
@@ -57,7 +58,8 @@ class KategoriModel extends Model
         $data = KategoriModel::select('categories.category_name', 'sub_categories.sub_category_name')
             ->join('sub_categories', 'sub_categories.category_id', '=', 'categories.id')
             ->where('categories.id', $id)
-            ->get();
+            ->get()
+            ->toArray();
 
         return $data;
     }

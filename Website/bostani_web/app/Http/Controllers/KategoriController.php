@@ -28,7 +28,6 @@ class KategoriController extends Controller
             'nama_kategori' => 'required',
         ]);
 
-
         $kategori = new KategoriModel();
         $data = $kategori->createKategori($validatedData);
 
@@ -65,7 +64,8 @@ class KategoriController extends Controller
         $cek_subkategori = $kategori->listSubKategori($id);
         $cek_produk = $kategori->listProduk($id);
 
-        if (!empty($cek_subkategori) || !empty($cek_produk)) {
+        // dd($cek_subkategori, $cek_produk);
+        if ($cek_subkategori != [] || $cek_produk != []) {
             Alert::error('Gagal', 'Terdapat data sub kategori / data produk pada kategori');
             return redirect()->back();
         }
