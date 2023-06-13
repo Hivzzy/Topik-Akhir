@@ -88,7 +88,8 @@ class PesananModel extends Model
     {
         $penjualan_harian = PesananModel::select(PesananModel::raw('orders.id, orders.delivery_date, customers.customer_name, SUM(order_items.item_selling_price * order_items.item_size) AS pendapatan, SUM(order_items.item_purchase_price * order_items.item_size) AS modal_belanja'))
             ->join('order_items', 'order_items.order_id', '=', 'orders.id')
-            ->join('deliveries', 'deliveries.order_id', '=', 'orders.id')
+            // ->join('deliveries', 'deliveries.order_id', '=', 'orders.id')
+            ->join('deliveries', 'deliveries.id', '=', 'orders.delivery_id')
             ->join('customers', 'customers.id', '=', 'orders.customer_id')
             ->where([
                 ['orders.delivery_date', '=', $tanggal],
@@ -104,7 +105,8 @@ class PesananModel extends Model
     public function getPenjualanBulanan($bulan, $tahun)
     {
         $penjualan_bulanan = PesananModel::select(PesananModel::raw('orders.delivery_date AS tanggal_transaksi, COUNT(orders.id) AS jumlah_pesanan'))
-            ->join('deliveries', 'deliveries.order_id', '=', 'orders.id')
+            // ->join('deliveries', 'deliveries.order_id', '=', 'orders.id')
+            ->join('deliveries', 'deliveries.id', '=', 'orders.delivery_id')
             ->whereMonth('orders.delivery_date', $bulan)
             ->whereYear('orders.delivery_date', $tahun)
             ->where([
@@ -120,7 +122,8 @@ class PesananModel extends Model
     public function getPenjualanPeriodeWaktu($tanggal_awal, $tanggal_akhir)
     {
         $penjualan_periode = PesananModel::select(PesananModel::raw('orders.delivery_date AS tanggal_transaksi, COUNT(orders.id) AS jumlah_pesanan'))
-            ->join('deliveries', 'deliveries.order_id', '=', 'orders.id')
+            // ->join('deliveries', 'deliveries.order_id', '=', 'orders.id')
+            ->join('deliveries', 'deliveries.id', '=', 'orders.delivery_id')
             ->whereBetween('orders.delivery_date', [$tanggal_awal, $tanggal_akhir])
             ->where([
                 ['orders.order_status_id', '=', 2],
@@ -147,7 +150,8 @@ class PesananModel extends Model
     public function getDataPenjualan($from_date, $to_date)
     {
         $id_penjualan = PesananModel::select('orders.id')
-            ->join('deliveries', 'deliveries.order_id', '=', 'orders.id')
+            // ->join('deliveries', 'deliveries.order_id', '=', 'orders.id')
+            ->join('deliveries', 'deliveries.id', '=', 'orders.delivery_id')
             ->whereBetween('orders.delivery_date', [$from_date, $to_date])
             ->where([
                 ['orders.order_status_id', '=', 2],

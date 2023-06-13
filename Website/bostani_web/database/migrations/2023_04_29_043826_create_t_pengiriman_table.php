@@ -18,8 +18,8 @@ return new class extends Migration
             $table->foreignId('delivery_status_id');
             // $table->foreignId('driver_id');
             $table->dateTime('delivery_date');
-            $table->foreignId('order_id');
-            $table->string('delivery_address');
+            // $table->foreignId('order_id');
+            // $table->string('delivery_address');
 
         });
     }
