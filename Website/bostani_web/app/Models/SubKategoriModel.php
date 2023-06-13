@@ -30,7 +30,7 @@ class SubKategoriModel extends Model
         return $add_subkategori;
     }
 
-    public function editSubKategori($sub_kategori, $id)
+    public function updateSubKategori($sub_kategori, $id)
     {
         $edit_subkategori = SubKategoriModel::where('id', $id)->update([
             'sub_category_name' => $sub_kategori['nama_sub_kategori'],

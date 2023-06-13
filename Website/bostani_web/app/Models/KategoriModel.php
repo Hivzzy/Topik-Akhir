@@ -28,7 +28,7 @@ class KategoriModel extends Model
         return $add_kategori;
     }
 
-    public function editKategori($kategori, $id)
+    public function updateKategori($kategori, $id)
     {
         $edit_kategori = KategoriModel::where('id', $id)->update([
             'category_name' => $kategori['nama_kategori'],
