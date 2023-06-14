@@ -119,20 +119,6 @@ class PesananController extends Controller
             toast('Harap isi item pesanan!', 'error');
             return redirect()->back()->withInput($request->all());
         }
-        // Mengecek alamat pelanggan
-        // $pelanggan = new PelangganModel();
-        // $cek_pelanggan = $pelanggan->getPelangganById($request['pelanggan']);
-        // if ($cek_pelanggan->customer_address != $request['alamat']) {
-        //     $pelanggan_baru = [
-        //         'kelurahan' => $request->all()['kelurahan'],
-        //         'nama_pelanggan' => $cek_pelanggan->customer_name,
-        //         'no_telepon' => $request['no_telepon'],
-        //         'alamat' => $request['alamat'],
-        //     ];
-        //     $add_pelanggan = $pelanggan->createPelanggan($pelanggan_baru);
-        //     $request['pelanggan'] = $add_pelanggan;
-        // }
-        // dd($request['pelanggan']);
         // Create data pesanan
         $pesanan = new PesananModel();
         $id_pesanan = $pesanan->createPesanan($request->all());
@@ -245,11 +231,8 @@ class PesananController extends Controller
         $item_belanja = new ItemPesananModel();
         $id_pesanan = [];
         $tanggal_kirim = date('Y/m/d', strtotime(now()));
-        // $tanggal_awal = date('Y-m-d', strtotime(now()));
-        // $tanggal_akhir = date('Y-m-d', strtotime('tomorrow'));
-
-        // $dt_belanja = $belanja->getListBelanja($tanggal_awal, $tanggal_akhir);
         $dt_belanja = $belanja->getListBelanja($tanggal_kirim);
+
         foreach ($dt_belanja as $dt) {
             array_push($id_pesanan, $dt->id);
         }
@@ -257,7 +240,6 @@ class PesananController extends Controller
         $data = $item_belanja->getItemBelanja($id_pesanan);
         $sum_item = $item_belanja->getTotalItem($id_pesanan);
 
-        // dd($data);
         return view('pages.belanja.BelanjaView', [
             'title' => 'Daftar Belanja',
             'active' => 'shop-item',

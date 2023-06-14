@@ -20,17 +20,12 @@ class PenjualanController extends Controller
 
     public function getGrafikPenjualan()
     {
-        $data_penjualan = PenjualanController::getDataPenjualan();
-        $produk_penjualan = $data_penjualan[0];
-        $wilayah_penjualan = $data_penjualan[1];
-        $pelanggam = $data_penjualan[2];
-
+        $data = PenjualanController::getInfoPenjualan();
+        // dd($data);
         return view('pages.penjualan.GrafikView', [
             'title' => 'Grafik Penjualan',
             'active' => 'sell-item',
-            'penjualan_produk' => $produk_penjualan,
-            'wilayah_penjualan' => $wilayah_penjualan,
-            'pelanggan' => $pelanggam,
+            'data' => $data,
         ]);
     }
 
@@ -119,18 +114,54 @@ class PenjualanController extends Controller
         return [$penjualan_harian, $item_penjualan];
     }
 
+    public function getInfoPenjualan()
+    {
+        $to_date = date('Y-m-d', strtotime(Carbon::today()));
+        $from_date = date('Y-m-d', strtotime(Carbon::today()->subDays(30)));
+        
+        $penjualan = new PesananModel();
+        $id_pesanan = $penjualan->getDataPenjualan($from_date, $to_date);
+        $pelanggan = $penjualan->getPelangganPalingSeringPesan($id_pesanan);
+        $kelurahan = $penjualan->getKelurahanPalingBanyakPesanan($id_pesanan);
+        $kecamatan = $penjualan->getKecamatanPalingBanyakPesanan($id_pesanan);
+
+        return [
+            'pelanggan' => $pelanggan,
+            'kelurahan' => $kelurahan,
+            'kecamatan' => $kecamatan,
+        ];
+    }
+
     public function getDataPenjualan()
     {
         $to_date = date('Y-m-d', strtotime(Carbon::today()));
-        $from_date = date('Y-m-d', strtotime(Carbon::today()->subDays(7)));
+        $from_date = date('Y-m-d', strtotime(Carbon::today()->subDays(30)));
 
         $penjualan = new PesananModel();
         $id_pesanan = $penjualan->getDataPenjualan($from_date, $to_date);
-        $item_penjualan = $penjualan->getItemPenjualan($id_pesanan);
         $wilayah_penjualan = $penjualan->getWilayahPenjualan($id_pesanan);
-        $pelanggan_penjualan = $penjualan->getPelangganPenjualan($id_pesanan);
-        
-        return [$item_penjualan, $wilayah_penjualan, $pelanggan_penjualan];
+        $produk_kg = $penjualan->getItemProdukKg($id_pesanan);
+        $produk_bungkus = $penjualan->getItemProdukBungkus($id_pesanan);
+        $produk_bongkol = $penjualan->getItemProdukBongkol($id_pesanan);
+        $produk_tray = $penjualan->getItemProdukTray($id_pesanan);
+        $produk_ikat = $penjualan->getItemProdukIkat($id_pesanan);
+        $produk_butir = $penjualan->getItemProdukButir($id_pesanan);
+        $produk_pack = $penjualan->getItemProdukPack($id_pesanan);
+        $produk_paket = $penjualan->getItemProdukPaket($id_pesanan);
+        $produk_pasang = $penjualan->getItemProdukPasang($id_pesanan);
+
+        return response()->json([
+            'wilayah' => $wilayah_penjualan,
+            'produk_kg' => $produk_kg,
+            'produk_bungkus' => $produk_bungkus,
+            'produk_bongkol' => $produk_bongkol,
+            'produk_tray' => $produk_tray,
+            'produk_ikat' => $produk_ikat,
+            'produk_butir' => $produk_butir,
+            'produk_pack' => $produk_pack,
+            'produk_paket' => $produk_paket,
+            'produk_pasang' => $produk_pasang,
+        ]);
     }
 
     public function createLaporanPenjualanHarian($tanggal)

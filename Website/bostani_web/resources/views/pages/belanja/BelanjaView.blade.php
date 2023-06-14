@@ -57,7 +57,6 @@
                                         <th>Nama Pemesan</th>
                                         <th>Nama Item</th>
                                         <th>Jumlah</th>
-                                        {{-- <th>Check</th> --}}
                                         <th>Keterangan</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -73,9 +72,6 @@
                                             @endforeach
                                             <td>{{ $item->produk->product_name }}</td>
                                             <td>{{ $item->item_size }}</td>
-                                            {{-- <td>
-                                                <input type="checkbox" name="check" id="check">
-                                            </td> --}}
                                             <td>
                                                 {{ $item->shop_item_id != null ? $item->belanja->shop_item_information : '' }}
                                             </td>

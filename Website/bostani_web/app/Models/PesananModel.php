@@ -73,14 +73,12 @@ class PesananModel extends Model
     }
 
     public function getListBelanja($tanggal_kirim)
-    // public function getListBelanja($tanggal_awal, $tanggal_akhir)
     {
         $belanja = PesananModel::where([
             ['delivery_date', date($tanggal_kirim)],
             ['order_status_id', 1],
-        ])
-            // ->whereBetween('delivery_date', [$tanggal_awal, $tanggal_akhir])
-            ->get(['id', 'customer_id']);
+        ])->get(['id', 'customer_id']);
+
         return $belanja;
     }
 
@@ -163,20 +161,6 @@ class PesananModel extends Model
         return $id_penjualan;
     }
 
-    public function getItemPenjualan($id_pesanan)
-    {
-        $item_penjualan = ItemPesananModel::select(ItemPesananModel::raw('products.product_name AS nama_item, units.unit_product_name AS satuan, SUM(order_items.item_size) AS jumlah_item'))
-            ->join('products', 'products.id', '=', 'order_items.product_id')
-            ->join('units', 'units.id', '=', 'products.unit_id')
-            ->whereIn('order_items.order_id', $id_pesanan)
-            ->orderBy('jumlah_item', 'DESC')
-            ->groupBy(['products.product_name', 'order_items.item_size', 'units.unit_product_name'])
-            ->take(10)
-            ->get();
-
-        return $item_penjualan;
-    }
-
     public function getWilayahPenjualan($id_pesanan)
     {
         $wilayah_penjualan = PesananModel::select(PesananModel::raw('COUNT(orders.id) AS jumlah_pesanan, urban_villages.urban_village_name AS kelurahan'))
@@ -184,14 +168,14 @@ class PesananModel extends Model
             ->join('urban_villages', 'urban_villages.id', '=', 'customers.urban_village_id')
             ->whereIn('orders.id', $id_pesanan)
             ->orderBy('jumlah_pesanan', 'DESC')
-            ->groupBy(['urban_villages.urban_village_name'])
+            ->groupBy(['kelurahan'])
             ->take(10)
             ->get();
 
         return $wilayah_penjualan;
     }
 
-    public function getPelangganPenjualan($id_pesanan)
+    public function getPelangganPalingSeringPesan($id_pesanan)
     {
         $pelanggan = PesananModel::select(PesananModel::raw('COUNT(orders.id) AS jumlah_pesanan, customers.customer_name AS pelanggan'))
             ->join('customers', 'customers.id', '=', 'orders.customer_id')
@@ -203,6 +187,33 @@ class PesananModel extends Model
         return $pelanggan;
     }
 
+    public function getKelurahanPalingBanyakPesanan($id_pesanan)
+    {
+        $kelurahan = PesananModel::select(PesananModel::raw('COUNT(orders.id) AS jumlah_pesanan, urban_villages.urban_village_name AS kelurahan'))
+            ->join('customers', 'customers.id', '=', 'orders.customer_id')
+            ->join('urban_villages', 'urban_villages.id', '=', 'customers.urban_village_id')
+            ->whereIn('orders.id', $id_pesanan)
+            ->orderBy('jumlah_pesanan', 'DESC')
+            ->groupBy(['kelurahan'])
+            ->first();
+
+        return $kelurahan;
+    }
+
+    public function getKecamatanPalingBanyakPesanan($id_pesanan)
+    {
+        $kecamatan = PesananModel::select(PesananModel::raw('COUNT(orders.id) AS jumlah_pesanan, districts.district_name AS kecamatan'))
+            ->join('customers', 'customers.id', '=', 'orders.customer_id')
+            ->join('urban_villages', 'urban_villages.id', '=', 'customers.urban_village_id')
+            ->join('districts', 'urban_villages.district_id', '=', 'districts.id')
+            ->whereIn('orders.id', $id_pesanan)
+            ->orderBy('jumlah_pesanan', 'DESC')
+            ->groupBy(['kecamatan'])
+            ->first();
+
+        return $kecamatan;
+    }
+
     public function getInfoPesanan()
     {
         $from_date = date("Y-m-d", strtotime("+1 day"));
@@ -212,6 +223,141 @@ class PesananModel extends Model
             ->get();
 
         return $info_pesanan;
+    }
+
+    public function getItemProdukKg($id_pesanan)
+    {
+        $produk_kg = ItemPesananModel::select(ItemPesananModel::raw('products.product_name AS nama_item, SUM(order_items.item_size) AS jumlah_item'))
+            ->join('products', 'products.id', '=', 'order_items.product_id')
+            ->join('units', 'units.id', '=', 'products.unit_id')
+            ->whereIn('order_items.order_id', $id_pesanan)
+            ->where('units.unit_product_name', 'Kg')
+            ->orderBy('jumlah_item', 'DESC')
+            ->groupBy(['products.product_name'])
+            ->take(10)
+            ->get();
+
+        return $produk_kg;
+    }
+
+    public function getItemProdukBungkus($id_pesanan)
+    {
+        $produk_kg = ItemPesananModel::select(ItemPesananModel::raw('products.product_name AS nama_item, SUM(order_items.item_size) AS jumlah_item'))
+            ->join('products', 'products.id', '=', 'order_items.product_id')
+            ->join('units', 'units.id', '=', 'products.unit_id')
+            ->whereIn('order_items.order_id', $id_pesanan)
+            ->where('units.unit_product_name', 'Bungkus')
+            ->orderBy('jumlah_item', 'DESC')
+            ->groupBy(['products.product_name'])
+            ->take(10)
+            ->get();
+
+        return $produk_kg;
+    }
+
+    public function getItemProdukBongkol($id_pesanan)
+    {
+        $produk_kg = ItemPesananModel::select(ItemPesananModel::raw('products.product_name AS nama_item, SUM(order_items.item_size) AS jumlah_item'))
+            ->join('products', 'products.id', '=', 'order_items.product_id')
+            ->join('units', 'units.id', '=', 'products.unit_id')
+            ->whereIn('order_items.order_id', $id_pesanan)
+            ->where('units.unit_product_name', 'Bongkol')
+            ->orderBy('jumlah_item', 'DESC')
+            ->groupBy(['products.product_name'])
+            ->take(10)
+            ->get();
+
+        return $produk_kg;
+    }
+
+    public function getItemProdukTray($id_pesanan)
+    {
+        $produk_kg = ItemPesananModel::select(ItemPesananModel::raw('products.product_name AS nama_item, SUM(order_items.item_size) AS jumlah_item'))
+            ->join('products', 'products.id', '=', 'order_items.product_id')
+            ->join('units', 'units.id', '=', 'products.unit_id')
+            ->whereIn('order_items.order_id', $id_pesanan)
+            ->where('units.unit_product_name', 'Tray')
+            ->orderBy('jumlah_item', 'DESC')
+            ->groupBy(['products.product_name'])
+            ->take(10)
+            ->get();
+
+        return $produk_kg;
+    }
+
+    public function getItemProdukIkat($id_pesanan)
+    {
+        $produk_kg = ItemPesananModel::select(ItemPesananModel::raw('products.product_name AS nama_item, SUM(order_items.item_size) AS jumlah_item'))
+            ->join('products', 'products.id', '=', 'order_items.product_id')
+            ->join('units', 'units.id', '=', 'products.unit_id')
+            ->whereIn('order_items.order_id', $id_pesanan)
+            ->where('units.unit_product_name', 'Ikat')
+            ->orderBy('jumlah_item', 'DESC')
+            ->groupBy(['products.product_name'])
+            ->take(10)
+            ->get();
+
+        return $produk_kg;
+    }
+
+    public function getItemProdukButir($id_pesanan)
+    {
+        $produk_kg = ItemPesananModel::select(ItemPesananModel::raw('products.product_name AS nama_item, SUM(order_items.item_size) AS jumlah_item'))
+            ->join('products', 'products.id', '=', 'order_items.product_id')
+            ->join('units', 'units.id', '=', 'products.unit_id')
+            ->whereIn('order_items.order_id', $id_pesanan)
+            ->where('units.unit_product_name', 'Butir')
+            ->orderBy('jumlah_item', 'DESC')
+            ->groupBy(['products.product_name'])
+            ->take(10)
+            ->get();
+
+        return $produk_kg;
+    }
+
+    public function getItemProdukPack($id_pesanan)
+    {
+        $produk_kg = ItemPesananModel::select(ItemPesananModel::raw('products.product_name AS nama_item, SUM(order_items.item_size) AS jumlah_item'))
+            ->join('products', 'products.id', '=', 'order_items.product_id')
+            ->join('units', 'units.id', '=', 'products.unit_id')
+            ->whereIn('order_items.order_id', $id_pesanan)
+            ->where('units.unit_product_name', 'Pack')
+            ->orderBy('jumlah_item', 'DESC')
+            ->groupBy(['products.product_name'])
+            ->take(10)
+            ->get();
+
+        return $produk_kg;
+    }
+
+    public function getItemProdukPaket($id_pesanan)
+    {
+        $produk_kg = ItemPesananModel::select(ItemPesananModel::raw('products.product_name AS nama_item, SUM(order_items.item_size) AS jumlah_item'))
+            ->join('products', 'products.id', '=', 'order_items.product_id')
+            ->join('units', 'units.id', '=', 'products.unit_id')
+            ->whereIn('order_items.order_id', $id_pesanan)
+            ->where('units.unit_product_name', 'Paket')
+            ->orderBy('jumlah_item', 'DESC')
+            ->groupBy(['products.product_name'])
+            ->take(10)
+            ->get();
+
+        return $produk_kg;
+    }
+
+    public function getItemProdukPasang($id_pesanan)
+    {
+        $produk_kg = ItemPesananModel::select(ItemPesananModel::raw('products.product_name AS nama_item, SUM(order_items.item_size) AS jumlah_item'))
+            ->join('products', 'products.id', '=', 'order_items.product_id')
+            ->join('units', 'units.id', '=', 'products.unit_id')
+            ->whereIn('order_items.order_id', $id_pesanan)
+            ->where('units.unit_product_name', 'Pasang')
+            ->orderBy('jumlah_item', 'DESC')
+            ->groupBy(['products.product_name'])
+            ->take(10)
+            ->get();
+
+        return $produk_kg;
     }
 
     public function users()
