@@ -14,7 +14,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ItemPesananController extends Controller
 {
-
     public function addToCartItemPesanan(Request $request)
     {
         if ($request->product_id == '' || $request->quantity == '') {
@@ -42,7 +41,7 @@ class ItemPesananController extends Controller
                 'product_id' => $product->id,
                 'item_name' => $product->product_name,
                 'item_size' => $request->quantity,
-                'item_unit' => $product->satuan->unit_product_name,
+                'item_unit' => $product->satuan->unit_name,
                 'item_purchase_price' => $product->product_purchase_price,
                 'item_selling_price' => $product->product_selling_price,
                 // 'sub_total' => $request->quantity * $product->product_seliing_price,

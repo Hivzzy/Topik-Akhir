@@ -110,7 +110,7 @@
                 <td class="text-center">{{ $loop->iteration }}</td>
                 <td>{{ $item->produk->product_name }}</td>
                 <td class="text-center">
-                    {{ $item->item_size }}<small>/{{ $item->produk->satuan->unit_product_name }}</small></td>
+                    {{ $item->item_size }}<small>/{{ $item->produk->satuan->unit_name }}</small></td>
                 <td class="text-right">Rp{{ number_format($item->item_selling_price, 2, ',', '.') }}</td>
                 <td class="text-right">Rp{{ number_format($item->item_selling_price * $item->item_size, 2, ',', '.') }}
                 </td>

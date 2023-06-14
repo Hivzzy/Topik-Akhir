@@ -18,7 +18,7 @@
                         <select name="unit" data-te-select-init required>
                             <option value=""></option>
                             @foreach ($units as $unit)
-                                <option value="{{ $unit->id }}">{{ $unit->unit_product_name }}</option>
+                                <option value="{{ $unit->id }}">{{ $unit->unit_name }}</option>
                             @endforeach
                         </select>
                     </div>

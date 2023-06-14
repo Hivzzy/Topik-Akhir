@@ -92,7 +92,7 @@
                                         @endphp
                                         <tr class="">
                                             <td class="px-6 py-2">{{ $item->produk->product_name }}</td>
-                                            <td class="px-6 py-2">{{ $item->produk->satuan->unit_product_name }}</td>
+                                            <td class="px-6 py-2">{{ $item->produk->satuan->unit_name }}</td>
                                             <td class="px-6 py-2 text-right">
                                                 Rp{{ number_format($item->item_selling_price, 2, ',', '.') }}</td>
                                             <td class="px-6 py-2">{{ $item->item_size }}</td>

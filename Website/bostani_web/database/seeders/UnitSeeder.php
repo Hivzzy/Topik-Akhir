@@ -16,31 +16,31 @@ class UnitSeeder extends Seeder
     public function run()
     {
         UnitModel::create([
-            'unit_product_name' => 'Bongkol',
+            'unit_name' => 'Bongkol',
         ]);
         UnitModel::create([
-            'unit_product_name' => 'Bungkus',
+            'unit_name' => 'Bungkus',
         ]);
         UnitModel::create([
-            'unit_product_name' => 'Butir',
+            'unit_name' => 'Butir',
         ]);
         UnitModel::create([
-            'unit_product_name' => 'Ikat',
+            'unit_name' => 'Ikat',
         ]);
         UnitModel::create([
-            'unit_product_name' => 'Kg',
+            'unit_name' => 'Kg',
         ]);
         UnitModel::create([
-            'unit_product_name' => 'Pack',
+            'unit_name' => 'Pack',
         ]);
         UnitModel::create([
-            'unit_product_name' => 'Paket',
+            'unit_name' => 'Paket',
         ]);
         UnitModel::create([
-            'unit_product_name' => 'Pasang',
+            'unit_name' => 'Pasang',
         ]);
         UnitModel::create([
-            'unit_product_name' => 'Tray',
+            'unit_name' => 'Tray',
         ]);
     }
 }

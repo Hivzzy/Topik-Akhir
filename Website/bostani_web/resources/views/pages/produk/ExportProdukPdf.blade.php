@@ -111,7 +111,7 @@
                                                 <div class="item-list"> {{ $produk->product_name }}
                                                     <small> &nbsp;
                                                         Rp
-                                                        {{ number_format($produk->product_selling_price, 0, ',', '.') }}/{{ $produk->satuan->unit_product_name }}</small>
+                                                        {{ number_format($produk->product_selling_price, 0, ',', '.') }}/{{ $produk->satuan->unit_name }}</small>
                                                 </div>
                                             @endif
                                         @endforeach
@@ -130,7 +130,7 @@
                                     <div class="item-list"> {{ $produk->product_name }}
                                         <small> &nbsp;
                                             Rp
-                                            {{ number_format($produk->product_selling_price, 0, ',', '.') }}/{{ $produk->satuan->unit_product_name }}</small>
+                                            {{ number_format($produk->product_selling_price, 0, ',', '.') }}/{{ $produk->satuan->unit_name }}</small>
                                     </div>
                                 @endif
                             @endforeach

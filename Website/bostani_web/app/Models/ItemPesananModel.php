@@ -58,11 +58,11 @@ class ItemPesananModel extends Model
     }
 
     public function getTotalItem($id_pesanan) {
-        $item_belanja = ItemPesananModel::select(ItemPesananModel::raw('products.product_name, units.unit_product_name, order_items.item_purchase_price, SUM(order_items.item_size) as jumlah'))
+        $item_belanja = ItemPesananModel::select(ItemPesananModel::raw('products.product_name, units.unit_name, order_items.item_purchase_price, SUM(order_items.item_size) as jumlah'))
         ->join('products', 'order_items.product_id', '=', 'products.id')
         ->join('units', 'products.unit_id', '=', 'units.id')
         ->whereIn('order_id', $id_pesanan)
-        ->groupBy(['products.product_name', 'order_items.item_purchase_price','units.unit_product_name'])
+        ->groupBy(['products.product_name', 'order_items.item_purchase_price','units.unit_name'])
         ->get();
         
         return $item_belanja;

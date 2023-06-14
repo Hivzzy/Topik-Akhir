@@ -16,9 +16,9 @@
                     <div class="grid grid-rows-1">
                         <label class="font-medium">Satuan Produk</label>
                         <select name="unit" data-te-select-init required>
-                            <option value="{{ $produk->unit_id }}">{{ $produk->satuan->unit_product_name }}</option>
+                            <option value="{{ $produk->unit_id }}">{{ $produk->satuan->unit_name }}</option>
                             @foreach ($units as $unit)
-                                <option value="{{ $unit->id }}">{{ $unit->unit_product_name }}</option>
+                                <option value="{{ $unit->id }}">{{ $unit->unit_name }}</option>
                             @endforeach
                         </select>
                     </div>

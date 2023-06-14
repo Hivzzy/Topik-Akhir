@@ -82,7 +82,7 @@ $(document).on("change", "#product_id", function () {
             // console.log(data);
 
             // Set Nilai
-            $("#satuan").val(data[0].unit_product_name);
+            $("#satuan").val(data[0].unit_name);
             $("#harga").val(data[0].product_selling_price);
         },
         error: function () {},

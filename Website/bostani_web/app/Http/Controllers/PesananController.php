@@ -73,7 +73,7 @@ class PesananController extends Controller
                 'product_id' => $item->product_id,
                 'item_name' => $item->produk->product_name,
                 'item_size' => $item->item_size,
-                'item_unit' => $item->produk->satuan->unit_product_name,
+                'item_unit' => $item->produk->satuan->unit_name,
                 'item_purchase_price' => $item->item_purchase_price,
                 'item_selling_price' => $item->item_selling_price,
                 // 'sub_total' => $item->item_size * $item->item_seliing_price,

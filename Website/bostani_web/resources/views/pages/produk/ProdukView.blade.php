@@ -44,7 +44,7 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $produk->product_name }}</td>
-                                                <td>{{ $produk->satuan->unit_product_name }}</td>
+                                                <td>{{ $produk->satuan->unit_name }}</td>
                                                 <td>
                                                     {{ $produk->kategori->category_name }}</td>
                                                 <td>

@@ -31,7 +31,7 @@ class ProdukModel extends Model
     public function getProdukById($id_produk)
     {
         $produk = ProdukModel::join('units', 'products.unit_id', '=', 'units.id')
-        ->select('products.product_selling_price', 'units.unit_product_name')
+        ->select('products.product_selling_price', 'units.unit_name')
         ->where('products.id', $id_produk)
         ->get();
 
