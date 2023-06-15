@@ -75,6 +75,15 @@
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="/assets/js/delivery.js"></script>
     <script>
+        var table = $("#tabel_pengiriman")
+        .DataTable({
+            responsive: true,
+            searching: false,
+            lengthChange: false,
+            info: true,
+        })
+        .columns.adjust()
+        .responsive.recalc();
         $(document).ready(function() {
             get_list_delivery();
         });
