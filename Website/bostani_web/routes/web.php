@@ -110,6 +110,18 @@ Route::group(['middleware' => ['auth']], function () {
         //Pengiriman
         Route::get('/pengiriman', [PengirimanController::class, 'index']);
         Route::get('/pengiriman/detail/{id}', [PengirimanController::class, 'getDetailPengiriman']);
+        Route::get('/tambah-pengiriman', [PengirimanController::class, 'displayTambahPengiriman']);
+        Route::get('/tambah-detail-pengiriman', [PengirimanController::class, 'displayTambahDetailPengiriman']);
+        Route::get('/pengiriman/edit/{id}', [PengirimanController::class, 'displayEditPengiriman']);
+        Route::get('/pengiriman-detail/edit/{id}', [PengirimanController::class, 'displayEditDetailPengiriman']);
+        Route::post('/pengiriman/tambah', [PengirimanController::class, 'createPengiriman']);
+        Route::post('/pengiriman/edit/{id}', [PengirimanController::class, 'updatePengiriman']);
+        Route::get('/pengiriman/status/{delivery_id}/{status_id}', [PengirimanController::class, 'updateStatusPengiriman']);
+        Route::get('/pengiriman/list', [PengirimanController::class, 'showListPesanan']);
+        // Route::get('/pengiriman/data', [PengirimanController::class, 'showDataPesanan']);
+        Route::post('/pengiriman/list/add_pesanan', [PengirimanController::class, 'createListPesanan']);
+        Route::get('/pengiriman/list/list_delete', [PengirimanController::class, 'deleteAllList']);
+        Route::get('/pengiriman/list/delete/{id}', [PengirimanController::class, 'deleteListCart']);
 
         // Pelanggan
         Route::get('/pelanggan', [PelangganController::class, 'index']);

@@ -8,7 +8,7 @@
                 <tr>
                     <td>Tanggal Pengiriman</td>
                     <td>:</td>
-                    <td>{{date('d M Y', strtotime($detail_pengiriman->delivery_date))}}</td>
+                    <td>{{date('d M Y', strtotime($detail_pengiriman->pesanans[0]->delivery_date))}}</td>
                 </tr>
                 <tr>
                     <td>Nama Driver</td>
@@ -23,20 +23,20 @@
                 <tr>
                     <td>Status Pengiriman</td>
                     <td>:</td>
-                    <td>{{$delivery_status[0]->delivery_status_name}}
-                        <!-- <select name="delivery_status" data-te-select-init>
-                            <option value=""></option>
-                            {{-- <option value="{{ $detail_pengiriman->statusPengiriman->delivery_status_id }}">
+                    <td>
+                    <select name="delivery_status" data-te-select-init>
+                            <option value="{{ $detail_pengiriman->delivery_status_id }}">
                                 {{ $detail_pengiriman->statusPengiriman->delivery_status_name }}</option>
                             @foreach ($delivery_status as $status)
                                 <option value="{{ $status->id }}">
                                     {{ $status->delivery_status_name }}</option>
-                            @endforeach --}}
+                            @endforeach
                         </select>
-                        <input type="hidden" name="delivery_id" value="{{ $detail_pengiriman->id }}">
-                    </td> -->
+                    <input type="hidden" name="delivery_id" value="{{ $detail_pengiriman->id }}">
+                    </td>
                 </tr>
             </table>
+
             <div class="flex flex-col">
                 <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
@@ -89,26 +89,27 @@
     </div>
 @endsection
 
-{{-- @section('script')
+@section('script')
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
         $(document).ready(function() {
             $('select[name="delivery_status"]').on('change', function() {
                 var statusID = $(this).val();
-                var orderID = $('input[name="delivery_id"]').val();
-                // console.log(statusID,orderID);
+                var deliveryID = $('input[name="delivery_id"]').val();
+                // console.log(statusID,deliveryID);
 
                 if (statusID) {
                     $.ajax({
                         type: 'GET',
-                        url: '/pesanan/status/' + orderID + '/' + statusID,
+                        url: '/pengiriman/status/' + deliveryID + '/' + statusID,
                         dataType: 'json',
                         success: function(data) {
                             // console.log(data);
+                            swal("Success!", "" + data.message + "", "success");
                         }
                     });
                 }
             });
         });
     </script>
-@endsection --}}
+@endsection

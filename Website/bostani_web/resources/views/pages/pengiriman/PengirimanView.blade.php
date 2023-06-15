@@ -4,7 +4,7 @@
     <div class="space-y-4 sm:space-y-6">
         <h1 class="text-lg sm:text-2xl font-semibold">Data Pengiriman</h1>
         <div class="bg-white p-4 rounded shadow-md flex space-x-[10px]">
-            <a href="/tambah-pesanan"
+            <a href="/tambah-pengiriman"
                 class="inline-block rounded bg-primary p-2 font-medium leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]">
                 <div class="flex space-x-1 items-center">
                     <img src="/assets/icons/add.svg" alt="add icon">
@@ -22,9 +22,10 @@
                                 <thead class="bg-[#272727] text-white">
                                     <tr>
                                         <th>No</th>
+                                        <th>Group Pengiriman</th>
                                         <th>Tanggal Pengiriman</th>
                                         <th>Jumlah Pesanan</th>
-                                        <th>Jumlah Ongkos Kirim</th>
+                                        <!-- <th>Jumlah Ongkos Kirim</th> -->
                                         <th>Driver</th>
                                         <th>Status Pengiriman</th>
                                         <th>Aksi</th>
@@ -35,9 +36,10 @@
                                             <tr>
                                             @if($pengiriman)
                                                 <td>{{$loop->iteration}}</td>
-                                                <td>{{ date('d M Y', strtotime($pengiriman->delivery_date)) }}</td>
-                                                <td>{{$jumlahPesanan}}</td>
-                                                <td>{{$jumlahOngkir[0]->pesanans[0]->total_shipping_cost}}</td>
+                                                <td>{{ $pengiriman->delivery_group_name??'-'}}</td>
+                                                <td>{{ date('d M Y', strtotime($pengiriman->pesanans[0]->delivery_date)) }}</td>
+                                                <td>{{ $jumlahList[$pengiriman->pesanans[0]->delivery_id]}}</td>
+                                                <!-- <td>{{$jumlahOngkir[0]->pesanans[0]->total_shipping_cost}}</td> -->
                                                 <td>{{ $pengiriman->driver_type??'-'}}</td>
                                                 <td>{{ $pengiriman->statusPengiriman->delivery_status_name??'-'}}</td>
                                                     <td>

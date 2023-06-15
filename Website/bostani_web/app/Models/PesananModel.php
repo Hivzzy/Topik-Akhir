@@ -60,6 +60,27 @@ class PesananModel extends Model
         return $edit_pesanan;
     }
 
+    static function updateStatusPengiriman($id_pesanan, $list)
+    {
+        $edit_statusPengiriman = PesananModel::where('id', $id_pesanan)->update(
+            array(
+                'delivery_id' => $list['delivery_id'],
+            )
+        );
+
+        return $edit_statusPengiriman;
+    }
+
+    static function deletePengiriman($id)
+    {
+        $delete_pengiriman = PesananModel::where('delivery_id', $id)->update(
+            array(
+                'delivery_id' => null,
+            )
+        );
+
+        return $delete_pengiriman;
+    }
     public function deletePesanan($id_pesanan)
     {
         $delete_pesanan = PesananModel::where('id', $id_pesanan)->delete();

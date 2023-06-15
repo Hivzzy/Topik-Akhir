@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('delivery_status_id');
+            $table->string('delivery_group_name');
             $table->dateTime('delivery_date');
             // $table->string('driver_type')
             // $table->string('delivery_group-name')
