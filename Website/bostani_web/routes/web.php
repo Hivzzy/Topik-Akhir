@@ -118,7 +118,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/pengiriman/edit/{id}', [PengirimanController::class, 'updatePengiriman']);
         Route::get('/pengiriman/status/{delivery_id}/{status_id}', [PengirimanController::class, 'updateStatusPengiriman']);
         Route::get('/pengiriman/list', [PengirimanController::class, 'showListPesanan']);
-        // Route::get('/pengiriman/data', [PengirimanController::class, 'showDataPesanan']);
+        Route::get('/pengiriman/data', [PengirimanController::class, 'showDataPesanan']);
         Route::post('/pengiriman/list/add_pesanan', [PengirimanController::class, 'createListPesanan']);
         Route::get('/pengiriman/list/list_delete', [PengirimanController::class, 'deleteAllList']);
         Route::get('/pengiriman/list/delete/{id}', [PengirimanController::class, 'deleteListCart']);

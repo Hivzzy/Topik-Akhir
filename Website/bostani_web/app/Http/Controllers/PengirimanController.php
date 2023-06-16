@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class PengirimanController extends Controller
 {
@@ -133,26 +135,30 @@ class PengirimanController extends Controller
         ]);
     }
 
-    // public function showDataPesanan()
-    // {
-    //     $order_list = Session::get('order_list', []);
-    //     $orders = PesananModel::where('order_status_id', 2)->where('delivery_id', null)->get();
-    //     $query = " SELECT order_id, COUNT(*) AS item_count FROM order_items GROUP BY order_id ";
-    //     $results = DB::select($query);
-    //     $itemCounts = [];
+    public function showDataPesanan()
+    {
+        $order_list = Session::get('order_list', []);
+        $orders = PesananModel::where('order_status_id', 2)->where('delivery_id', null)->get();
+        $query = " SELECT order_id, COUNT(*) AS item_count FROM order_items GROUP BY order_id ";
+        $results = DB::select($query);
+        $itemCounts = [];
 
-    //     foreach ($results as $result) {
-    //         $itemCounts[$result->order_id] = $result->item_count;
-    //     }
-    //     return view('pages.pengiriman.DataPengirimanView')->with([
-    //         'jumlahItem' => $itemCounts,
-    //         'pesanans' => $orders,
-    //         'order_list' => $order_list,
-    //     ]);
-    // }
+        foreach ($results as $result) {
+            $itemCounts[$result->order_id] = $result->item_count;
+        }
+        return view('pages.pengiriman.DataPengirimanView')->with([
+            'jumlahItem' => $itemCounts,
+            'pesanans' => $orders,
+            'order_list' => $order_list,
+        ]);
+    }
 
     public function deleteListCart($id)
     {
+        // Hapus item pesanan sebelumnya
+        $pesanans = new PesananModel();
+        $pesanans->deletePengiriman($id);
+
         $order_list = Session::get('order_list', []);
         unset($order_list[$id]);
         Session::put('order_list', $order_list);
@@ -349,5 +355,24 @@ class PengirimanController extends Controller
         $pengiriman = new PengirimanModel();
         $pengiriman->updateStatusPengiriman($delivery_id, $delivery_status_id);
         return response()->json(['message' => 'Status Pengiriman berhasil diperbarui'], 200);
-    }}
+    }
+
+    public function createPengirimanPDF(){
+        $pengirimans = new PengirimanModel();
+        $pesanans = new PesananModel();
+
+        $data_pengirimans = PengirimanModel::with('pesanans')->get();
+
+        $query = " SELECT order_id, COUNT(*) AS item_count FROM order_items GROUP BY order_id ";
+        $results = DB::select($query);
+        $itemCounts = [];
+
+        foreach ($results as $result) {
+            $itemCounts[$result->order_id] = $result->item_count;
+        }
+
+        $pdf = Pdf::loadView('pages.pengiriman.ExportGroupPengiriman', compact(['data_pengirimans', 'itemCounts']))->setPaper('a4', 'landscape');
+        return $pdf->stream('Group Pengiriman.pdf');
+    }
+}
 ?>

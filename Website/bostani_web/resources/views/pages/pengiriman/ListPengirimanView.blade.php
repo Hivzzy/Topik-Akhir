@@ -54,8 +54,8 @@
             method: "GET",
             contentType: "application/json",
         }).done(function (data) {
-            // get_list_delivery_non_session();
             get_list_delivery();
+            get_list_delivery_non_session();
         });
     }
 </script>
