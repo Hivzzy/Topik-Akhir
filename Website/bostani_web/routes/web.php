@@ -50,9 +50,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['middleware' => ['CekRole:1,5']], function () {
         //Belanja
         Route::get('/belanja', [PesananController::class, 'getListBelanja']);
-        Route::post('/keterangan/tambah/{id}', [ItemPesananController::class, 'createKeteranganItemBelanja']);
-        Route::post('/keterangan/edit/{id}', [ItemPesananController::class, 'updateKeteranganItemBelanja']);
-        Route::get('/keterangan/hapus/{id}', [ItemPesananController::class, 'deleteKeteranganItemBelanja']);
+        Route::post('/keterangan/update/{order_id}/{product_id}', [ItemPesananController::class, 'updateKeteranganItemBelanja']);
+        Route::get('/keterangan/hapus/{order_id}/{product_id}', [ItemPesananController::class, 'deleteKeteranganItemBelanja']);
     });
 
     Route::group(['middleware' => ['CekRole:1,3,4']], function () {

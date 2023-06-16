@@ -97,42 +97,29 @@ class ItemPesananController extends Controller
         }
     }
 
-    public function createKeteranganItemBelanja(Request $request, $id)
+    public function updateKeteranganItemBelanja(Request $request, $order_id, $product_id)
     {
-        $cek = ItemPesananModel::find($id);
+        $item = new ItemPesananModel();
+        $data = $item->updateKeteranganItemBelanja($request['product_information'], $order_id, $product_id);
 
-        if ($cek->shop_item_id != null) {
-            toast('Produk sudah memiliki keterangan', 'error');
+        if (!$data) {
+            toast('Keterangan gagal ditambahkan', 'error');
             return redirect()->back();
         }
-
-        $belanja = new BelanjaModel();
-        $item = new ItemPesananModel();
-
-        $id_item = $belanja->createKeteranganItemBelanja($request->all()['product_information'], $id);
-        $item->updateKeteranganProdukPesanan($id, $id_item);
 
         toast('Keterangan berhasil ditambahkan', 'success');
         return redirect('/belanja');
     }
 
-    public function updateKeteranganItemBelanja(Request $request, $id)
+    public function deleteKeteranganItemBelanja($order_id, $product_id)
     {
-        $belanja = new BelanjaModel();
-        $belanja->updateKeteranganItemBelanja($request->all()['product_information'], $id);
-        toast('Keterangan berhasil diperbarui', 'success');
-        return redirect('/belanja');
-    }
-
-    public function deleteKeteranganItemBelanja($id)
-    {
-        $order_item_id = BelanjaModel::find($id);
-
-        $belanja = new BelanjaModel();
         $item = new ItemPesananModel();
+        $data = $item->updateKeteranganItemBelanja(null, $order_id, $product_id);
 
-        $belanja->deleteKeteranganItemBelanja($id);
-        $item->updateKeteranganProdukPesanan($order_item_id->order_item_id, null);
+        if (!$data) {
+            toast('Keterangan gagal dihapus', 'error');
+            return redirect()->back();
+        }
 
         toast('Keterangan berhasil dihapus', 'success');
         return redirect('/belanja');

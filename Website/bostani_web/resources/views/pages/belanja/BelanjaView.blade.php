@@ -2,7 +2,6 @@
 
 @section('container')
     <div class="space-y-4 sm:space-y-6">
-        {{-- <h1 class="text-lg sm:text-2xl font-semibold">Data Belanja {{ date('d M Y', strtotime(now())) }} - {{ date('d M Y', strtotime('tomorrow')) }}</h1> --}}
         <h1 class="text-lg sm:text-2xl font-semibold">Data Belanja - {{ date('d M Y', strtotime(now())) }}</h1>
         <div class="bg-white p-4 space-y-4 rounded shadow-md">
             <h2 class="text-xl font-semibold">Info Item Belanja</h2>
@@ -73,21 +72,16 @@
                                             <td>{{ $item->produk->product_name }}</td>
                                             <td>{{ $item->item_size }}</td>
                                             <td>
-                                                {{ $item->shop_item_id != null ? $item->belanja->shop_item_information : '' }}
+                                                {{ $item->shop_item_information ?? '' }}
                                             </td>
                                             <td>
                                                 <a href="#" data-te-toggle="modal"
-                                                    data-te-target="#addInformationModal{{ $item->id }}"
-                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-info-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-info-700">
-                                                    Tambah Keterangan
+                                                    data-te-target="#updateInformationModal{{ $item->order_id }}{{ $item->product_id }}"
+                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
+                                                    Ubah Keterangan
                                                 </a>
-                                                <a href="#" data-te-toggle="modal"
-                                                    data-te-target="#editInformationModal{{ $item->shop_item_id }}"
-                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700 {{ $item->shop_item_id == null ? 'pointer-events-none' : '' }}">
-                                                    Edit Keterangan
-                                                </a>
-                                                <a href="/keterangan/hapus/{{ $item->shop_item_id }}"
-                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700 {{ $item->shop_item_id == null ? 'pointer-events-none' : '' }}">
+                                                <a href="/keterangan/hapus/{{ $item->order_id }}/{{ $item->product_id }}"
+                                                    class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700 {{ $item->shop_item_information == null ? 'pointer-events-none' : '' }}">
                                                     Hapus Keterangan
                                                 </a>
                                             </td>

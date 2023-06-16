@@ -9,7 +9,9 @@ class ItemPesananModel extends Model
     use HasFactory;
 
     protected $table = 'order_items';
-    protected $guarded = ['id'];
+    protected $primaryKey = null;
+    protected $fillable = ['order_id', 'product_id', 'item_size', 'item_purchase_price', 'item_selling_price'];
+    public $incrementing = false;
     public $timestamps = false;
 
     public function getItemPesanan($id_pesanan)
@@ -18,7 +20,7 @@ class ItemPesananModel extends Model
         return $item_pesanan;
     }
 
-    static function createItemPesanan($item_pesanan)
+    public static function createItemPesanan($item_pesanan)
     {
         $add_item_pesanan = ItemPesananModel::create([
             'order_id' => $item_pesanan['order_id'],
@@ -31,7 +33,7 @@ class ItemPesananModel extends Model
         // return $add_item_pesanan;
     }
 
-    static function updateItemPesanan($item_pesanan, $id)
+    public static function updateItemPesanan($item_pesanan, $id)
     {
         $edit_item_pesanan = ItemPesananModel::where('order_id', $id)->update(
             array(
@@ -53,7 +55,7 @@ class ItemPesananModel extends Model
 
     public function getItemBelanja($id_pesanan)
     {
-        $item_belanja = ItemPesananModel::whereIn('order_id', $id_pesanan)->orderBy('id', 'ASC')->get();
+        $item_belanja = ItemPesananModel::whereIn('order_id', $id_pesanan)->orderBy('order_id', 'ASC')->get();
         return $item_belanja;
     }
 
@@ -68,11 +70,16 @@ class ItemPesananModel extends Model
         return $item_belanja;
     }
 
-    static function updateKeteranganProdukPesanan($order_item_id, $shop_id)
+    public function updateKeteranganItemBelanja($keterangan, $order_id, $product_id)
     {
-        ItemPesananModel::where('id', $order_item_id)->update([
-            'shop_item_id' => $shop_id,
+        $data = ItemPesananModel::where([
+            ['order_id', $order_id],
+            ['product_id', $product_id],
+        ])->update([
+            'shop_item_information' => $keterangan,
         ]);
+
+        return $data;
     }
 
     public function pesanan()

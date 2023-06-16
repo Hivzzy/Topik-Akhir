@@ -14,13 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('order_items', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('order_id');
             $table->foreignId('product_id');
-            $table->foreignId('shop_item_id')->nullable();
             $table->integer('item_purchase_price');
             $table->integer('item_selling_price');
             $table->decimal('item_size');
+            $table->string('shop_item_information', 128)->nullable();
         });
     }
 

@@ -174,16 +174,16 @@ class PengirimanController extends Controller
         }
     }
 
-    public function getList($list)
-    {
-        $order_list = Session::get('order_list', []);
-        foreach ($items as $item) {
-            $order_list[$item->product_id] = [
-                'order_id' => $item->order_id,
-            ];
-            Session::put('order_list', $order_list);
-        }
-    }
+    // public function getList($list)
+    // {
+    //     $order_list = Session::get('order_list', []);
+    //     foreach ($items as $item) {
+    //         $order_list[$item->product_id] = [
+    //             'order_id' => $item->order_id,
+    //         ];
+    //         Session::put('order_list', $order_list);
+    //     }
+    // }
 
     public function createPengiriman(Request $request){
 
