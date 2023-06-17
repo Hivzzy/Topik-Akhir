@@ -54,7 +54,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'username' => 'The provided credentials do not match our records. Please refresh page This.',
+            'username' => 'Username atau password yang anda masukkan salah. Silahkan coba lagi.',
         ])->onlyInput('username');
     }
 
@@ -96,7 +96,7 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'username' => 'The provided credentials do not match our records. Please refresh page This.',
+            'username' => 'Username yang anda masukkan belum terdaftar.',
         ])->onlyInput('username');
     }
 }
