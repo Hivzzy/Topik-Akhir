@@ -90,10 +90,9 @@
     <div class="container">
         @foreach ($data_pengirimans as $data_pengiriman)
             <div class="page-break">
-                <h3 class="delivery_group_name">{{ $data_pengiriman->delivery_group_name }}</h3>
+                <h3 class="delivery_group_name">Group - {{$loop->iteration}} </h3>
                 <h4 class="driver">Driver : {{ $data_pengiriman->driver_type }}</h4>
 
-                @foreach ($data_pengiriman->pesanans as $pesanan)
                             <table >
                                 <tr>
                                     <th class="pesanan-list-no">No</th>
@@ -105,6 +104,8 @@
                                     <th class="pesanan-list-ongkir">Total Biaya</th>
                                     <th class="pesanan-list-payment">Payment Method</th>
                                 </tr>
+                                @foreach ($data_pengiriman->pesanans as $pesanan)
+
                                 <tr>
                                     <td class="pesanan-list-no" style="text-align:center">{{$loop->iteration}}</td>
                                     <td class="pesanan-list-name" style="text-align:center">{{$pesanan->customers->customer_name}}</td>
@@ -115,9 +116,10 @@
                                     <td class="pesanan-list-ongkir" style="text-align:center">{{ number_format($pesanan->shipping_cost, 2, ',', '.') }}</td>
                                     <td class="pesanan-list-payment" style="text-align:center">{{$pesanan->payment_method}}</td>
                                 </tr>
+                                @endforeach
+
                             </table>
 
-                    @endforeach
         @endforeach
 </body>
 

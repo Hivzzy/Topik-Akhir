@@ -4,9 +4,7 @@
     <div class="space-y-4 sm:space-y-6">
         <h1 class="text-lg sm:text-2xl font-semibold">Data Pengiriman - Siap Antar</h1>
         @csrf
-        <div class="bg-white p-4 space-y-6 rounded shadow-md" id="list_pengiriman">
-
-        </div>
+        <div class="bg-white p-4 space-y-6 rounded shadow-md" id="list_pengiriman"></div>
 
         <div class="bg-white p-4 space-y-6 rounded shadow-md" id="list_pesanan"></div>
 

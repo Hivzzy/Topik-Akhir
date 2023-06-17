@@ -4,16 +4,6 @@
     <div class="space-y-4 sm:space-y-6">
         <h1 class="text-lg sm:text-2xl font-semibold">Data Pengiriman - Siap Antar</h1>
         @csrf
-        <div class="bg-white p-4 space-y-4 rounded shadow-md">
-            <div class="flex flex-col">
-                <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                    <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                        <div class="overflow-hidden">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="bg-white p-4 space-y-6 rounded shadow-md" id="list_pengiriman"></div>
 
         <div class="bg-white p-4 space-y-6 rounded shadow-md" id="list_pesanan"></div>

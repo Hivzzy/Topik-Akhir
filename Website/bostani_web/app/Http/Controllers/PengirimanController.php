@@ -28,7 +28,13 @@ class PengirimanController extends Controller
         confirmDelete($title, $text);
 
         $pengiriman = new PengirimanModel();
-        $pengirimans = PengirimanModel::with('pesanans')->get();
+        $today = now();
+        $pengirimans = PengirimanModel::with('pesanans')
+        ->whereHas('pesanans', function ($query) use ($today) {
+            $query->whereDate('delivery_date', $today);
+        })
+        ->get();
+        // $pengirimans = PengirimanModel::with('pesanans')->get();
         $jumlahTotalOngkir = PengirimanModel::with(['pesanans' => function ($query) {
             $query->select('delivery_id', DB::raw('SUM(shipping_cost) as total_shipping_cost'))
                 ->groupBy('delivery_id');
@@ -73,7 +79,12 @@ class PengirimanController extends Controller
 
     public function displayTambahPengiriman()
     {
-        $orders = PesananModel::where('order_status_id', 2)->where('delivery_id', null)->get();
+        $date = now();
+        $orders = PesananModel::whereDate('delivery_date', '=', date('Y-m-d', strtotime($date)))->orderBy('delivery_date', 'ASC')
+        ->where('order_status_id', 2)
+        ->where('delivery_id', null)
+        ->get();
+
         $query = " SELECT order_id, COUNT(*) AS item_count FROM order_items GROUP BY order_id ";
         $results = DB::select($query);
         $itemCounts = [];
@@ -90,8 +101,9 @@ class PengirimanController extends Controller
     }
     public function displayTambahDetailPengiriman()
     {
+        $date = now();
         $order_list = Session::get('order_list', []);
-        $orders = PesananModel::where('order_status_id', 2)->get();
+        $orders = PesananModel::where('order_status_id', 2)->where('delivery_id', null)->whereDate('delivery_date', '=', date('Y-m-d', strtotime($date)))->orderBy('delivery_date', 'ASC')->get();
         $query = " SELECT order_id, COUNT(*) AS item_count FROM order_items GROUP BY order_id ";
         $results = DB::select($query);
         $itemCounts = [];
@@ -138,7 +150,12 @@ class PengirimanController extends Controller
     public function showDataPesanan()
     {
         $order_list = Session::get('order_list', []);
-        $orders = PesananModel::where('order_status_id', 2)->where('delivery_id', null)->get();
+        $date = now();
+
+        $orders = PesananModel::whereDate('delivery_date', '=', date('Y-m-d', strtotime($date)))
+        ->where('order_status_id', 2)
+        ->where('delivery_id', null)
+        ->get();;
         $query = " SELECT order_id, COUNT(*) AS item_count FROM order_items GROUP BY order_id ";
         $results = DB::select($query);
         $itemCounts = [];
@@ -188,7 +205,6 @@ class PengirimanController extends Controller
     public function createPengiriman(Request $request){
 
         $validator = Validator::make($request->all(), [
-            'delivery_group_name' => 'required',
             'driver_type' => 'required',
         ]);
 
@@ -234,7 +250,9 @@ class PengirimanController extends Controller
         $pesanans = PesananModel::where('delivery_id', $pengiriman->id)->get();
         PengirimanController::getListPesanan($pesanans);
 
-        $orders = PesananModel::where('order_status_id', 2)->where('delivery_id', null)->get();
+        $date = now();
+        $orders = PesananModel::where('order_status_id', 2)->where('delivery_id', null)->whereDate('delivery_date', '=', date('Y-m-d', strtotime($date)))->orderBy('delivery_date', 'ASC')->get();
+
         $query = " SELECT order_id, COUNT(*) AS item_count FROM order_items GROUP BY order_id ";
         $results = DB::select($query);
         $itemCounts = [];
@@ -290,7 +308,6 @@ class PengirimanController extends Controller
     public function updatePengiriman(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'delivery_group_name' => 'required',
             'driver_type' => 'required',
         ]);
 
@@ -361,7 +378,13 @@ class PengirimanController extends Controller
         $pengirimans = new PengirimanModel();
         $pesanans = new PesananModel();
 
-        $data_pengirimans = PengirimanModel::with('pesanans')->get();
+        $today = now();
+        $data_pengirimans = PengirimanModel::with('pesanans')
+        ->whereHas('pesanans', function ($query) use ($today) {
+            $query->whereDate('delivery_date', $today);
+        })
+        ->get();
+        // $data_pengirimans = PengirimanModel::with('pesanans')->get();
 
         $query = " SELECT order_id, COUNT(*) AS item_count FROM order_items GROUP BY order_id ";
         $results = DB::select($query);
