@@ -47,7 +47,7 @@ class KategoriController extends Controller
         ]);
 
         $kategori = new KategoriModel();
-        $data = $kategori->editKategori($validatedData, $id);
+        $data = $kategori->updateKategori($validatedData, $id);
 
         if ($data) {
             Alert::success('Success', 'Kategori berhasil diperbarui');

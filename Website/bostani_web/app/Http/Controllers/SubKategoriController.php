@@ -72,7 +72,7 @@ class SubKategoriController extends Controller
         ]);
 
         $sub_kategori = new SubKategoriModel();
-        $data = $sub_kategori->editSubKategori($validatedData, $id);
+        $data = $sub_kategori->updateSubKategori($validatedData, $id);
 
         if ($data) {
             Alert::success('Success', 'Sub Kategori berhasil diperbarui');
