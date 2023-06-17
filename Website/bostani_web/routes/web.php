@@ -121,6 +121,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/pengiriman/list/add_pesanan', [PengirimanController::class, 'createListPesanan']);
         Route::get('/pengiriman/list/list_delete', [PengirimanController::class, 'deleteAllList']);
         Route::get('/pengiriman/list/delete/{id}', [PengirimanController::class, 'deleteListCart']);
+        Route::delete('/pengiriman/hapus/{id}', [PengirimanController::class, 'deleteDataPengiriman']);
+
 
         // Pelanggan
         Route::get('/pelanggan', [PelangganController::class, 'index']);
