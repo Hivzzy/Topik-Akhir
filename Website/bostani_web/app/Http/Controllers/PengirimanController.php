@@ -34,7 +34,7 @@ class PengirimanController extends Controller
             $query->whereDate('delivery_date', $today);
         })
         ->get();
-        // $pengirimans = PengirimanModel::with('pesanans')->get();
+
         $jumlahTotalOngkir = PengirimanModel::with(['pesanans' => function ($query) {
             $query->select('delivery_id', DB::raw('SUM(shipping_cost) as total_shipping_cost'))
                 ->groupBy('delivery_id');
@@ -47,7 +47,6 @@ class PengirimanController extends Controller
         foreach ($results as $result) {
             $itemCounts[$result->delivery_id] = $result->list_count;
         }
-
 
         return view('pages.pengiriman.PengirimanView', [
             'title' => 'Data Pengiriman',
@@ -123,9 +122,9 @@ class PengirimanController extends Controller
     {
 
         $pesanan = PesananModel::find($request->order_id);
-        // if (!$pesanan) {
-        //     return response()->json(['message' => 'Data pesanan tidak ditemukan'], 404);
-        // }
+        if (!$pesanan) {
+            return response()->json(['message' => 'Data pesanan tidak ditemukan'], 404);
+        }
         $order_list = Session()->get('order_list', []);
         $order_list[$pesanan->id] = [
             'order_id' => $pesanan->id,
@@ -172,10 +171,6 @@ class PengirimanController extends Controller
 
     public function deleteListCart($id)
     {
-        // Hapus item pesanan sebelumnya
-        $pesanans = new PesananModel();
-        $pesanans->deletePengiriman($id);
-
         $order_list = Session::get('order_list', []);
         unset($order_list[$id]);
         Session::put('order_list', $order_list);
@@ -223,9 +218,9 @@ class PengirimanController extends Controller
             return redirect()->back()->withInput($request->all());
         }
 
-        // Mengecek item pesanan
+        // Mengecek data pesanan
         if (Session::get('order_list') == []) {
-            toast('Harap isi list pesanan!', 'error');
+            toast('Harap isi data pesanan!', 'error');
             return redirect()->back()->withInput($request->all());
         }
 
@@ -277,9 +272,6 @@ class PengirimanController extends Controller
             'pesanans' => $orders,
             'jumlahItem' => $itemCounts,
             'data' => $pesanans,
-            // 'customers' => PelangganModel::all(),
-            // 'cities' => KotaModel::all(),
-            // 'products' => ProdukModel::all(),
             'pengirimans' => $pengiriman,
         ]);
     }
@@ -290,9 +282,6 @@ class PengirimanController extends Controller
         return view('pages.pengiriman.EditDetailPengirimanView', [
             'title' => 'Edit Pengiriman',
             'active' => 'delivery',
-            // 'customers' => PelangganModel::all(),
-            // 'cities' => KotaModel::all(),
-            // 'products' => ProdukModel::all(),
             'pengirimans' => $pengiriman,
         ]);
     }
@@ -326,17 +315,17 @@ class PengirimanController extends Controller
             return redirect()->back()->withInput($request->all());
         }
 
-        // Mengecek item pesanan
+        // Mengecek pesanan
         if (Session::get('order_list') == []) {
-            toast('Harap isi item pesanan!', 'error');
+            toast('Harap isi data pesanan!', 'error');
             return redirect()->back()->withInput($request->all());
         }
 
-        // Hapus item pesanan sebelumnya
+        // Hapus data pesanan sebelumnya
         $pesanans = new PesananModel();
         $pesanans->deletePengiriman($id);
 
-        // Insert item pesanan baru
+        // Insert data pesanan baru
         $pengiriman = new PengirimanModel();
         $pengiriman->deletePengiriman($id);
         $id_pengiriman = $pengiriman->createPengiriman($request->all());
@@ -362,16 +351,19 @@ class PengirimanController extends Controller
 
     public function deleteDataPengiriman($id){
         $pengiriman = new PengirimanModel();
-        $item = new PesananModel();
+        $pesanans = PesananModel::where('delivery_id',$id)->get();
 
-        $delete_pengiriman = $pengiriman->deleteDataPengiriman($id);
+        $delete_pengiriman = $pengiriman->deletePengiriman($id);
+
+        foreach($pesanans as $pesanan){
+            $pesanan->deletePengiriman($id);
+        }
 
         if ($delete_pengiriman) {
-            $item->deletePengiriman($id);
-            Alert::success('Success', 'Data pesanan berhasil dihapus');
+            Alert::success('Success', 'Data Pengiriman berhasil dihapus');
             return redirect('/pengiriman');
         } else {
-            Alert::error('Error', 'Data pesanan gagal dihapus');
+            Alert::error('Error', 'Data Pengiriman gagal dihapus');
             return redirect()->back();
         }
     }
@@ -393,7 +385,6 @@ class PengirimanController extends Controller
             $query->whereDate('delivery_date', $today);
         })
         ->get();
-        // $data_pengirimans = PengirimanModel::with('pesanans')->get();
 
         $query = " SELECT order_id, COUNT(*) AS item_count FROM order_items GROUP BY order_id ";
         $results = DB::select($query);

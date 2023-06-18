@@ -122,6 +122,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/pengiriman/list/list_delete', [PengirimanController::class, 'deleteAllList']);
         Route::get('/pengiriman/list/delete/{id}', [PengirimanController::class, 'deleteListCart']);
         Route::delete('/pengiriman/hapus/{id}', [PengirimanController::class, 'deleteDataPengiriman']);
+        Route::get('/viewDeliveryPDF', [PengirimanController::class, 'createPengirimanPDF']);
 
 
         // Pelanggan

@@ -42,20 +42,25 @@
                                             <tr>
                                             @if($pengiriman)
                                                 <td>Group - {{$loop->iteration}}</td>
-                                                <td>{{ date('d M Y', strtotime($pengiriman->pesanans[0]->delivery_date)) }}</td>
-                                                <td>{{ $jumlahList[$pengiriman->pesanans[0]->delivery_id]}}</td>
-                                                <!-- <td>{{$jumlahOngkir[0]->pesanans[0]->total_shipping_cost}}</td> -->
-                                                <td>{{ $pengiriman->driver_type??'-'}}</td>
-                                                <td>{{ $pengiriman->statusPengiriman->delivery_status_name??'-'}}</td>
-                                                    <td>
+                                                @if ($pengiriman->pesanans->isEmpty())
+                                                    <td colspan="5">Pengiriman tanpa pesanan</td>
+                                                @else
+                                                    <td>{{ date('d M Y', strtotime($pengiriman->pesanans[0]->delivery_date)) }}</td>
+                                                    <td>{{ $jumlahList[$pengiriman->pesanans[0]->delivery_id]}}</td>
+                                                    <td>{{ $pengiriman->driver_type??'-'}}</td>
+                                                    <td>{{ $pengiriman->statusPengiriman->delivery_status_name??'-'}}</td>
+                                                @endif
+                                                <td>
+                                                    @if (!$pengiriman->pesanans->isEmpty())
                                                         <a href="/pengiriman/detail/{{ $pengiriman->id }}"
                                                             class="inline-block whitespace-nowrap rounded-[0.27rem] bg-info-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-info-700">
                                                             Lihat
                                                         </a>
-                                                    <a href="/pengiriman/edit/{{ $pengiriman->id }}"
-                                                        class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
-                                                        Edit
+                                                        <a href="/pengiriman/edit/{{ $pengiriman->id }}"
+                                                            class="inline-block whitespace-nowrap rounded-[0.27rem] bg-primary-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-primary-700">
+                                                            Edit
                                                         </a>
+                                                    @endif
                                                         <a href="/pengiriman/hapus/{{ $pengiriman->id }}"
                                                             class="inline-block whitespace-nowrap rounded-[0.27rem] bg-danger-100 px-[0.65em] pb-[0.25em] pt-[0.35em] text-center align-baseline text-[0.75em] font-bold leading-none text-danger-700"
                                                             data-confirm-delete="true">

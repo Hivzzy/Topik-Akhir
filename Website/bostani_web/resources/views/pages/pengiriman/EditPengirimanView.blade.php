@@ -34,8 +34,8 @@
     <script src="/assets/js/delivery.js"></script>
     <script>
         $(document).ready(function() {
-            get_list_delivery_non_session()
             get_list_delivery();
+            get_list_delivery_non_session()
         });
         $(document).ready(function() {
             var table = $("#tabel_pengiriman")
