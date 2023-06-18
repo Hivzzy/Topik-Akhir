@@ -40,7 +40,6 @@ class PengirimanModel extends Model
         $add_pengiriman = new PengirimanModel;
         $add_pengiriman = PengirimanModel::create([
             'delivery_status_id' => $status_id,
-            'delivery_group_name' => $pengiriman['delivery_group_name'],
             'driver_type' => $pengiriman['driver_type'],
         ]);
         return $add_pengiriman;
