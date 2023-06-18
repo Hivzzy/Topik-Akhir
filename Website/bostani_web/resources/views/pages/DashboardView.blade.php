@@ -39,7 +39,7 @@
                 <div class="bg-white space-y-4 p-4 rounded shadow-md">
                     <h2 class="text-lg font-medium">Daftar Pesanan 3 Hari Kedepan</h2>
                     <hr>
-                    <table id="tabel_info_pesanan" class="text-sm">
+                    <table id="tabel_info_pesanan" class="text-sm" width="100%">
                         <thead class="bg-[#272727] text-white">
                             <tr>
                                 <th>Nama Pelanggan</th>
