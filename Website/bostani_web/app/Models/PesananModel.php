@@ -158,7 +158,12 @@ class PesananModel extends Model
     {
         $total_transaksi = ItemPesananModel::select(ItemPesananModel::raw('orders.delivery_date AS tanggal_transaksi, SUM(order_items.item_selling_price * order_items.item_size) AS pendapatan, SUM(order_items.item_purchase_price * order_items.item_size) AS modal_belanja'))
             ->join('orders', 'order_items.order_id', '=', 'orders.id')
+            ->join('deliveries', 'deliveries.id', '=', 'orders.delivery_id')
             ->whereIn('orders.delivery_date', $tanggal_transaksi)
+            ->where([
+                ['orders.order_status_id', '=', 2],
+                ['deliveries.delivery_status_id', '=', 2],
+            ])
             ->groupBy('tanggal_transaksi')
             ->orderBy('tanggal_transaksi', 'ASC')
             ->get();
