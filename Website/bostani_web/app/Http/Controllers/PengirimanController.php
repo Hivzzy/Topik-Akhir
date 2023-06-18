@@ -186,24 +186,24 @@ class PengirimanController extends Controller
         }
     }
 
-     public function deleteDataPengiriman($id){
-        $pengiriman = new PengirimanModel();
-        $pesanans = PesananModel::where('delivery_id',$id)->get();
+    //  public function deleteDataPengiriman($id){
+    //     $pengiriman = new PengirimanModel();
+    //     $pesanans = PesananModel::where('delivery_id',$id)->get();
 
-        $delete_pengiriman = $pengiriman->deletePengiriman($id);
+    //     $delete_pengiriman = $pengiriman->deletePengiriman($id);
 
-        foreach($pesanans as $pesanan){
-            $pesanan->deletePengiriman($id);
-        }
+    //     foreach($pesanans as $pesanan){
+    //         $pesanan->deletePengiriman($id);
+    //     }
 
-        if ($delete_pengiriman) {
-            Alert::success('Success', 'Data Pengiriman berhasil dihapus');
-            return redirect('/pengiriman');
-        } else {
-            Alert::error('Error', 'Data Pengiriman gagal dihapus');
-            return redirect()->back();
-        }
-    }
+    //     if ($delete_pengiriman) {
+    //         Alert::success('Success', 'Data Pengiriman berhasil dihapus');
+    //         return redirect('/pengiriman');
+    //     } else {
+    //         Alert::error('Error', 'Data Pengiriman gagal dihapus');
+    //         return redirect()->back();
+    //     }
+    // }
 
 
     public function createPengiriman(Request $request){

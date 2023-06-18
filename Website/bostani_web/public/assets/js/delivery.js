@@ -42,8 +42,8 @@ function get_list_delivery_non_session() {
         method: "GET",
         contentType: "application/json",
     }).done(function (data) {
-        // $("#list_pengiriman").html(data);
-        console.log(data);
+        $("#list_pengiriman").html(data);
+        // console.log(data);
     });
 }
 
