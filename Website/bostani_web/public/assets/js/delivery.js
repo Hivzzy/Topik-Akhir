@@ -12,10 +12,10 @@ function add_pesanan(button) {
             order_id: orderId,
         },
         success: function (response) {
-            // var row = document.getElementById("row-" + orderId);
-            // if (row) {
-            //     row.style.display = "none";
-            // }
+            var row = document.getElementById("row-" + orderId);
+            if (row) {
+                row.style.display = "none";
+            }
             get_list_delivery();
         },
         error: function (response) {
@@ -43,7 +43,6 @@ function get_list_delivery_non_session() {
         contentType: "application/json",
     }).done(function (data) {
         $("#list_pengiriman").html(data);
-        // console.log(data);
     });
 }
 
@@ -56,6 +55,7 @@ function delete_all_list() {
             // console.log(response);
             swal("Success!", "" + response.message + "", "success");
             get_list_delivery();
+            get_list_delivery_non_session();
         },
         error: function (response) {
             // console.log(response);
